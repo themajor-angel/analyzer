@@ -19,6 +19,10 @@ import { AuthModule } from './auth/auth.module';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './app.reducer';
+import { PerfilModule } from './perfil/perfil.module';
+import { PerfilService } from './perfil/perfil.service';
+import { VerPerfilComponent } from './perfil/verperfil/verperfil/verperfil.component';
+import { CargaArchivosComponent } from './analisis/carga-archivos/carga-archivos.component'
 
 @NgModule({
   declarations: [
@@ -26,6 +30,7 @@ import { reducers } from './app.reducer';
     WelcomeComponent,
     HeaderComponent,
     SidenavListComponent,
+    CargaArchivosComponent,
     
   ],
   imports: [
@@ -37,9 +42,10 @@ import { reducers } from './app.reducer';
     AngularFireModule.initializeApp(environment.firebase),
     AuthModule,
     AngularFirestoreModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    PerfilModule
   ],
-  providers: [AuthService, TrainingService, UIservice],
+  providers: [AuthService, TrainingService, UIservice, PerfilService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

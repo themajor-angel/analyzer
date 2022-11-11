@@ -8,13 +8,18 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from '../app.reducer'
 import * as UI from '../shared/ui.actions'
 import * as Auth from './auth.actions'
+import { map, Observable, of, switchMap } from "rxjs";
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { User } from "firebase";
 
 @Injectable()
 export class AuthService{
+    private user: Observable<any> | null = null;
     
     constructor(
         private router: Router, 
-        private afAuth: AngularFireAuth, 
+        private afAuth: AngularFireAuth,
+        private fs: AngularFirestore, 
         private trainingService: TrainingService,
         private uiService: UIservice,
         private store: Store<fromRoot.State>){
@@ -25,13 +30,24 @@ export class AuthService{
         this.afAuth.authState.subscribe(user => {
             if(user){
                 this.store.dispatch(new Auth.SetAuthenticated());
-                this.router.navigate(['/training']);
+                //this.router.navigate(['/training']);
+                this.userInfo();
+               // console.log(user);
             } else {
                 this.trainingService.cancelSubscriptions();
                 this.store.dispatch(new Auth.SetUnauthenticated());
                 this.router.navigate(['/login']);
             }
         });
+    }
+
+    userInfo(){
+        
+        this.user = this.afAuth.authState.pipe(switchMap(user => {
+            if (user === null || user === undefined) return of(null);
+            console.log(this.fs.doc<User>(`users/${user.uid}`).valueChanges());
+            return this.fs.doc<User>(`users/${user.uid}`).valueChanges();
+          }));
     }
 
     registerUser(authData: AuthData){
