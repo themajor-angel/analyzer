@@ -1,0 +1,44 @@
+export interface Analisis {
+    activos: number;
+    pasivos: number;
+    patrimonio: number;
+    dispCorto: number;
+    dispMed: number;
+    dispLargo: number;
+    dispCajas: number;
+    dispOtros: number;
+    clientesDeben: number;
+    inventario: number;
+    propiedades: number;
+    otrosActivos: number;
+    debeEntFin: number;
+    debeEntFin1: number;
+    nombreEntFin1: string;
+    debeEntFin2: number;
+    nombreEntFin2: string;
+    debeEntFin3: number;
+    debeProveedores: number;
+    dProveedores1: number;
+    nombreDProveedores1: string;
+    dProveedores2: number;
+    nombreDProveedores2: string;
+    dProveedores3: number;
+    cuentas: number;
+    cuentas1: number;
+    nombreCuentas1: string;
+    cuentas2: number;
+    nombreCuentas2: string;
+    cuentas3: number;
+    impuestos: number;
+    impuestos1: number;
+    nombreImpuestos1: string;
+    impuestos2: number;
+    nombreImpuestos2: string;
+    impuestos3: number;
+    deudas: number;
+    laborales: number;
+    otrasDeudas: number;
+    pagosAnt: number;
+    otrosPasivos: number;
+
+}

@@ -1,1 +1,36 @@
-<p>carga-archivos works!</p>
+<section class="signup-form">
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    fxLayoutGap="10px"
+    #f="ngForm"
+    (ngSubmit)="onSubmit(f)"
+  >
+    <label for="input-file-id" class="md-button md-raised md-primary"
+      >Seleccione los archivos que desea comparar</label
+    >
+    <input
+      type="file"
+      appReadexcel
+      #readexcel="readexcel"
+      (eventEmitter)="DataFromEventEmitter($event)"
+    />
+
+    <!--<ul *ngFor="let n of readexcel.excelObservable | async">
+      <li>{{ n.Item }}</li>
+    </ul>-->
+
+    <button
+      *ngIf="!(isLoading$ | async)"
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="f.invalid"
+      (click)="submit()"
+    >
+      Guardar
+    </button>
+    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+  </form>
+</section>
+

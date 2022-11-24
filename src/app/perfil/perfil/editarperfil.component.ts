@@ -14,7 +14,6 @@ import { PerfilService } from '../perfil.service';
 })
 export class EditarPerfilComponent implements OnInit {
   isLoading$: Observable<boolean>;
-  private loadingSubs: Subscription;
 
   constructor(
     private perfilService: PerfilService,
@@ -22,15 +21,9 @@ export class EditarPerfilComponent implements OnInit {
     private store: Store<fromRoot.State>) { }
     cargos = ["Contable", "Empresario"];
 
-  ngOnDestroy(): void {
-    if(this.loadingSubs){
-      this.loadingSubs.unsubscribe();
-    }
-  }
 
   ngOnInit(): void {
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
-
   }
 
   onSubmit(form: NgForm){
