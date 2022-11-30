@@ -7,11 +7,11 @@
     <div><a routerLink="/">Analyzer</a></div>
     <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
       <ul fxLayout fxLayoutGap="10px" class="navigation-items">
-        <li *ngIf="!(isAuth$ | async)"><a routerLink="/signup">SignUp</a></li>
-        <li *ngIf="!(isAuth$ | async)"><a routerLink="/login">LogIn</a></li>
+        <li *ngIf="!(isAuth$ | async)"><a routerLink="/signup">Registrarse</a></li>
+        <li *ngIf="!(isAuth$ | async)"><a routerLink="/login">Ingresar</a></li>
         <li *ngIf="isAuth$ | async"><a routerLink="/cargadearchivos">Análisis</a></li>
-        <li *ngIf="isAuth$ | async"><a routerLink="/editarperfil">Editar Perfil</a></li>
-        <li *ngIf="isAuth$ | async"><a style="cursor: pointer" (click)="onLogout()">Logout</a></li>
+        <!--<li *ngIf="isAuth$ | async"><a routerLink="/editarperfil">Editar Perfil</a></li>-->
+        <li *ngIf="isAuth$ | async"><a style="cursor: pointer" (click)="onLogout()">Cerrar Sesión</a></li>
       </ul>
     </div>
 </mat-toolbar>

@@ -32,7 +32,7 @@ export class CargaArchivosComponent implements OnInit {
   }
 
   DataFromEventEmitter(data) {
-    console.log(data);
+    
   }
 
   submit(){

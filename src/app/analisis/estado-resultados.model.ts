@@ -1,0 +1,30 @@
+export interface EstadoResultados {
+    ingresos: number;
+    gastos: number;
+    resultado: number;
+    opNormal: number;
+    noOp: number;
+    devoluciones: number;
+    inflacion: number;
+    opAdministracion: number;
+    admin1: number;
+    nombreAdmin1: string;
+    admin2: number;
+    nombreAdmin2: string;
+    demasGastosA: number;
+    depreciacionA: number;
+    opVentas: number;
+    ventas1: number;
+    nombreVentas1: string;
+    ventas2: number;
+    nombreVentas2: string;
+    demasGastosV: number;
+    depreciacionV: number;
+    costosV: number;
+    compras: number;
+    prestacion: number;
+    gastosNoOp: number;
+    financieros: number;
+    otrosGastos: number;
+    impuestoRenta: number;
+}

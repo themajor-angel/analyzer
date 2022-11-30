@@ -8,6 +8,7 @@ import { AnalisisService } from '../analisis.service';
 })
 export class MostrarAnalisisComponent implements OnInit {
   @Input() analisis;
+  @Input() estadoResultado;
 
   constructor(
     private analisis_service: AnalisisService
@@ -15,6 +16,7 @@ export class MostrarAnalisisComponent implements OnInit {
 
   ngOnInit(): void {
     this.analisis = this.analisis_service.getAnalisis();
+    this.estadoResultado = this.analisis_service.getEstadoResultado();
   }
 
 }

@@ -15,9 +15,7 @@ export class ReadexcelDirective {
   datos: [] = [];
   @Output() eventEmitter = new EventEmitter();
 
-  constructor(
-    private analisis_service: AnalisisService
-  ) {}
+  constructor(private analisis_service: AnalisisService) {}
 
   @HostListener('change', ['$event.target'])
   onChange(target: HTMLInputElement) {
@@ -56,24 +54,37 @@ export class ReadexcelDirective {
   }
 
   analisisBalanceGeneral(data) {
-   /*switch case para las diferentes tipos de balance??*/
-    for(let i = 0; i< data.length;i++){
-      if(data[i]['__EMPTY_2'] >= 1 ){
+    /*switch case para las diferentes tipos de balance??*/
+    for (let i = 0; i < data.length; i++) {
+      if (data[i]['__EMPTY_2'] >= 1 && data[i]['__EMPTY_7'] != 0) {
         let row = {
           codigo: data[i]['__EMPTY_2'],
           nombre: data[i]['__EMPTY_3'],
           saldo: data[i]['__EMPTY_7'],
-        }
-       this.datosNum.push(row);
+        };
+
+        this.datosNum.push(row);
       }
+      if( data[i]['__EMPTY_7'] == 0){
+        if (data[i]['__EMPTY_2'].startsWith('4') || data[i]['__EMPTY_2'].startsWith('5') || data[i]['__EMPTY_2'].startsWith('6') ) {
+          let row = {
+            codigo: data[i]['__EMPTY_2'],
+            nombre: data[i]['__EMPTY_3'],
+            saldo: data[i]['__EMPTY_6'],
+          };
+          this.datosNum.push(row);
+        }
+      }
+      
     }
 
     //this.analisis_service.generarAnalisisGeneral(this.datosNum);
-    this.analisis_service.getDatosActivos(this.datosNum);//aqui esta el problkemaaa
-    
+    this.analisis_service.getDatosActivos(this.datosNum); //aqui esta el problkemaaa
+
     this.analisis_service.getDatosPasivos(this.datosNum);
     this.analisis_service.getDatosPatrimonio(this.datosNum);
+    this.analisis_service.getDatosIngresos(this.datosNum);
+    this.analisis_service.getDatosGastosCostos(this.datosNum);
     this.analisis_service.crearAnalisis();
-    console.log("datos pasados", this.datosNum);
   }
 }

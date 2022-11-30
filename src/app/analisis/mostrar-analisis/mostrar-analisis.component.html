@@ -2,39 +2,18 @@
     <table>
       <tbody>
         <tr>
-          <td class="tg-0lax">Su empresa tiene: $ {{analisis.activos}}</td>
+          <td class="tg-0lax">Su empresa tiene: $ {{analisis.activos | number:'.0-0'}}</td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Disponible a Corto Plazo: $ {{analisis.dispCorto}}</td>
+          <td class="tg-0lax">Disponible a Corto Plazo: $ {{analisis.dispCorto | number:'.0-0'}}</td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Diponible (Caja y Bancos): $ {{analisis.dispCajas}}</td>
+          <td class="tg-0lax">Diponible (Caja y Bancos): $ {{analisis.dispCajas | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Otros (Remesas, cuentas de ahorros y Fondos): $ {{analisis.dispOtros}}</td>
-        </tr>
-        <tr>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax"></td>
-        </tr>
-        <tr>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax">Disponible a Mediano Plazo: $ {{analisis.dispMed}}</td>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax">Sus clientes le deben: $ {{analisis.clientesDeben}}</td>
-        </tr>
-        <tr>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax"></td>
-          <td class="tg-0lax">En inventario tiene: $ {{analisis.inventario}}</td>
+          <td class="tg-0lax">Otros (Remesas, cuentas de ahorros y Fondos): $ {{analisis.dispOtros | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -46,16 +25,16 @@
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Disponible a Largo Plazo: $ {{analisis.dispLargo}}</td>
+          <td class="tg-0lax">Disponible a Mediano Plazo: $ {{analisis.dispMed | number:'.0-0'}}</td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">En propiedades de planta y equipo tiene: $ {{analisis.propiedades}}</td>
+          <td class="tg-0lax">Sus clientes le deben: $ {{analisis.clientesDeben | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">En otros activos tiene: $ {{analisis.otrosActivos}}</td>
+          <td class="tg-0lax">En inventario tiene: $ {{analisis.inventario | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -67,9 +46,30 @@
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Debe a Entidades Financieras: $ {{analisis.debeEntFin}}</td>
+          <td class="tg-0lax">Disponible a Largo Plazo: $ {{analisis.dispLargo | number:'.0-0'}}</td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Mayor deuda a Entidad Financiera: $ {{analisis.debeEntFin1}}</td>
+          <td class="tg-0lax">En propiedades de planta y equipo tiene: $ {{analisis.propiedades | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">En otros activos tiene: $ {{analisis.otrosActivos | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Debe a Entidades Financieras: $ {{analisis.debeEntFin | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Mayor deuda a Entidad Financiera: $ {{analisis.debeEntFin1 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -79,11 +79,11 @@
           <td class="tg-0lax">Debe a: {{analisis.nombreEntFin1}}</td>
         </tr>
         <tr>
-          <td class="tg-0lax">Su empresa debe: $ {{analisis.pasivos}}</td>
+          <td class="tg-0lax">Su empresa debe: $ {{analisis.pasivos | number:'.0-0'}}</td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Segunda mayor deuda a Entidad Financiera: $ {{analisis.debeEntFin2}}</td>
+          <td class="tg-0lax">Segunda mayor deuda a Entidad Financiera: $ {{analisis.debeEntFin2 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -97,7 +97,7 @@
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Total otras deudas a Entidad Financiera: $ {{analisis.debeEntFin3}}</td>
+          <td class="tg-0lax">Total otras deudas a Entidad Financiera: $ {{analisis.debeEntFin3 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -109,9 +109,9 @@
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Debe a Proveedores: $ {{analisis.debeProveedores}}</td>
+          <td class="tg-0lax">Debe a Proveedores: $ {{analisis.debeProveedores | number:'.0-0'}}</td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Mayor deuda a Proveedores: $ {{analisis.dProveedores1}}</td>
+          <td class="tg-0lax">Mayor deuda a Proveedores: $ {{analisis.dProveedores1 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -125,7 +125,7 @@
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Segunda mayor deuda a Proveedores: $ {{analisis.dProveedores2}}</td>
+          <td class="tg-0lax">Segunda mayor deuda a Proveedores: $ {{analisis.dProveedores2 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -139,7 +139,7 @@
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Total otras deudas a Proveedores: $ {{analisis.dProveedores3}}</td>
+          <td class="tg-0lax">Total otras deudas a Proveedores: $ {{analisis.dProveedores3 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -151,9 +151,9 @@
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Cuentas por Pagar: $ {{analisis.cuentas}}</td>
+          <td class="tg-0lax">Cuentas por Pagar: $ {{analisis.cuentas | number:'.0-0'}}</td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Mayor deuda de Cuentas por Pagar: $ {{analisis.cuentas1}}</td>
+          <td class="tg-0lax">Mayor deuda de Cuentas por Pagar: $ {{analisis.cuentas1 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -167,7 +167,7 @@
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Segunda mayor deudade Cuentas por Pagar: $ {{analisis.cuentas2}}</td>
+          <td class="tg-0lax">Segunda mayor deudade Cuentas por Pagar: $ {{analisis.cuentas2 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -181,7 +181,7 @@
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Total otras deudas de Cuentas por Pagar: $ {{analisis.cuentas3}}</td>
+          <td class="tg-0lax">Total otras deudas de Cuentas por Pagar: $ {{analisis.cuentas3 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -193,9 +193,9 @@
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Impuestos, Gravamenes y Tasas: $ {{analisis.impuestos}}</td>
+          <td class="tg-0lax">Impuestos, Gravamenes y Tasas: $ {{analisis.impuestos | number:'.0-0'}}</td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Mayor deuda de Impuestos, Gravamenes y Tasas: $ {{analisis.impuestos1}}</td>
+          <td class="tg-0lax">Mayor deuda de Impuestos, Gravamenes y Tasas: $ {{analisis.impuestos1 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -209,7 +209,7 @@
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Segunda mayor deuda de Impuestos, Gravamenes y Tasas: $ {{analisis.impuestos2}}</td>
+          <td class="tg-0lax">Segunda mayor deuda de Impuestos, Gravamenes y Tasas: $ {{analisis.impuestos2 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -223,7 +223,7 @@
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Total otras deudas  de Impuestos, Gravamenes y Tasas: $ {{analisis.impuestos3}}</td>
+          <td class="tg-0lax">Total otras deudas  de Impuestos, Gravamenes y Tasas: $ {{analisis.impuestos3 | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -235,30 +235,30 @@
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Otras deudas: $ {{analisis.deudas}}</td>
+          <td class="tg-0lax">Otras deudas: $ {{analisis.deudas | number:'.0-0'}}</td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Deudas Laborales: $ {{analisis.laborales}}</td>
+          <td class="tg-0lax">Deudas Laborales: $ {{analisis.laborales | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Otras deudas y provisiones: $ {{analisis.otrasDeudas}}</td>
+          <td class="tg-0lax">Otras deudas y provisiones: $ {{analisis.otrasDeudas | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Ingresos o pagos por anticipado: $ {{analisis.pagosAnt}}</td>
+          <td class="tg-0lax">Ingresos o pagos por anticipado: $ {{analisis.pagosAnt | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
-          <td class="tg-0lax">Otros Pasivos: $ {{analisis.otrosPasivos}}</td>
+          <td class="tg-0lax">Otros Pasivos: $ {{analisis.otrosPasivos | number:'.0-0'}}</td>
         </tr>
         <tr>
           <td class="tg-0lax"></td>
@@ -268,7 +268,182 @@
           <td class="tg-0lax"></td>
         </tr>
         <tr>
-          <td class="tg-0lax">El patrimonio de su empresa es de: $ {{analisis.patrimonio}}</td>
+          <td class="tg-0lax">El patrimonio de su empresa es de: $ {{analisis.patrimonio | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">El total de ingresos de su empresa es: ${{ estadoResultado.ingresos | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Ingresos por la operación normal: ${{ estadoResultado.opNormal | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Ingresos NO operacionales: ${{ estadoResultado.noOp | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Devoluciones, rebajas y descuentos: ${{ estadoResultado.devoluciones | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Ajustes por inflación: ${{ estadoResultado.inflacion | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">El total de gastos y costos de su empresa es: ${{ estadoResultado.gastos | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Gastos Operacionales de Administración: ${{ estadoResultado.opAdministracion | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">{{ estadoResultado.nombreAdmin1 }}: ${{ estadoResultado.admin1 | number:'.0-0'}} </td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">{{ estadoResultado.nombreAdmin2 }}: ${{ estadoResultado.admin2 | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Total otros Gastos Operacionales Administrativos:  ${{ estadoResultado.demasGastosA | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Depreciacióny Provisiones (NO es un egreso): ${{ estadoResultado.depreciacionA | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Gastos Operacionales de Ventas: ${{ estadoResultado.opVentas | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">{{ estadoResultado.nombreVentas1 }}: ${{ estadoResultado.ventas1 | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">{{ estadoResultado.nombreVentas2 }}: ${{ estadoResultado.ventas2 | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Total otros Gastos Operacionales de Ventas: ${{ estadoResultado.demasGastosV | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Depreciación y Provisiones (NO es un egreso): ${{ estadoResultado.depreciacionV | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Costos de Ventas: ${{ estadoResultado.costosV | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Compras: ${{ estadoResultado.compras | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Costos de Ventas y Prestación de Servicios: ${{ estadoResultado.prestacion | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Gastos No Operacionales: ${{ estadoResultado.gastosNoOp | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Financieros: ${{ estadoResultado.financieros | number:'.0-0'}}</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Otros Gastos NO Operacionales: ${{ estadoResultado.otrosGastos | number:'.0-0'}} </td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax">Impuesto de renta y complementarios:  ${{ estadoResultado.impuestoRenta | number:'.0-0'}}</td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+          <td class="tg-0lax"></td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">El resultado de la operacion (Ingresos – Gastos): ${{ estadoResultado.ingresos - estadoResultado.gastos}} </td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
           <td class="tg-0lax"></td>
