@@ -23,7 +23,9 @@ import { PerfilModule } from './perfil/perfil.module';
 import { PerfilService } from './perfil/perfil.service';
 import { AnalisisModule } from './analisis/analisis.module'
 import { ReadexcelDirective } from './directives/readexcel.directive';
+import { ComparativeexcelDirective } from './directives/comparativeexcel.directive';
 import { AnalisisService } from './analisis/analisis.service';
+import { AnalisisService2 } from './analisis/analisis2.service';
 import { MostrarAnalisisComponent } from './analisis/mostrar-analisis/mostrar-analisis.component';
 
 @NgModule({
@@ -48,7 +50,7 @@ import { MostrarAnalisisComponent } from './analisis/mostrar-analisis/mostrar-an
     PerfilModule,
     AnalisisModule
   ],
-  providers: [AuthService, TrainingService, UIservice, PerfilService, AnalisisService],
+  providers: [AuthService, TrainingService, UIservice, PerfilService, AnalisisService, AnalisisService2],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

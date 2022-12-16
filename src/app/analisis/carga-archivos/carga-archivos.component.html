@@ -1,36 +1,105 @@
-<section class="signup-form">
-  <form
-    fxLayout="column"
-    fxLayoutAlign="center center"
-    fxLayoutGap="10px"
-    #f="ngForm"
-    (ngSubmit)="onSubmit(f)"
-  >
-    <label for="input-file-id" class="md-button md-raised md-primary"
-      >Seleccione los archivos que desea comparar</label
-    >
-    <input
-      type="file"
-      appReadexcel
-      #readexcel="readexcel"
-      (eventEmitter)="DataFromEventEmitter($event)"
-    />
+<div fxLayout="column" fxLayoutAlign="center center" class="encabezado">
+  <h1>
+    Selecciona dos reportes, ¡y déjanos hacer el resto!
+  </h1>
+  <h4>Por medio de nuestra herramienta, podrás entender tus balances generales / estados de pérdidas y ganancias de una manera sencilla</h4>
+</div>
+<div class="welcome" fxLayout="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="30px" fxLayoutAlign="center end">
+  <section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap.gt-md="30px">
+    <img src="../../../assets/Visual data.png" >
+    <p>Visualiza tus datos de una manera inteligente</p>
+  </section>
+  <section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap.gt-md="30px">
+    <img src="../../../assets/Saving money.png" >
+    <p>Toma decisiones clave con la información que generamos para ti</p>
+  </section>
+</div>
 
-    <!--<ul *ngFor="let n of readexcel.excelObservable | async">
-      <li>{{ n.Item }}</li>
-    </ul>-->
-
-    <button
-      *ngIf="!(isLoading$ | async)"
-      type="submit"
-      mat-raised-button
-      color="primary"
-      [disabled]="f.invalid"
-      (click)="submit()"
+<div class="pasoapaso">
+  <mat-stepper [linear]="true" #stepper>
+    <mat-step
+      [stepControl]="firstFormGroup"
+      completed="{{ completo1 }}"
+      label="Archivo para analizar"
     >
-      Guardar
-    </button>
-    <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
-  </form>
-</section>
+      <form
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="10px"
+        #f="ngForm"
+        (ngSubmit)="onSubmit(f)"
+      >
+        <label for="input-file-id" class="md-button md-raised md-primary"
+          >Seleccione los archivos que desea comparar</label
+        >
+        <input
+          type="file"
+          appReadexcel
+          #readexcel="readexcel"
+          (eventEmitter)="DataFromEventEmitter($event)"
+        />
+        <button
+          mat-raised-button
+          color="primary"
+          matStepperNext
+          (click)="onSubmit(f)"
+          [disabled]="f.invalid"
+        >
+          Siguiente
+        </button>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+      </form>
+    </mat-step>
+    <mat-step
+      [stepControl]="secondFormGroup"
+      completed="{{ completo2 }}"
+      label="Archivo para comparar"
+    >
+      <form
+        fxLayout="column"
+        fxLayoutAlign="center center"
+        fxLayoutGap="10px"
+        #form2="ngForm"
+        (ngSubmit)="onSubmitComparacion(form2)"
+      >
+        <label for="input-file-id" class="md-button md-raised md-primary"
+          >Seleccione los archivos que desea comparar</label
+        >
+        <input
+          type="file"
+          appComparativeexcel
+          #comparativeexcel="comparativeexcel"
+          (eventEmitter)="DataFromEventEmitter($event)"
+        />
+  
+        <button
+          mat-raised-button
+          color="primary"
+          matStepperNext
+          (click)="onSubmitComparacion(form2)"
+          [disabled]="f.invalid"
+        >
+          Siguiente
+        </button>
+        <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Parámetros</ng-template>
+      <p>¿Deseas ingresar parámetros de comparación de manera manual o automático?</p>
+      <div>
+        <button
+        *ngIf="!(isLoading$ | async)"
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="f.invalid"
+        (click)="submit()"
+      >
+        Analizar
+      </button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
 
