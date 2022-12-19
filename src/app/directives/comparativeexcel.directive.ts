@@ -2,20 +2,19 @@ import { Directive, HostListener, Output, EventEmitter } from '@angular/core';
 import { Data } from '@angular/router';
 import { Observable, Subscriber } from 'rxjs';
 import * as XLSX from 'xlsx';
-import { AnalisisService } from '../analisis/analisis.service';
+import { AnalisisService2 } from '../analisis/analisis2.service';
 import { Item } from '../analisis/item.model';
-
 @Directive({
-  selector: '[appReadexcel]',
-  exportAs: 'readexcel',
+  selector: '[appComparativeexcel]',
+  exportAs: 'comparativeexcel',
 })
-export class ReadexcelDirective {
+export class ComparativeexcelDirective {
   excelObservable: Observable<any>;
   datosNum: Item[] = [];
   datos: [] = [];
   @Output() eventEmitter = new EventEmitter();
 
-  constructor(private analisis_service: AnalisisService) {}
+  constructor(private analisis_service: AnalisisService2) {}
 
   @HostListener('change', ['$event.target'])
   onChange(target: HTMLInputElement) {
@@ -86,4 +85,5 @@ export class ReadexcelDirective {
     this.analisis_service.getDatosGastosCostos(this.datosNum);
     this.analisis_service.crearAnalisis();
   }
+
 }

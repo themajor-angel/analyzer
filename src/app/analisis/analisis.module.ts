@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ReadexcelDirective } from "../directives/readexcel.directive";
+import { ComparativeexcelDirective } from "../directives/comparativeexcel.directive";
 import { SharedModule } from "../shared/shared.module";
 import { AnalisisRoutingModule } from "./analisis-routing.module";
 import { CargaArchivosComponent } from "./carga-archivos/carga-archivos.component";
@@ -13,7 +14,9 @@ import { MostrarAnalisisComponent } from "./mostrar-analisis/mostrar-analisis.co
         CargaArchivosComponent,
         MostrarAnalisisComponent,
         ReadexcelDirective,
-        CardBalanceComponent
+        CardBalanceComponent,
+        ReadexcelDirective,
+        ComparativeexcelDirective
     ],
     imports: [
         ReactiveFormsModule,
