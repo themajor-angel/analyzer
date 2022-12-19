@@ -6,10 +6,15 @@ import { ComparativeexcelDirective } from "../directives/comparativeexcel.direct
 import { SharedModule } from "../shared/shared.module";
 import { AnalisisRoutingModule } from "./analisis-routing.module";
 import { CargaArchivosComponent } from "./carga-archivos/carga-archivos.component";
+import { CardBalanceComponent } from './mostrar-analisis/card-balance/card-balance.component';
+import { MostrarAnalisisComponent } from "./mostrar-analisis/mostrar-analisis.component";
 
 @NgModule({
     declarations: [
         CargaArchivosComponent,
+        MostrarAnalisisComponent,
+        ReadexcelDirective,
+        CardBalanceComponent,
         ReadexcelDirective,
         ComparativeexcelDirective
     ],

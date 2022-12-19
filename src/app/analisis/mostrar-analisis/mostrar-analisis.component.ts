@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AnalisisService } from '../analisis.service';
 
 @Component({
@@ -7,16 +8,20 @@ import { AnalisisService } from '../analisis.service';
   styleUrls: ['./mostrar-analisis.component.css']
 })
 export class MostrarAnalisisComponent implements OnInit {
-  @Input() analisis;
-  @Input() estadoResultado;
+  @Input() analisis = {} as any;
+  @Input() estadoResultado = {} as any;
 
   constructor(
-    private analisis_service: AnalisisService
+    private analisis_service: AnalisisService,
+    private router: Router,
     ) { }
 
   ngOnInit(): void {
     this.analisis = this.analisis_service.getAnalisis();
     this.estadoResultado = this.analisis_service.getEstadoResultado();
+    if (!this.analisis || !this.estadoResultado) {
+      this.router.navigateByUrl('/cargadearchivos')
+    }
   }
 
 }

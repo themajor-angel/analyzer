@@ -1,0 +1,11 @@
+<div class="card-balance-wrapper">
+  <div [class]="'card-balance ' + 'card-balance--' + color">
+    <img class="card-balance__imagen" [src]="imagen" />
+    <h2 class="card-balance__titulo">{{titulo}}</h2>
+    <h3 class="card-balance__subtitulo">{{subtitulo}}</h3>
+    <p class="card-balance__cuerpo">{{cuerpo}}</p>
+    <div class="card-balance__submenu-grid">
+      <button type="button" *ngFor="let tarjeta of tarjetas" class="card-balance__submenu">{{tarjeta}}</button>
+    </div>
+  </div>
+</div>

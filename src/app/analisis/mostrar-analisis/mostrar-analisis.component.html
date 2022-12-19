@@ -1,4 +1,14 @@
 <section>
+  <div class="cards-balance">
+    <app-card-balance titulo="Ingresos" subtitulo="Sus ingresos fueron de $12’900,888"
+      cuerpo="Su desempeño frente al periodo anterior mejoró en un 3%"
+      [tarjetas]="['Operación Normal','No Operacionales','Devoluciones, rebajas y descuentos','Ajustes por inflación',]"
+      imagen="assets/svg/coin.svg" color="blue"></app-card-balance>
+    <app-card-balance titulo="Ingresos" subtitulo="Sus gastos y costos fueron de $12’900,888"
+      cuerpo="Su desempeño frente al periodo anterior empeoró en un 3%"
+      [tarjetas]="['Operacionales de Administración','Operacionales de Ventas','Costos de Ventas','No Operacionales','Impuestos de renta y complementarios']"
+      imagen="assets/svg/coin.svg" color="red"></app-card-balance>
+  </div>
     <table>
       <tbody>
         <tr>
