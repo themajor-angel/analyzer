@@ -10,7 +10,6 @@ import * as UI from '../shared/ui.actions'
 import * as Auth from '../auth/auth.actions'
 import { map, Observable, of, switchMap } from "rxjs";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
-import { User } from "firebase";
 import { Usuario } from "../shared/usuario.model";
 
 @Injectable()
