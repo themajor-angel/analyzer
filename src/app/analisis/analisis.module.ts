@@ -5,11 +5,15 @@ import { ReadexcelDirective } from "../directives/readexcel.directive";
 import { SharedModule } from "../shared/shared.module";
 import { AnalisisRoutingModule } from "./analisis-routing.module";
 import { CargaArchivosComponent } from "./carga-archivos/carga-archivos.component";
+import { CardBalanceComponent } from './mostrar-analisis/card-balance/card-balance.component';
+import { MostrarAnalisisComponent } from "./mostrar-analisis/mostrar-analisis.component";
 
 @NgModule({
     declarations: [
         CargaArchivosComponent,
-        ReadexcelDirective
+        MostrarAnalisisComponent,
+        ReadexcelDirective,
+        CardBalanceComponent
     ],
     imports: [
         ReactiveFormsModule,
