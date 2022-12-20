@@ -31,6 +31,14 @@
   --bg: #449EE3;
 }
 
+.card-balance--green {
+  --bg: #6ac272;
+}
+
+.card-balance--purple {
+  --bg: #8960c3;
+}
+
 .card-balance__submenu-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
