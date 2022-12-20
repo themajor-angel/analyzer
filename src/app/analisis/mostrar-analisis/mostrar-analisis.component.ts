@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AnalisisService } from '../analisis.service';
+import { AnalisisService2 } from '../analisis2.service';
 
 @Component({
   selector: 'app-mostrar-analisis',
