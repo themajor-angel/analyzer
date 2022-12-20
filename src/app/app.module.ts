@@ -34,8 +34,6 @@ import { MostrarAnalisisComponent } from './analisis/mostrar-analisis/mostrar-an
     WelcomeComponent,
     HeaderComponent,
     SidenavListComponent,
-    MostrarAnalisisComponent
-    
   ],
   imports: [
     BrowserModule,

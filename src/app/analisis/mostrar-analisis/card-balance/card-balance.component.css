@@ -1,0 +1,49 @@
+:host {
+  display: flex;
+}
+
+.card-balance-wrapper {
+  display: flex;
+}
+
+.card-balance {
+  --bg: #ee5c5c;
+  background-color: var(--bg);
+  border: 4px dashed white;
+  border-radius: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+}
+
+.card-balance__cuerpo, .card-balance__subtitulo {
+  max-width: 280px;
+}
+
+.card-balance--red {
+  --bg: #ee5c5c;
+}
+
+.card-balance--blue {
+  --bg: #449EE3;
+}
+
+.card-balance__submenu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 10px;
+}
+
+.card-balance__submenu {
+  background-color: #00000054;
+  border: 0;
+  border-radius: 16px;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
+  color: white;
+  min-height: 60px;
+  padding: 4px;
+  width: 135px;
+}
