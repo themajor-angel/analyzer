@@ -21,7 +21,7 @@ export class MostrarAnalisisComponent implements OnInit {
     this.analisis = this.analisis_service.getAnalisis();
     this.estadoResultado = this.analisis_service.getEstadoResultado();
     if (!this.analisis || !this.estadoResultado) {
-      this.router.navigateByUrl('/cargadearchivos')
+      this.router.navigateByUrl('/analisis/cargadearchivos')
     }
   }
 

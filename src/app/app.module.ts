@@ -42,11 +42,8 @@ import { MostrarAnalisisComponent } from './analisis/mostrar-analisis/mostrar-an
     AppRoutingModule,
     FlexLayoutModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AuthModule,
     AngularFirestoreModule,
     StoreModule.forRoot(reducers),
-    PerfilModule,
-    AnalisisModule
   ],
   providers: [AuthService, TrainingService, UIservice, PerfilService, AnalisisService, AnalisisService2],
   bootstrap: [AppComponent],

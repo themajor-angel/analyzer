@@ -56,6 +56,6 @@ export class CargaArchivosComponent implements OnInit {
   }
 
   submit(){
-    this.router.navigate(['/mostraranalisis'])
+    this.router.navigate(['/analisis/mostraranalisis'])
   }
 }

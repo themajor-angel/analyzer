@@ -35,7 +35,7 @@ export class PerfilService{
                 usuario.email = this.datosUsuario.email;
                 console.log("datos ", usuario);
                 this.db.collection('usuarios').add(usuario);
-                this.router.navigate(['/verperfil']);
+                this.router.navigate(['/perfil/verperfil']);
                 return user;
             } else {
                 return null;                
