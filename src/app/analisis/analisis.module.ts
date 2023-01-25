@@ -8,6 +8,8 @@ import { AnalisisRoutingModule } from "./analisis-routing.module";
 import { CargaArchivosComponent } from "./carga-archivos/carga-archivos.component";
 import { CardBalanceComponent } from './mostrar-analisis/card-balance/card-balance.component';
 import { MostrarAnalisisComponent } from "./mostrar-analisis/mostrar-analisis.component";
+import { TableroComponent } from './mostrar-analisis/tablero/tablero.component';
+import { TablaBalanceComponent } from "./mostrar-analisis/tabla-balance/tabla-balance.component";
 
 @NgModule({
     declarations: [
@@ -15,8 +17,9 @@ import { MostrarAnalisisComponent } from "./mostrar-analisis/mostrar-analisis.co
         MostrarAnalisisComponent,
         ReadexcelDirective,
         CardBalanceComponent,
-        ReadexcelDirective,
-        ComparativeexcelDirective
+        TablaBalanceComponent,
+        ComparativeexcelDirective,
+        TableroComponent,
     ],
     imports: [
         ReactiveFormsModule,

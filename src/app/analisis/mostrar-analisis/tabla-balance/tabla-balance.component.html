@@ -1,0 +1,32 @@
+<div class="overflow-x-auto w-full m-2">
+  <table mat-table [dataSource]="dataSource" class="mx-auto">
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef class="p-0 m-0 text-center"></th>
+      <td mat-cell *matCellDef="let element" class="p-0 pr-4 bg-white">
+        <div [class]="'text-white text-center px-2 md:px-8 lg:px-12 py-3 my-1 rounded-md drop-shadow-lg ' + element.styles?.nombre">
+          {{element.nombre}}
+        </div>
+      </td>
+    </ng-container>
+    <ng-container *ngFor="let year of dataYears" [matColumnDef]="year.id">
+      <th mat-header-cell *matHeaderCellDef class="p-0 m-0 text-center text-white">
+        <div class="px-2 md:px-8 lg:px-12 flex items-center justify-center mb-1 bg-zinc-800 h-16">{{year.nombre}}</div>
+      </th>
+      <td mat-cell *matCellDef="let element" class="odd:bg-stone-300/80 even:bg-neutral-500/80 even:text-white text-center px-2 md:px-8 lg:px-12 py-4"> {{element[year.id]}} </td>
+    </ng-container>
+    <ng-container matColumnDef="variacionNeta">
+      <th mat-header-cell *matHeaderCellDef class="p-0 m-0 text-center text-white">
+        <div class="px-2 md:px-8 lg:px-12 flex items-center justify-center mb-1 bg-zinc-800 h-16">Variación Neta</div>
+      </th>
+      <td mat-cell *matCellDef="let element" class="odd:bg-stone-300/80 even:bg-neutral-500/80 even:text-white text-center px-2 md:px-8 lg:px-12 py-4"> {{element.variacionNeta}} </td>
+    </ng-container>
+    <ng-container matColumnDef="variacionPorcentual">
+      <th mat-header-cell *matHeaderCellDef class="p-0 m-0 text-center text-white">
+        <div class="px-2 md:px-8 lg:px-12 flex items-center justify-center mb-1 bg-zinc-800 h-16">Variación Porcentual</div>
+      </th>
+      <td mat-cell *matCellDef="let element" class="odd:bg-stone-300/80 even:bg-neutral-500/80 even:text-white text-center px-2 md:px-8 lg:px-12 py-4"> {{element.variacionPorcentual}} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="odd:bg-stone-300 even:bg-neutral-500"></tr>
+  </table>
+</div>

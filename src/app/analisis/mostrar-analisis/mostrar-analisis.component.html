@@ -1,5 +1,11 @@
 <section>
+  <app-tabla-balance
+    [dataYears]="dataYears"
+    [dataActivos]="dataActivos"
+  ></app-tabla-balance>
   <div class="cards-balance">
+  </div>
+  <!-- <div class="cards-balance">
     <app-card-balance titulo="Ingresos" subtitulo="Sus ingresos fueron de $12’900,888"
       cuerpo="Su desempeño frente al periodo anterior mejoró en un 3%"
       [tarjetas]="['Operación Normal','No Operacionales','Devoluciones, rebajas y descuentos','Ajustes por inflación',]"
@@ -8,6 +14,10 @@
       cuerpo="Su desempeño frente al periodo anterior empeoró en un 3%"
       [tarjetas]="['Operacionales de Administración','Operacionales de Ventas','Costos de Ventas','No Operacionales','Impuestos de renta y complementarios']"
       imagen="assets/svg/coin.svg" color="red"></app-card-balance>
+    <app-tablero>
+      Así va el desempeño de su empresa<br>(Ingresos - Egresos):<br><b>$6.499.527</b><br>
+      Año 2022
+    </app-tablero>
   </div>
   <div class="cards-balance">
     <app-card-balance titulo="Activos" subtitulo="Sus empresa tiene $12’900,888"
@@ -18,8 +28,8 @@
       cuerpo="Su desempeño frente al periodo anterior empeoró en un 3%"
       [tarjetas]="['Debe a Entidades Financieras','Debe a Proveedores','Cuentas por Pagar','Impuestos, Gavamenes y Tasas','Otras Deudas']"
       imagen="assets/svg/coin.svg" color="purple"></app-card-balance>
-  </div>
-    <table>
+  </div> -->
+    <!-- <table>
       <tbody>
         <tr>
           <td class="tg-0lax">Su empresa tiene: $ {{analisis.activos | number:'.0-0'}}</td>
@@ -470,6 +480,6 @@
           <td class="tg-0lax"></td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
   </section>
   
