@@ -9,6 +9,7 @@ import { CargaArchivosComponent } from "./carga-archivos/carga-archivos.componen
 import { CardBalanceComponent } from './mostrar-analisis/card-balance/card-balance.component';
 import { MostrarAnalisisComponent } from "./mostrar-analisis/mostrar-analisis.component";
 import { TableroComponent } from './mostrar-analisis/tablero/tablero.component';
+import { TablaBalanceComponent } from "./mostrar-analisis/tabla-balance/tabla-balance.component";
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { TableroComponent } from './mostrar-analisis/tablero/tablero.component';
         MostrarAnalisisComponent,
         ReadexcelDirective,
         CardBalanceComponent,
+        TablaBalanceComponent,
         ComparativeexcelDirective,
         TableroComponent,
     ],

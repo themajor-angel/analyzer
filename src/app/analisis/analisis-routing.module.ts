@@ -14,8 +14,4 @@ const routes: Routes = [
     ],
     exports: [RouterModule]
 })
-export class AnalisisRoutingModule {
-  navigate(arg0: string[]) {
-    throw new Error('Method not implemented.');
-  }
-}
+export class AnalisisRoutingModule {}
