@@ -27,6 +27,7 @@ import { ComparativeexcelDirective } from './directives/comparativeexcel.directi
 import { AnalisisService } from './analisis/analisis.service';
 import { AnalisisService2 } from './analisis/analisis2.service';
 import { MostrarAnalisisComponent } from './analisis/mostrar-analisis/mostrar-analisis.component';
+import { IndicadoresComponent } from './analisis/indicadores/indicadores.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MostrarAnalisisComponent } from './analisis/mostrar-analisis/mostrar-an
     WelcomeComponent,
     HeaderComponent,
     SidenavListComponent,
+    IndicadoresComponent,
   ],
   imports: [
     BrowserModule,
