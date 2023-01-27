@@ -3,6 +3,7 @@ import { Data } from '@angular/router';
 import { Observable, Subscriber } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { AnalisisService } from '../analisis/analisis.service';
+import { ComparacionIndicadoresService } from '../analisis/indicadores/comparacionIndicadores.service';
 import { Item } from '../analisis/item.model';
 
 @Directive({
@@ -13,9 +14,11 @@ export class ReadexcelDirective {
   excelObservable: Observable<any>;
   datosNum: Item[] = [];
   datos: [] = [];
+  idInput: string;
   @Output() eventEmitter = new EventEmitter();
 
-  constructor(private analisis_service: AnalisisService) {}
+  constructor(private analisis_service: AnalisisService,
+    private comparacionIndicadoresService:ComparacionIndicadoresService) {}
 
   @HostListener('change', ['$event.target'])
   onChange(target: HTMLInputElement) {
@@ -28,6 +31,7 @@ export class ReadexcelDirective {
     this.excelObservable.subscribe((d) => {
       this.eventEmitter.emit(d);
 
+      this.comparacionIndicadoresService.registrarExcel(this.idInput, d);
       this.analisisBalanceGeneral(d);
     });
   }

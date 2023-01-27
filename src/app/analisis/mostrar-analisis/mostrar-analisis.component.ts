@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AnalisisService } from '../analisis.service';
 import { AnalisisService2 } from '../analisis2.service';
+import { ComparacionIndicadoresService } from '../indicadores/comparacionIndicadores.service';
 import { TablaBalanceYears, TablaBalanceActivos } from './tabla-balance/types';
 
 @Component({
@@ -23,11 +24,12 @@ export class MostrarAnalisisComponent implements OnInit {
       variacionNeta: '42',
       variacionPorcentual: '104%',
       porAnio: {
-        year2020: '100.000',
+        year2020: this.comparacionIndicadoresService.getVal('2020', '1'),
         year2021: '200.000',
       },
       styles: {
         nombre: 'bg-gradient-radial from-cyan-400 to-sky-400',
+        variacionPorcentual: 'text-white bg-teal-300'
       },
     },
     {
@@ -41,6 +43,7 @@ export class MostrarAnalisisComponent implements OnInit {
       },
       styles: {
         nombre: 'bg-gradient-radial from-[#FCBDCA] to-[#FAA6BA]',
+        variacionPorcentual: 'text-white bg-orange-300'
       },
     },
     {
@@ -54,12 +57,14 @@ export class MostrarAnalisisComponent implements OnInit {
       },
       styles: {
         nombre: 'bg-gradient-radial from-[#5FEBBE] to-[#57D7C9]',
+        variacionPorcentual: 'text-white bg-rose-300'
       },
     },
   ];
 
   constructor(
     private analisis_service: AnalisisService,
+    private comparacionIndicadoresService: ComparacionIndicadoresService,
     private router: Router
   ) {}
 

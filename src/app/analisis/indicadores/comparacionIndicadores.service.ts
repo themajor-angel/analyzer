@@ -2,10 +2,31 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../app.reducer';
-import { Item } from '../item.model';
+import { Item, Regla } from '../item.model';
+
+class DataExcel {
+  datos: {
+    '1': 4000,
+    '2': 3000,
+    '4': 2000,
+  }
+  constructor(id: string, dataExcel: Item[]) {
+    dataExcel.forEach(dato =>  {
+      this.datos[dato.codigo] = dato;
+    })
+  }
+
+  getVal(id) {
+    return this.datos[id] || null;
+  }
+
+  setVal() {
+
+  }
+}
 
 @Injectable()
-export class AuthService {
+export class ComparacionIndicadoresService {
   cod1_1;
   cod2_1;
   cod3_1;
@@ -50,7 +71,45 @@ export class AuthService {
   $rotActivos;
   $rotInventario;
 
+  exceles: DataExcel[] = [];
+  exceles1: {[id:string]: DataExcel};
+  reglas: Regla[] = []
+
   constructor() {}
+
+  registrarExcel(id: string, dataExcel: any) {
+    this.exceles.push(new DataExcel(id, dataExcel));
+    this.exceles1[id] = (new DataExcel(id, dataExcel));
+  }
+
+  eliminarExcel(id: string) {
+
+  }
+
+  getVal(idExcel: string, idPropiedad:string): string{
+    return '42'
+  }
+
+  getAnios() {
+    return ['2020', '2021', '2022']
+  }
+
+  getHijos(prop: string) {
+    return ['11','12','13']
+  }
+
+  comparar(idExcel1: string, idExcel2: string, prop: string): {
+    valorNeto: number,
+    valorPorcentual: number,
+    semaforo: string,
+  } {
+    return {} as any
+    // si existe una regla personalizada
+    // comparacionregla =  comparar(idExcel1, idExcel2, regla.prop)
+    // exceles[idExcel1].get(prop) - exceles[idExcel2].get(prop)
+    // si no
+    // return exceles[idExcel1].get(prop) - exceles[idExcel2].get(prop)
+  }
 
   setVal1(data: Item[]) {
     for (let i = 0; i < data.length; i++) {
