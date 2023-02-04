@@ -31,7 +31,7 @@ export class ReadexcelDirective {
     this.excelObservable.subscribe((d) => {
       this.eventEmitter.emit(d);
 
-      this.comparacionIndicadoresService.registrarExcel(this.idInput, d);
+      //this.comparacionIndicadoresService.registrarExcel(this.idInput, d);
       this.analisisBalanceGeneral(d);
     });
   }
@@ -89,5 +89,6 @@ export class ReadexcelDirective {
     this.analisis_service.getDatosIngresos(this.datosNum);
     this.analisis_service.getDatosGastosCostos(this.datosNum);
     this.analisis_service.crearAnalisis();
+    this.comparacionIndicadoresService.setVal1(this.datosNum);
   }
 }

@@ -3,6 +3,7 @@ import { Data } from '@angular/router';
 import { Observable, Subscriber } from 'rxjs';
 import * as XLSX from 'xlsx';
 import { AnalisisService2 } from '../analisis/analisis2.service';
+import { ComparacionIndicadoresService } from '../analisis/indicadores/comparacionIndicadores.service';
 import { Item } from '../analisis/item.model';
 @Directive({
   selector: '[appComparativeexcel]',
@@ -12,9 +13,11 @@ export class ComparativeexcelDirective {
   excelObservable: Observable<any>;
   datosNum: Item[] = [];
   datos: [] = [];
+  idInput: string;
   @Output() eventEmitter = new EventEmitter();
 
-  constructor(private analisis_service: AnalisisService2) {}
+  constructor(private analisis_service: AnalisisService2,
+    private comparacionIndicadoresService:ComparacionIndicadoresService) {}
 
   @HostListener('change', ['$event.target'])
   onChange(target: HTMLInputElement) {
@@ -27,6 +30,7 @@ export class ComparativeexcelDirective {
     this.excelObservable.subscribe((d) => {
       this.eventEmitter.emit(d);
 
+      //this.comparacionIndicadoresService.registrarExcel(this.idInput, d);
       this.analisisBalanceGeneral(d);
     });
   }
@@ -84,6 +88,7 @@ export class ComparativeexcelDirective {
     this.analisis_service.getDatosIngresos(this.datosNum);
     this.analisis_service.getDatosGastosCostos(this.datosNum);
     this.analisis_service.crearAnalisis();
+    this.comparacionIndicadoresService.setVal2(this.datosNum);
   }
 
 }
