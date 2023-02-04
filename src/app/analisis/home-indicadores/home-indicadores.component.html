@@ -1,0 +1,10 @@
+<section class="grid grid-cols-3">
+  <div class="w-full p-4" *ngFor="let indicador of botonesIndicadores">
+    <button
+      [routerLink]="indicador.ruta"
+      [class]="indicador.bgColor + ' w-full h-24 rounded-md text-white text-xl font-bold'"
+    >
+      {{ indicador.nombre }}
+    </button>
+  </div>
+</section>

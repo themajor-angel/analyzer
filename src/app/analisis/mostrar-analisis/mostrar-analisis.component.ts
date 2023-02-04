@@ -29,6 +29,8 @@ export class MostrarAnalisisComponent implements OnInit {
       styles: {
         nombre: 'bg-gradient-radial from-cyan-400 to-sky-400',
       },
+      semaforoValor: 'verde',
+      semaforoTexto: 'Aumentó con respecto al año pasado',
     },
     {
       id: '2',
@@ -42,6 +44,8 @@ export class MostrarAnalisisComponent implements OnInit {
       styles: {
         nombre: 'bg-gradient-radial from-[#FCBDCA] to-[#FAA6BA]',
       },
+      semaforoValor: 'amarillo',
+      semaforoTexto: 'Aumentó con respecto al año pasado',
     },
     {
       id: '3',
@@ -55,6 +59,8 @@ export class MostrarAnalisisComponent implements OnInit {
       styles: {
         nombre: 'bg-gradient-radial from-[#5FEBBE] to-[#57D7C9]',
       },
+      semaforoValor: 'rojo',
+      semaforoTexto: 'Aumentó con respecto al año pasado',
     },
   ];
 

@@ -10,6 +10,10 @@ import { CardBalanceComponent } from './mostrar-analisis/card-balance/card-balan
 import { MostrarAnalisisComponent } from "./mostrar-analisis/mostrar-analisis.component";
 import { TableroComponent } from './mostrar-analisis/tablero/tablero.component';
 import { TablaBalanceComponent } from "./mostrar-analisis/tabla-balance/tabla-balance.component";
+import { HomeIndicadoresComponent } from "./home-indicadores/home-indicadores.component";
+import { DetallesIndicadoresComponent } from "./detalles-indicadores/detalles-indicadores.component";
+import { CardIndicadorComponent } from "./detalles-indicadores/card-indicador/card-indicador.component";
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
     declarations: [
@@ -20,12 +24,16 @@ import { TablaBalanceComponent } from "./mostrar-analisis/tabla-balance/tabla-ba
         TablaBalanceComponent,
         ComparativeexcelDirective,
         TableroComponent,
+        HomeIndicadoresComponent,
+        DetallesIndicadoresComponent,
+        CardIndicadorComponent,
     ],
     imports: [
         ReactiveFormsModule,
         AngularFireAuthModule,
         SharedModule,
-        AnalisisRoutingModule
+        AnalisisRoutingModule,
+        SwiperModule,
     ]
 })
 
