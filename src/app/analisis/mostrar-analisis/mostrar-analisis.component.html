@@ -1,8 +1,12 @@
 <section>
   <app-tabla-balance
     [dataYears]="dataYears"
-    [dataActivos]="dataActivos"
+    [dataActivos]="dataActivos$ | async"
   ></app-tabla-balance>
+  <app-botones-navegacion
+    routerLinkAtras="/analisis/menu"
+    [mostrarBotonIndicadores]="true"
+  ></app-botones-navegacion>
   <div class="cards-balance">
   </div>
   <!-- <div class="cards-balance">

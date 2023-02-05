@@ -21,7 +21,7 @@ const routes: Routes = [
     // * comentado para poder probar
     // canLoad: [AuthGuard],
   },
-  { path: '', component: WelcomeComponent },
+  { path: '', redirectTo: '/analisis/menu', pathMatch:'full'},
   {
     path: 'training',
     loadChildren: () =>

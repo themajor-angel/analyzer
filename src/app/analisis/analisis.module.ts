@@ -14,6 +14,7 @@ import { HomeIndicadoresComponent } from "./home-indicadores/home-indicadores.co
 import { DetallesIndicadoresComponent } from "./detalles-indicadores/detalles-indicadores.component";
 import { CardIndicadorComponent } from "./detalles-indicadores/card-indicador/card-indicador.component";
 import { SwiperModule } from 'swiper/angular';
+import { MenuPrincipalComponent } from "./menu-principal/menu-principal.component";
 
 @NgModule({
     declarations: [
@@ -27,6 +28,7 @@ import { SwiperModule } from 'swiper/angular';
         HomeIndicadoresComponent,
         DetallesIndicadoresComponent,
         CardIndicadorComponent,
+        MenuPrincipalComponent,
     ],
     imports: [
         ReactiveFormsModule,
