@@ -8,7 +8,8 @@
     "build:stats": "ng build --configuration production --stats-json",
     "analyze": "webpack-bundle-analyzer dist/analyzer/stats.json",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng build --configuration production && firebase deploy"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +31,7 @@
     "firebase": "^9.14.0",
     "rxjs": "~7.5.0",
     "rxjs-compat": "^6.6.7",
+    "swiper": "^6.8.4",
     "tslib": "^2.3.0",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.0/xlsx-0.19.0.tgz",
     "zone.js": "~0.11.4"

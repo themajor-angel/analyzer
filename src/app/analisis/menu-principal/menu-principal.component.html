@@ -1,0 +1,30 @@
+<ng-template templateTexto>
+  <h2 class="text-light m-0">Cuanto tiene y debe su empresa</h2>
+  <p class="text-light text-sm m-0 mb-4">(Pasivos y Activos)</p>
+  <p class="m-0">Balance general a Junio 2022</p>
+  <p class="text-light text-sm m-0">Ver más 🡒</p>
+</ng-template>
+<ng-template templateTexto>
+  <h2 class="text-light m-0">Así va el desempeño de su empresa</h2>
+  <p class="text-light text-sm m-0 mb-4">(Ingresos menos costos y gastos)</p>
+  <p class="m-0">Estado de Resultados a Junio 2022</p>
+  <p class="text-light text-sm m-0">Ver más 🡒</p>
+</ng-template>
+<ng-template templateTexto>
+  <h2 class="text-light m-0">Indicadores Tradicionales</h2>
+  <p class="text-light text-sm m-0">Ver más 🡒</p>
+</ng-template>
+
+<section class="grid md:grid-cols-2 md:auto-rows-fr">
+  <div class="w-full h-full p-4 flex flex-col text-center align-center justify-center">
+    <h1 class="text-2xl font-bold">Así va su empresa</h1>
+  </div>
+  <div class="w-full p-4" *ngFor="let indicador of botonesIndicadores; let i = index">
+    <button
+      [routerLink]="indicador.ruta"
+      [class]="indicador.bgColor + ' w-full h-full rounded-md text-white text-xl p-4'"
+    >
+      <ng-container *ngTemplateOutlet="textosBotones[i]"></ng-container>
+    </button>
+  </div>
+</section>
