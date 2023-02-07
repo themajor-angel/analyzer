@@ -1,0 +1,32 @@
+<main>
+  <h1 class="text-center font-medium m-0 mt-4">Rentabilidad</h1>
+  <p class="text-center m-0 my-2">
+    Rentabilidad es la capacidad de su empresa de obtener ganancias a partir de
+    una cierta inversión.
+  </p>
+  <div class="">
+    <!-- https://v6.swiperjs.com/swiper-api -->
+    <swiper
+      #swiperRef
+      [slidesPerView]="'auto'"
+      [centeredSlides]="true"
+      [spaceBetween]="0"
+      (slideChange)="onSwipe($event)"
+    >
+      <!-- [pagination]="{ clickable: true }" -->
+      <ng-template *ngFor="let id of ids" swiperSlide>
+        <app-card-indicador
+          class="flex justify-center w-auto max-w-[80vw]"
+          [activo]="id === idSeleccionado"
+          (seleccionar)="onSeleccionarCard(id)"
+        ></app-card-indicador>
+      </ng-template>
+      <!-- <div class="swiper-pagination"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div> -->
+    </swiper>
+  </div>
+  <app-botones-navegacion
+    routerLinkAtras="/analisis/indicadores"
+  ></app-botones-navegacion>
+</main>

@@ -14,3 +14,6 @@ html, body, button {
 body { 
     margin: 0; 
 }
+
+/* Necesario para poder usar slidesPerView: auto en swiper.js */
+.swiper-slide { width: auto; }

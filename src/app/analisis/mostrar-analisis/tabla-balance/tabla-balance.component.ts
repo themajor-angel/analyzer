@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { TablaBalanceActivos, TablaBalanceYears } from './types';
+import { ITipoSemaforo, TablaBalanceActivos, TablaBalanceYears } from './types';
 
 @Component({
   selector: 'app-tabla-balance',
@@ -26,11 +26,20 @@ export class TablaBalanceComponent implements OnInit {
     this.rebuildDataSource();
   }
 
+  getColorTailwindPorSemaforo(color: ITipoSemaforo) {
+    switch(color) {
+      case 'verde': return 'bg-teal-300';
+      case 'amarillo': return 'bg-orange-300';
+      case 'rojo': return 'bg-rose-300';
+      default: return '';
+    }
+  }
+
   public rebuildDataSource(): void {
     this.dataSource.data = this.dataActivos.map(activo => {
-      const fila: any = {};
+      const fila: any = {...activo};
       this.displayedColumns.forEach(nombreColumna => {
-        fila[nombreColumna] = activo.porAnio[nombreColumna] || activo[nombreColumna];
+        fila[nombreColumna] ||= activo.porAnio[nombreColumna];
       });
       fila.styles = activo.styles;
       return fila;

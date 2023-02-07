@@ -18,9 +18,10 @@ const routes: Routes = [
     path: 'analisis',
     loadChildren: () =>
       import('./analisis/analisis.module').then((m) => m.AnalisisModule),
-    canLoad: [AuthGuard],
+    // * comentado para poder probar
+    // canLoad: [AuthGuard],
   },
-  { path: '', component: WelcomeComponent },
+  { path: '', redirectTo: '/analisis/menu', pathMatch:'full'},
   {
     path: 'training',
     loadChildren: () =>

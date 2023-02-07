@@ -1,0 +1,37 @@
+<div
+  class="p-4 w-80 max-w-full bg-gradient-radial from-[#93A9FE] to-[#c3a8ff] rounded-xl shadow-lg shadow-black/25 transition-all duration-500"
+  [class.opacity-50]="!activo"
+  [class.scale-90]="!activo"
+  [class.cursor-pointer]="!activo"
+  (click)="onClickCard()"
+>
+  <div class="my-2 h-16 flex flex-col justify-center">
+    <h3 class="text-white text-2xl font-medium text-center m-0 p-0">
+      Margen de utilidad o Neto
+    </h3>
+  </div>
+  <p class="m-0"><b>Descripción</b></p>
+  <p class="m-0 mb-12">
+    Cuantos pesos genera su empresa por cada 100 pesos vendidos, descontando
+    solo costos y sin incluir ningún gasto
+  </p>
+  <div class="flex flex-row justify-around gap-4 mb-4">
+    <div class="bg-white flex-auto text-center rounded-md pt-4">
+      <p class="font-bold m-0 my-2">Año 2021</p>
+      <p class="text-4xl font-bold m-0 mb-6">0.8</p>
+    </div>
+    <div class="bg-orange-300 flex-auto text-center rounded-md pt-4">
+      <p class="font-bold m-0 my-2">Año 2020</p>
+      <p class="text-4xl font-bold m-0 mb-6">0.7</p>
+    </div>
+  </div>
+  <div class="bg-white flex w-full">
+    <div class="bg-orange-300 flex-none flex justify-center align-center">
+      <img src="assets/svg/mdi_face-outline.svg" class="w-12 m-3" />
+    </div>
+    <div class="flex-auto text-center m-auto p-2">
+      <p class="m-0"><b>Comparación:</b></p>
+      <p class="m-0">A pesar que mejoro este indicador debe ser mayor a 1</p>
+    </div>
+  </div>
+</div>

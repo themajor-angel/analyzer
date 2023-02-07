@@ -9,7 +9,7 @@
       <ul fxLayout fxLayoutGap="10px" class="navigation-items">
         <li *ngIf="!(isAuth$ | async)"><a routerLink="/auth/signup">Registrarse</a></li>
         <li *ngIf="!(isAuth$ | async)"><a routerLink="/auth/login">Ingresar</a></li>
-        <li *ngIf="isAuth$ | async"><a routerLink="/analisis/cargadearchivos">Análisis</a></li>
+        <li *ngIf="isAuth$ | async"><a routerLink="/analisis/menu">Análisis</a></li>
         <!--<li *ngIf="isAuth$ | async"><a routerLink="/editarperfil">Editar Perfil</a></li>-->
         <li *ngIf="isAuth$ | async"><a style="cursor: pointer" (click)="onLogout()">Cerrar Sesión</a></li>
       </ul>
