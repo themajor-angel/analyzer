@@ -21,20 +21,20 @@ export interface ComparacionItems {
 }
 
 export class ExcelInfo {
-  cod1;
-  cod2;
-  cod3;
-  cod4;
-  cod5;
-  cod6;
-  cod7;
+  cod1 = 0;
+  cod2 = 0;
+  cod3 = 0;
+  cod4 = 0;
+  cod5 = 0;
+  cod6 = 0;
+  cod7 = 0;
   cod11;
   cod12;
   cod14;
   cod1305;
   cod41;
-  actCor;
-  pasCor;
+  actCor = [];
+  pasCor = [];
   sumAct;
   sumPas;
 
@@ -56,27 +56,43 @@ export class ExcelInfo {
 
   setVal(data: Item[]) {
     for (let i = 0; i < data.length; i++) {
-      if (data[i].codigo == '1') {
-        this.cod1 = data[i].saldo;
+      if (data[i].codigo.length == 2) {
+        if (data[i].codigo.startsWith('1')) {
+          this.cod1 += data[i].saldo;
+        }
       }
-      if (data[i].codigo == '2') {
-        this.cod2 = data[i].saldo;
+      if (data[i].codigo.length == 2) {
+        if (data[i].codigo.startsWith('2')) {
+          this.cod2 += data[i].saldo;
+        }
       }
-      if (data[i].codigo == '3') {
-        this.cod3 = data[i].saldo;
+      if (data[i].codigo.length == 2) {
+        if (data[i].codigo.startsWith('3')) {
+          this.cod3 += data[i].saldo;
+        }
       }
-      if (data[i].codigo == '4') {
-        this.cod4 = data[i].saldo;
+      if (data[i].codigo.length == 2) {
+        if (data[i].codigo.startsWith('4')) {
+          this.cod4 += data[i].saldo;
+        }
       }
-      if (data[i].codigo == '5') {
-        this.cod5 = data[i].saldo;
+      if (data[i].codigo.length == 2) {
+        if (data[i].codigo.startsWith('5')) {
+          this.cod5 += data[i].saldo;
+        }
       }
-      if (data[i].codigo == '6') {
-        this.cod6 = data[i].saldo;
+      if (data[i].codigo.length == 2) {
+        if (data[i].codigo.startsWith('6')) {
+          this.cod6 += data[i].saldo;
+        }
       }
-      if (data[i].codigo == '7') {
-        this.cod7 = data[i].saldo;
+      if (data[i].codigo.length == 7) {
+        if (data[i].codigo.startsWith('2')) {
+          this.cod7 += data[i].saldo;
+        }
       }
+      
+      
       if (data[i].codigo == '11') {
         this.cod11 = data[i].saldo;
       }
@@ -95,8 +111,8 @@ export class ExcelInfo {
         data[i].codigo == '13' ||
         data[i].codigo == '14'
       ) {
-        //this.actCor.push(data[i].saldo);
-        this.actCor = 20
+        this.actCor.push(data[i].saldo);
+        //this.actCor = 20
       }
       if (
         data[i].codigo == '21' ||
@@ -105,8 +121,8 @@ export class ExcelInfo {
         data[i].codigo == '24' ||
         data[i].codigo == '25'
       ) {
-        //this.pasCor.push(data[i].saldo);
-        this.pasCor = 20
+        this.pasCor.push(data[i].saldo);
+        //this.pasCor = 20
       }
     }
     this.calcularIdicadores();
@@ -121,19 +137,14 @@ export class ExcelInfo {
 
     //Liquidez
     //no está bien seteada la suma
-    /*this.sumAct = this.actCor
-      .filter((item) => item.tax === '25.00')
-      .reduce((sum, current) => sum + current.total, 0);
-    this.sumPas = this.pasCor
-      .filter((item) => item.tax === '25.00')
-      .reduce((sum, current) => sum + current.total, 0);*/
-      this.sumAct = 10;
-      this.sumPas = 10;
+    this.sumAct = this.actCor.reduce((a, b) => a + b, 0);
+    this.sumPas = this.pasCor.reduce((a, b) => a + b, 0);
+
     this.liquidezCorriente = (this.sumAct / this.sumPas) * 100;
    
     this.liquidezInmediata = ((this.cod11 * this.cod12) / this.sumPas) * 100;
 
-    this.liquidezTotal = (this.cod1 / this.pasCor) * 100;
+    this.liquidezTotal = (this.cod1 / this.sumPas) * 100;
 
     //solvencia
     this.ratio = this.cod1 / this.cod2;

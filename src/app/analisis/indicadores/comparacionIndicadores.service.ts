@@ -36,59 +36,73 @@ export class ComparacionIndicadoresService {
   indicadores = [
     {
       prop: 'margenNeto',
-      verde: 'Su margen no ha cambiado',
+      status: 'Su margen no ha cambiado',
+      dif: 0,
     },
     {
       prop: 'margenBruto',
-      verde: 'Su margen ha mejorado',
+      status: 'Su margen ha mejorado',
+      dif: 0,
     },
     {
       prop: 'rActivos',
-      verde: 'Su margen no ha cambiado',
+      status: 'Su margen no ha cambiado',
+      dif: 0,
     },
     {
       prop: 'rPatrimonio',
-      verde: 'Su margen ha mejorado',
+      status: 'Su margen ha mejorado',
+      dif: 0,
     },
     {
       prop: 'liquidezCorriente',
-      verde: 'Su margen no ha cambiado',
+      status: 'Su margen no ha cambiado',
+      dif: 0,
     },
     {
       prop: 'liquidezInmmediata',
-      verde: 'Su margen ha mejorado',
+      status: 'Su margen ha mejorado',
+      dif: 0,
     },
     {
       prop: 'liquidezTotal',
-      verde: 'Su margen no ha cambiado',
+      status: 'Su margen no ha cambiado',
+      dif: 0,
     },
     {
       prop: 'ratio',
-      verde: 'Su margen ha mejorado',
+      status: 'Su margen ha mejorado',
+      dif: 0,
     },
     {
       prop: 'endeudamientoTotal',
-      verde: 'Su margen no ha cambiado',
+      status: 'Su margen no ha cambiado',
+      dif: 0,
     },
     {
       prop: 'rotInventarios',
-      verde: 'Su margen ha mejorado',
+      status: 'Su margen ha mejorado',
+      dif: 0,
     },
     {
       prop: 'rotCobrar',
-      verde: 'Su margen no ha cambiado',
+      status: 'Su margen no ha cambiado',
+      dif: 0,
     },
     {
       prop: 'rotPagar',
-      verde: 'Su margen ha mejorado',
+      status: 'Su margen ha mejorado',
+      dif: 0,
     },
     {
       prop: 'rotActivos',
-      verde: 'Su margen no ha cambiado',
+      status: 'Su margen no ha cambiado',
+      dif: 0,
     },
     {
       prop: 'rotInventario',
-      verde: 'Su margen ha mejorado',
+      status: 'Su margen ha mejorado',
+      dif: 0,
     },
   ]  
   reglas: Regla[] = []
@@ -112,16 +126,18 @@ export class ComparacionIndicadoresService {
   
   comparar() {
     this.indicadores.forEach(dato => {
-      this[dato.prop] = this.temp1[dato.prop] - this.temp2[dato.prop];
+      dato.dif = this.temp1[dato.prop] - this.temp2[dato.prop];
+      console.log("dato.prop", [dato.prop], this.temp1[dato.prop], this.temp2[dato.prop])
       if (this.temp1[dato.prop] > this.temp2[dato.prop]) {
-        this[dato.prop] = 'verde';
+        dato.status = 'verde';
       }
       if (this.temp1[dato.prop] === this.temp2[dato.prop]) {
-        this[dato.prop] = 'amarillo';
+        dato.status = 'amarillo';
       }
       if (this.temp1[dato.prop] < this.temp2[dato.prop]) {
-        this[dato.prop] = 'rojo';
+        dato.status = 'rojo';
       }
+      //this[dato.prop].dif = this.temp1[dato.prop] - this.temp2[dato.prop]
     })
 
     console.log(this.indicadores)
