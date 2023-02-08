@@ -8,7 +8,9 @@ import * as fromRoot from '../../app.reducer';
 import { Item, Regla, ExcelInfo } from '../item.model';
 
 
-@Injectable()
+@Injectable(
+  {providedIn: 'root'}
+)
 export class ComparacionIndicadoresService {
   temp1 = new ExcelInfo()
   temp2 = new ExcelInfo()
@@ -99,6 +101,7 @@ export class ComparacionIndicadoresService {
 
   setVal2(data: Item[]) {
     this.data2 = data;
+    this.iniciar()
   }
 
   iniciar() {

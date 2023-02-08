@@ -95,7 +95,8 @@ export class ExcelInfo {
         data[i].codigo == '13' ||
         data[i].codigo == '14'
       ) {
-        this.actCor.push(data[i].saldo);
+        //this.actCor.push(data[i].saldo);
+        this.actCor = 20
       }
       if (
         data[i].codigo == '21' ||
@@ -104,7 +105,8 @@ export class ExcelInfo {
         data[i].codigo == '24' ||
         data[i].codigo == '25'
       ) {
-        this.pasCor.push(data[i].saldo);
+        //this.pasCor.push(data[i].saldo);
+        this.pasCor = 20
       }
     }
     this.calcularIdicadores();
@@ -119,12 +121,14 @@ export class ExcelInfo {
 
     //Liquidez
     //no está bien seteada la suma
-    this.sumAct = this.actCor
+    /*this.sumAct = this.actCor
       .filter((item) => item.tax === '25.00')
       .reduce((sum, current) => sum + current.total, 0);
     this.sumPas = this.pasCor
       .filter((item) => item.tax === '25.00')
-      .reduce((sum, current) => sum + current.total, 0);
+      .reduce((sum, current) => sum + current.total, 0);*/
+      this.sumAct = 10;
+      this.sumPas = 10;
     this.liquidezCorriente = (this.sumAct / this.sumPas) * 100;
    
     this.liquidezInmediata = ((this.cod11 * this.cod12) / this.sumPas) * 100;
