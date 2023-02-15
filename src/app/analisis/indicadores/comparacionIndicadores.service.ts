@@ -137,7 +137,6 @@ export class ComparacionIndicadoresService {
       if (this.temp1[dato.prop] < this.temp2[dato.prop]) {
         dato.status = 'rojo';
       }
-      //this[dato.prop].dif = this.temp1[dato.prop] - this.temp2[dato.prop]
     })
 
     console.log(this.indicadores)
