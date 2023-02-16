@@ -97,6 +97,8 @@ export class AnalisisService2 {
   pos5 = 0;
   nombrePos5: string;
 
+  fechaArr =  [];
+
   showData(data: Item[]) {
 
   }
@@ -545,5 +547,13 @@ export class AnalisisService2 {
 
   getEstadoResultado() {
     return this.estadoResultado;
+  }
+
+  getFecha(fecha:string){
+    const rExp : RegExp = /Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre|\d{4}/gi;
+    
+    this.fechaArr = String(fecha).match(rExp);
+    console.log(this.fechaArr);
+    return this.fechaArr;
   }
 }
