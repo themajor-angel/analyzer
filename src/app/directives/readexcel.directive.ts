@@ -16,7 +16,8 @@ export class ReadexcelDirective {
   datos: [] = [];
   idInput: string;
   @Output() eventEmitter = new EventEmitter();
-
+  fecha: string;
+  
   constructor(private analisis_service: AnalisisService,
     private comparacionIndicadoresService:ComparacionIndicadoresService) {}
 
@@ -58,7 +59,8 @@ export class ReadexcelDirective {
   }
 
   analisisBalanceGeneral(data) {
-    /*switch case para las diferentes tipos de balance??*/
+    this.fecha = data[3]['__EMPTY'];
+
     for (let i = 0; i < data.length; i++) {
       if (data[i]['__EMPTY_2'] >= 1 && data[i]['__EMPTY_7'] != 0) {
         let row = {
@@ -90,5 +92,6 @@ export class ReadexcelDirective {
     this.analisis_service.getDatosGastosCostos(this.datosNum);
     this.analisis_service.crearAnalisis();
     this.comparacionIndicadoresService.setVal1(this.datosNum);
+    this.analisis_service.getFecha(this.fecha);
   }
 }

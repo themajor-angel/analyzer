@@ -1,18 +1,7 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="encabezado">
   <h1>
-    Selecciona dos reportes, ¡y déjanos hacer el resto!
+    Seleccione dos reportes de periodos correspondientes para comparar
   </h1>
-  <h4>Por medio de nuestra herramienta, podrás entender tus balances generales / estados de pérdidas y ganancias de una manera sencilla</h4>
-</div>
-<div class="welcome" fxLayout.lt-md="column" fxLayout.gt-md="row" fxLayoutGap.gt-md="30px" fxLayoutAlign="center end" fxLayoutAlign.lt-md="center center">
-  <section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap.gt-md="30px">
-    <img src="../../../assets/Visual data.png" >
-    <p>Visualiza tus datos de una manera inteligente</p>
-  </section>
-  <section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap.gt-md="30px">
-    <img src="../../../assets/Saving money.png" >
-    <p>Toma decisiones clave con la información que generamos para ti</p>
-  </section>
 </div>
 
 <div class="pasoapaso">
@@ -20,7 +9,7 @@
     <mat-step
       [stepControl]="firstFormGroup"
       completed="{{ completo1 }}"
-      label="Archivo para analizar"
+      label="Cargar archivo más reciente"
     >
       <form
         fxLayout="column"
@@ -30,7 +19,7 @@
         (ngSubmit)="onSubmit(f)"
       >
         <label for="input-file-id" class="md-button md-raised md-primary"
-          >Seleccione los archivos que desea comparar</label
+          >Seleccione el archivo del periodo más reciente</label
         >
         <input
           type="file"
@@ -53,7 +42,7 @@
     <mat-step
       [stepControl]="secondFormGroup"
       completed="{{ completo2 }}"
-      label="Archivo para comparar"
+      label="Cargar archivo más antiguo"
     >
       <form
         fxLayout="column"
@@ -63,7 +52,7 @@
         (ngSubmit)="onSubmitComparacion(form2)"
       >
         <label for="input-file-id" class="md-button md-raised md-primary"
-          >Seleccione los archivos que desea comparar</label
+          >Seleccione el archivo del periodo más antiguo</label
         >
         <input
           id="excel-1"
@@ -72,28 +61,6 @@
           #comparativeexcel="comparativeexcel"
           (eventEmitter)="DataFromEventEmitter($event)"
         />
-        <input
-          id="excel-2"
-          type="file"
-          appComparativeexcel
-          #comparativeexcel="comparativeexcel"
-          (eventEmitter)="DataFromEventEmitter($event)"
-        />
-        <input
-          id="excel-3"
-          type="file"
-          appComparativeexcel
-          #comparativeexcel="comparativeexcel"
-          (eventEmitter)="DataFromEventEmitter($event)"
-        />
-        <input
-          id="excel-4"
-          type="file"
-          appComparativeexcel
-          #comparativeexcel="comparativeexcel"
-          (eventEmitter)="DataFromEventEmitter($event)"
-        />
-  
         <button
           mat-raised-button
           color="primary"
@@ -107,8 +74,7 @@
       </form>
     </mat-step>
     <mat-step>
-      <ng-template matStepLabel>Parámetros</ng-template>
-      <p>¿Deseas ingresar parámetros de comparación de manera manual o automático?</p>
+      <ng-template matStepLabel>Analizar archivos</ng-template>
       <div>
         <button
         *ngIf="!(isLoading$ | async)"
