@@ -18,6 +18,9 @@ export class ComparacionIndicadoresService {
   data1: Item[] = [];
   data2: Item[] = [];
 
+  fecha1: [];
+  fecha2: [];
+
   $margenNeto;
   $margenBruto;
   $rActivos;
@@ -109,19 +112,24 @@ export class ComparacionIndicadoresService {
 
   constructor() {}
 
-  setVal1(data: Item[]) {
+  setVal1(data: Item[], fecha ) {
     this.data1 = data;
+    this.fecha1 = fecha;
   }
 
-  setVal2(data: Item[]) {
+  setVal2(data: Item[], fecha) {
     this.data2 = data;
+    this.fecha2 = fecha;
     this.iniciar()
   }
 
   iniciar() {
     this.temp1.setVal(this.data1)
     this.temp2.setVal(this.data2)
+    this.temp1.setFecha(this.fecha1)
+    this.temp2.setFecha(this.fecha2)
     this.comparar();
+    console.log(this.temp1, this.temp2)
   }
   
   comparar() {

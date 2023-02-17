@@ -549,11 +549,13 @@ export class AnalisisService2 {
     return this.estadoResultado;
   }
 
-  getFecha(fecha:string){
+  setFecha(fecha:string){
     const rExp : RegExp = /Enero|Febrero|Marzo|Abril|Mayo|Junio|Julio|Agosto|Septiembre|Octubre|Noviembre|Diciembre|\d{4}/gi;
     
     this.fechaArr = String(fecha).match(rExp);
-    console.log(this.fechaArr);
+  }
+
+  getFecha(){
     return this.fechaArr;
   }
 }

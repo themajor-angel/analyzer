@@ -15,6 +15,7 @@ export class ComparativeexcelDirective {
   datos: [] = [];
   idInput: string;
   fecha: string;
+  fechaArr = [];
   @Output() eventEmitter = new EventEmitter();
 
   constructor(private analisis_service: AnalisisService2,
@@ -90,8 +91,9 @@ export class ComparativeexcelDirective {
     this.analisis_service.getDatosIngresos(this.datosNum);
     this.analisis_service.getDatosGastosCostos(this.datosNum);
     this.analisis_service.crearAnalisis();
-    this.comparacionIndicadoresService.setVal2(this.datosNum);
-    this.analisis_service.getFecha(this.fecha);
+    this.analisis_service.setFecha(this.fecha);
+    this.fechaArr = this.analisis_service.getFecha();
+    this.comparacionIndicadoresService.setVal2(this.datosNum, this.fechaArr);
   }
 
 }

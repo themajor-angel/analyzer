@@ -17,7 +17,8 @@ export class ReadexcelDirective {
   idInput: string;
   @Output() eventEmitter = new EventEmitter();
   fecha: string;
-  
+  fechaArr = [];
+
   constructor(private analisis_service: AnalisisService,
     private comparacionIndicadoresService:ComparacionIndicadoresService) {}
 
@@ -91,7 +92,10 @@ export class ReadexcelDirective {
     this.analisis_service.getDatosIngresos(this.datosNum);
     this.analisis_service.getDatosGastosCostos(this.datosNum);
     this.analisis_service.crearAnalisis();
-    this.comparacionIndicadoresService.setVal1(this.datosNum);
-    this.analisis_service.getFecha(this.fecha);
+    
+    this.analisis_service.setFecha(this.fecha);
+    this.fechaArr = this.analisis_service.getFecha();
+    this.comparacionIndicadoresService.setVal1(this.datosNum, this.fechaArr);
+    
   }
 }
