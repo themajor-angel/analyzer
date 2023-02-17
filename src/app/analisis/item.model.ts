@@ -33,6 +33,7 @@ export class ExcelInfo {
   cod14;
   cod1305;
   cod41;
+  codigosExtra: Record<string, number> = {};
   actCor = [];
   pasCor = [];
   sumAct;
@@ -55,7 +56,17 @@ export class ExcelInfo {
 
 
   setVal(data: Item[]) {
+    this.cod1 = 0;
+    this.cod2 = 0;
+    this.cod3 = 0;
+    this.cod4 = 0;
+    this.cod5 = 0;
+    this.cod6 = 0;
+    this.cod7 = 0;
+    this.codigosExtra = {}
     for (let i = 0; i < data.length; i++) {
+      const codigo = data[i];
+      this.codigosExtra[`cod${codigo}`] = data[i].saldo;
       if (data[i].codigo.length == 2) {
         if (data[i].codigo.startsWith('1')) {
           this.cod1 += data[i].saldo;

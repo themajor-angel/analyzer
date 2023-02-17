@@ -8,15 +8,23 @@ import { ITipoSemaforo, TablaBalanceActivos, TablaBalanceYears } from './types';
   styleUrls: ['./tabla-balance.component.css'],
 })
 export class TablaBalanceComponent implements OnInit {
-  @Input() dataYears: TablaBalanceYears;
-  @Input() dataActivos: TablaBalanceActivos;
+  @Input() dataYears: TablaBalanceYears = [];
+  _dataActivos: TablaBalanceActivos = [];
+  get dataActivos() {
+    return this._dataActivos;
+  }
+  @Input() set dataActivos(value: TablaBalanceActivos) {
+    if (!value) value = [];
+    this._dataActivos = value;
+    this.rebuildDataSource();
+  }
   dataSource = new MatTableDataSource();
   get displayedColumns(): string[] {
     return [
       'nombre',
-      ...this.dataYears.map(year => year.id),
+      ...this.dataYears.map((year) => year.id),
       'variacionNeta',
-      'variacionPorcentual'
+      'variacionPorcentual',
     ];
   }
 
@@ -27,22 +35,27 @@ export class TablaBalanceComponent implements OnInit {
   }
 
   getColorTailwindPorSemaforo(color: ITipoSemaforo) {
-    switch(color) {
-      case 'verde': return 'bg-teal-300';
-      case 'amarillo': return 'bg-orange-300';
-      case 'rojo': return 'bg-rose-300';
-      default: return '';
+    switch (color) {
+      case 'verde':
+        return 'bg-teal-300';
+      case 'amarillo':
+        return 'bg-orange-300';
+      case 'rojo':
+        return 'bg-rose-300';
+      default:
+        return '';
     }
   }
 
   public rebuildDataSource(): void {
-    this.dataSource.data = this.dataActivos.map(activo => {
-      const fila: any = {...activo};
-      this.displayedColumns.forEach(nombreColumna => {
-        fila[nombreColumna] ||= activo.porAnio[nombreColumna];
-      });
-      fila.styles = activo.styles;
-      return fila;
-    })
+    this.dataSource.data =
+      this.dataActivos?.map((activo) => {
+        const fila: any = { ...activo };
+        this.displayedColumns.forEach((nombreColumna) => {
+          fila[nombreColumna] ||= activo.porAnio[nombreColumna];
+        });
+        fila.styles = activo.styles;
+        return fila;
+      }) || [];
   }
 }

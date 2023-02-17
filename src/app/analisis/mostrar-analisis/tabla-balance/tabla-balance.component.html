@@ -3,7 +3,10 @@
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef class="p-0 m-0 text-center"></th>
       <td mat-cell *matCellDef="let element" class="p-0 pr-4 bg-white">
-        <div [class]="'text-white text-center px-2 md:px-8 lg:px-12 py-3 my-1 rounded-md drop-shadow-lg ' + element.styles?.nombre">
+        <div
+          [class]="'text-white text-center px-2 md:px-8 lg:px-12 py-3 my-1 rounded-md drop-shadow-lg cursor-pointer ' + element.styles?.nombre"
+          [routerLink]="'/analisis/mostraranalisis/' + element.id"
+        >
           {{element.nombre}}
         </div>
       </td>

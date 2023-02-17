@@ -7,6 +7,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CardIndicadorComponent implements OnInit {
   @Input('activo') activo = false;
+  @Input('nombre') nombre = "_nombre_";
+  @Input('datoAnio1') datoAnio1 = "_año1";
+  @Input('datoAnio2') datoAnio2 = "_año2";
+  @Input('datoComparacion') datoComparacion = "_comparacion";
+  @Input('mensajeComparacion') mensajeComparacion = "_mensajeComparacion";
   @Output('seleccionar') seleccionarEventEmitter = new EventEmitter<void>();
 
   constructor() {}

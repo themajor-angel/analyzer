@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SwiperOptions } from 'swiper';
-import { SwiperComponent } from "swiper/angular";
+import { SwiperComponent } from 'swiper/angular';
 
 // import Swiper core and required modules
-import SwiperCore, { Pagination } from "swiper/core";
+import SwiperCore, { Pagination } from 'swiper/core';
+import { ComparacionIndicadoresService } from '../indicadores/comparacionIndicadores.service';
 
 @Component({
   selector: 'app-detalles-indicadores',
@@ -12,15 +13,18 @@ import SwiperCore, { Pagination } from "swiper/core";
 })
 export class DetallesIndicadoresComponent implements OnInit {
   @ViewChild('swiperRef') swiperRef?: SwiperComponent;
-  ids = ['1', '2', '3', '4'];
-  idSeleccionado: string = this.ids[0];
+  idSeleccionado: string = this.obtenerIndicadoresAMostrar()[0].prop;
 
-  constructor() {}
+  constructor(
+    private _comparacionIndicadoresService: ComparacionIndicadoresService
+  ) {}
 
   ngOnInit(): void {}
 
   get indexSeleccionado() {
-    return this.ids.findIndex((id) => id === this.idSeleccionado);
+    return this.obtenerIndicadoresAMostrar()
+      .map(indicador => indicador.prop)
+      .findIndex((id) => id === this.idSeleccionado);
   }
 
   onSeleccionarCard(id: string) {
@@ -33,6 +37,18 @@ export class DetallesIndicadoresComponent implements OnInit {
   }
 
   onSwipe(event: any) {
-    this.idSeleccionado = this.ids[event.activeIndex];
+    this.idSeleccionado = this.obtenerIndicadoresAMostrar()[event.activeIndex].prop;
+  }
+
+  obtenerValorAnio1(prop: string) {
+    return Number(this._comparacionIndicadoresService.temp1[prop]).toFixed(2);
+  }
+
+  obtenerValorAnio2(prop: string) {
+    return Number(this._comparacionIndicadoresService.temp2[prop]).toFixed(2);
+  }
+
+  obtenerIndicadoresAMostrar() {
+    return this._comparacionIndicadoresService.indicadores;
   }
 }

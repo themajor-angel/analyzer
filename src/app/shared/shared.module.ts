@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+import { CommonModule, CurrencyPipe } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { FormsModule } from "@angular/forms";
@@ -14,6 +14,7 @@ import { TemplateTextoDirective } from "./directives/template-texto.directive";
         MaterialModule,
         FlexLayoutModule,
         RouterModule,
+        CurrencyPipe,
     ],
     exports: [
         CommonModule,
@@ -22,11 +23,15 @@ import { TemplateTextoDirective } from "./directives/template-texto.directive";
         FlexLayoutModule,
         BotonesNavegacionComponent,
         TemplateTextoDirective,
+        CurrencyPipe,
     ],
     declarations: [
         BotonesNavegacionComponent,
         TemplateTextoDirective,
-    ]
+    ],
+    providers: [
+        CurrencyPipe
+    ],
 })
 
 export class SharedModule {}

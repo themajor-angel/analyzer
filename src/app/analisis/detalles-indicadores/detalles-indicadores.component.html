@@ -14,11 +14,16 @@
       (slideChange)="onSwipe($event)"
     >
       <!-- [pagination]="{ clickable: true }" -->
-      <ng-template *ngFor="let id of ids" swiperSlide>
+      <ng-template *ngFor="let indicador of obtenerIndicadoresAMostrar()" swiperSlide>
         <app-card-indicador
           class="flex justify-center w-auto max-w-[80vw]"
-          [activo]="id === idSeleccionado"
-          (seleccionar)="onSeleccionarCard(id)"
+          [activo]="indicador.prop === idSeleccionado"
+          (seleccionar)="onSeleccionarCard(indicador.prop)"
+          [nombre]="indicador.prop"
+          [datoAnio1]="obtenerValorAnio1(indicador.prop)"
+          [datoAnio2]="obtenerValorAnio2(indicador.prop)"
+          [datoComparacion]="indicador.dif"
+          [mensajeComparacion]="indicador.status"
         ></app-card-indicador>
       </ng-template>
       <!-- <div class="swiper-pagination"></div>
