@@ -21,6 +21,7 @@ export interface ComparacionItems {
 }
 
 export class ExcelInfo {
+  fecha = [];
   cod1 = 0;
   cod2 = 0;
   cod3 = 0;
@@ -55,6 +56,9 @@ export class ExcelInfo {
   rotInventario;
 
 
+  setFecha(fecha: []){
+    this.fecha = fecha
+  }
   setVal(data: Item[]) {
     this.cod1 = 0;
     this.cod2 = 0;
