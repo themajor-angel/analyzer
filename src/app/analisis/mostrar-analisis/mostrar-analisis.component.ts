@@ -1,7 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, map, Observable, of, switchMap } from 'rxjs';
+import { forkJoin, map, Observable, of, shareReplay, switchMap } from 'rxjs';
 import { DiccionarioService } from 'src/app/shared/services/diccionario.service';
 import { IDatoPuc } from 'src/app/shared/services/types/diccionario.types';
 import { AnalisisService } from '../analisis.service';
@@ -132,6 +132,7 @@ export class MostrarAnalisisComponent implements OnInit {
   ];
   dataActivos$: Observable<TablaBalanceActivos>;
   idPuc$: Observable<string>;
+  idPuc: string = null;
 
   constructor(
     private analisis_service: AnalisisService,
@@ -139,7 +140,7 @@ export class MostrarAnalisisComponent implements OnInit {
     private diccionarioService: DiccionarioService,
     private router: Router,
     private route: ActivatedRoute,
-    private currencyPipe: CurrencyPipe,
+    private currencyPipe: CurrencyPipe
   ) {}
 
   ngOnInit(): void {
@@ -154,8 +155,10 @@ export class MostrarAnalisisComponent implements OnInit {
 
   setupIdPuc(): void {
     this.idPuc$ = this.route.params.pipe(
-      map((params) => params.idPuc as string)
+      map((params) => params.idPuc as string),
+      shareReplay(1)
     );
+    this.idPuc$.subscribe((idPuc) => (this.idPuc = idPuc));
   }
 
   obtenerEstiloPorId(idCodigo: string) {
@@ -184,7 +187,7 @@ export class MostrarAnalisisComponent implements OnInit {
   }
 
   formatearDinero(cantidad: string | number) {
-    return this.currencyPipe.transform(cantidad, 'USD', 'symbol', '1.2-2')
+    return this.currencyPipe.transform(cantidad, 'USD', 'symbol', '1.2-2');
   }
 
   mapDataPucAFilaTabla(datoPuc: IDatoPuc): IFilaBalanceActivos {
@@ -200,12 +203,14 @@ export class MostrarAnalisisComponent implements OnInit {
       id,
       nombre: datoPuc?.Nombre || '',
       porAnio: {
-        year2020: this.formatearDinero(valorDatos1.toString()),
-        year2021: this.formatearDinero(valorDatos2.toString()),
+        year2020: this.formatearDinero( valorDatos1.toString()),
+        year2021: this.formatearDinero( valorDatos2.toString()),
       },
-      variacionNeta: this.formatearDinero((valorDatos2 - valorDatos1).toString()),
+      variacionNeta: this.formatearDinero (
+        valorDatos2 - valorDatos1
+      ).toString(),
       variacionPorcentual: `${
-        ((valorDatos2 - valorDatos1) * 100) / valorDatos1
+        (((valorDatos2 - valorDatos1) * 100) / valorDatos1).toFixed(2)
       } %`.toString(),
       semaforoTexto: 'Texto semaforo',
       semaforoValor: 'verde',
@@ -221,6 +226,11 @@ export class MostrarAnalisisComponent implements OnInit {
       switchMap((idPuc) =>
         this.diccionarioService.consultarListaClasesHijasPuc(idPuc)
       ),
+      map((clases) =>
+        [...clases].sort((a, b) =>
+          a.Codigo.toString().localeCompare(b.Codigo.toString())
+        )
+      ),
       // map((idPuc) => codigosAMostrar[idPuc]),
       // switchMap((codigos) =>
       //   forkJoin(
@@ -228,8 +238,52 @@ export class MostrarAnalisisComponent implements OnInit {
       //   )
       // ),
       map((codigos) => {
-        return codigos.map((datoPuc) => this.mapDataPucAFilaTabla(datoPuc));
+        const dataPucTabla = codigos.map((datoPuc) =>
+          this.mapDataPucAFilaTabla(datoPuc)
+        );
+        return dataPucTabla;
+        // const filaTabla = dataPucTabla.reduce((a, b) => {
+        //   const dataPorAnio = {}
+        //   Object.entries(b).forEach(([key, value]) => {
+        //     if (dataPorAnio) {
+
+        //     }
+        //   })
+        //   return {
+        //     id: 'Total',
+        //     nombre: 'Total',
+        //     porAnio: dataPorAnio,
+        //     semaforoTexto: '',
+        //     semaforoValor: 'verde',
+        //     variacionNeta:
+        //   };
+        // });
       })
     );
+  }
+
+  get linkBotonAtras() {
+    const id = this.idPuc;
+    if (id !== null && id !== undefined) {
+      if (isNaN(Number(id))) {
+        return '/analisis/menu';
+      } else if (['1', '2', '3'].includes(id)) {
+        return '/analisis/mostraranalisis/balanceGeneral';
+      } else if (['4', '5', '6'].includes(id)) {
+        return '/analisis/mostraranalisis/estadoResultados';
+      } else if (id.length === 2) {
+        return `/analisis/mostraranalisis/${id.slice(0, 1)}`;
+      } else if (id.length === 4) {
+        return `/analisis/mostraranalisis/${id.slice(0, 2)}`;
+      } else if (id.length === 6) {
+        return `/analisis/mostraranalisis/${id.slice(0, 4)}`;
+      } else if (id.length === 8) {
+        return `/analisis/mostraranalisis/${id.slice(0, 6)}`;
+      } else if (id.length === 10) {
+        return `/analisis/mostraranalisis/${id.slice(0, 8)}`;
+      } else if (id.length === 12) {
+        return `/analisis/mostraranalisis/${id.slice(0, 10)}`;
+      } else return '.';
+    } else return '.';
   }
 }

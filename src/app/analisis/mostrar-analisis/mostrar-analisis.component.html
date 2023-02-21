@@ -4,7 +4,7 @@
     [dataActivos]="dataActivos$ | async"
   ></app-tabla-balance>
   <app-botones-navegacion
-    routerLinkAtras="/analisis/menu"
+    [routerLinkAtras]="linkBotonAtras"
     [mostrarBotonIndicadores]="true"
   ></app-botones-navegacion>
   <div class="cards-balance">

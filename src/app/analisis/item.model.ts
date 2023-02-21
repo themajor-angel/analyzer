@@ -69,7 +69,7 @@ export class ExcelInfo {
     this.cod7 = 0;
     this.codigosExtra = {}
     for (let i = 0; i < data.length; i++) {
-      const codigo = data[i];
+      const codigo = data[i].codigo;
       this.codigosExtra[`cod${codigo}`] = data[i].saldo;
       if (data[i].codigo.length == 2) {
         if (data[i].codigo.startsWith('1')) {
