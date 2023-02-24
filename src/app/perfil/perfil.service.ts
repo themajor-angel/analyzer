@@ -43,4 +43,31 @@ export class PerfilService{
         });
     }
 
+    getUsuario() {
+       /* return this.db
+          .collection('usuarios', (ref) =>
+            ref.where('id', '==', this.datosUsuario.uid).limit(1)
+          )
+          .get()
+          .pipe(map((query) => query.docs[0]?.data()));*/
+
+         /* this.afAuth.authState.subscribe(user => {
+            if(user){
+                this.datosUsuario = user;
+                usuario.id = this.datosUsuario.uid;
+                usuario.email = this.datosUsuario.email;
+                console.log("datos ", usuario);
+                this.db.collection('usuarios').add(usuario);
+                this.router.navigate(['/perfil/verperfil']);
+                return user;
+            } else {
+                return null;                
+            }
+        });*/
+      }
+      
+    actualizarUsuario(usuario: Usuario){
+
+    }
+
 }

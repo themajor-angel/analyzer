@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-
+import { PerfilService } from '../../perfil.service';
 
 @Component({
   selector: 'app-verperfil',
@@ -9,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerPerfilComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private _perfilService: PerfilService
+  ) { }
 
   ngOnInit(): void {
+    //sacar esto del auth service #borrar
+    console.log(this._perfilService.getUsuario())
   }
 
 }

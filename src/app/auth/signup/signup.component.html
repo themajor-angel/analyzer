@@ -42,8 +42,69 @@
                 minlength="6"
                 #pwInput="ngModel">
                 <mat-hint align="end"> {{ pwInput.value?.length }} / 6</mat-hint>
-                <mat-error>Has to be 6 char long</mat-error>
+                <mat-error>Tiene que tener al menos 6 carácteres</mat-error>
         </mat-form-field>
+        <mat-form-field
+        appearance="fill"
+      >
+        <mat-label>Tipo de cargo</mat-label>
+        <mat-select
+          placeholder="Choose Exercise"
+          ngModel
+          name="cargo"
+          required
+        >
+          <mat-option
+            *ngFor="let cargo of cargos"
+            [value]="cargo"
+          >
+            {{ cargo }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="Nombre de la Empresa"
+          ngModel
+          name="nombreEmpresa"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          type="text"
+          matInput
+          placeholder="NIT de la Empresa"
+          ngModel
+          name="nitEmpresa"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>País de la empresa</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="País de la Empresa"
+          ngModel
+          name="pais"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Ciudad de la empresa</mat-label>
+        <input
+          type="text"
+          matInput
+          placeholder="Ciudad su empresa"
+          ngModel
+          name="ciudad"
+          required
+        />
+      </mat-form-field>
+      
         
         <mat-checkbox ngModel name="agree" labelPosition="before" color="primary" required>Agree to terms</mat-checkbox>
         <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>

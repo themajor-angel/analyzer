@@ -1,9 +1,10 @@
 import { LocationStrategy } from '@angular/common';
 import { isNgTemplate } from '@angular/compiler';
-import { Injectable } from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import { ɵɵtsModuleIndicatorApiExtractorWorkaround } from '@angular/material';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { BehaviorSubject, Observable } from 'rxjs';
 import * as fromRoot from '../../app.reducer';
 import { Item, Regla, ExcelInfo } from '../item.model';
 
@@ -20,6 +21,15 @@ export class ComparacionIndicadoresService {
 
   fecha1: [];
   fecha2: [];
+
+  nombre1 = 'Analyzer';
+  nombre2: string;
+
+  nit1: string;
+  nit2: string;
+
+  @Output() titulo$;
+  tituloPrueba = new BehaviorSubject<string>('Analyzer') ;
 
   $margenNeto;
   $margenBruto;
@@ -112,14 +122,19 @@ export class ComparacionIndicadoresService {
 
   constructor() {}
 
-  setVal1(data: Item[], fecha ) {
+  //agregar datos de nombre y nit de la empresa
+  setVal1(data: Item[], fecha, nombre, nit ) {
     this.data1 = data;
     this.fecha1 = fecha;
+    this.nombre1 = nombre;
+    this.nit1 = nit;
   }
 
-  setVal2(data: Item[], fecha) {
+  setVal2(data: Item[], fecha, nombre, nit) {
     this.data2 = data;
     this.fecha2 = fecha;
+    this.nombre2 = nombre;
+    this.nit2 = nit;
     this.iniciar()
   }
 
@@ -128,6 +143,15 @@ export class ComparacionIndicadoresService {
     this.temp2.setVal(this.data2)
     this.temp1.setFecha(this.fecha1)
     this.temp2.setFecha(this.fecha2)
+    if(this.nombre1 == this.nombre2 && this.nit1 == this.nit2){
+      this.temp1.setDatos(this.fecha1, this.nombre1, this.nit1);
+      this.temp2.setDatos(this.fecha2, this.nombre1, this.nit1);
+      this.titulo$ = this.nombre1;
+      this.tituloPrueba.next(this.nombre1);
+    } else{
+      //poner error 
+      console.log("Error en los archivos subidos")
+    }
     this.comparar();
     console.log(this.temp1, this.temp2)
   }
@@ -135,7 +159,6 @@ export class ComparacionIndicadoresService {
   comparar() {
     this.indicadores.forEach(dato => {
       dato.dif = this.temp1[dato.prop] - this.temp2[dato.prop];
-      console.log("dato.prop", [dato.prop], this.temp1[dato.prop], this.temp2[dato.prop])
       if (this.temp1[dato.prop] > this.temp2[dato.prop]) {
         dato.status = 'verde';
       }

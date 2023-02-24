@@ -6,6 +6,7 @@ import { PerfilRoutingModule } from "./perfil-routing.module";
 import { EditarPerfilComponent } from "./perfil/editarperfil.component";
 import { VerPerfilComponent } from "./verperfil/verperfil/verperfil.component";
 
+
 @NgModule({
     declarations: [
         EditarPerfilComponent,

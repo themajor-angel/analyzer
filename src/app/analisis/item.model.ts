@@ -22,6 +22,8 @@ export interface ComparacionItems {
 
 export class ExcelInfo {
   fecha = [];
+  nombre: string;
+  nit: string;
   cod1 = 0;
   cod2 = 0;
   cod3 = 0;
@@ -55,10 +57,17 @@ export class ExcelInfo {
   rotActivos;
   rotInventario;
 
-
+//set demás datos en una sola función? 
   setFecha(fecha: []){
-    this.fecha = fecha
+    this.fecha = fecha;
   }
+
+  setDatos(fecha: [], nombre: string, nit: string){
+    this.fecha = fecha;
+    this.nombre = nombre;
+    this.nit = nit;
+  }
+  
   setVal(data: Item[]) {
     this.cod1 = 0;
     this.cod2 = 0;
