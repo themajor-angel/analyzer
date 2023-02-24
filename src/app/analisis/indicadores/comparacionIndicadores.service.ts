@@ -1,11 +1,7 @@
-import { LocationStrategy } from '@angular/common';
-import { isNgTemplate } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { ɵɵtsModuleIndicatorApiExtractorWorkaround } from '@angular/material';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import * as fromRoot from '../../app.reducer';
+import { obtenerClaseMatrizPuc } from 'src/app/utils';
 import { Item, Regla, ExcelInfo } from '../item.model';
+import { ITipoSemaforo } from '../mostrar-analisis/tabla-balance/types';
 
 
 @Injectable(
@@ -131,7 +127,7 @@ export class ComparacionIndicadoresService {
     this.comparar();
     console.log(this.temp1, this.temp2)
   }
-  
+
   comparar() {
     this.indicadores.forEach(dato => {
       dato.dif = this.temp1[dato.prop] - this.temp2[dato.prop];
@@ -150,20 +146,49 @@ export class ComparacionIndicadoresService {
     console.log(this.indicadores)
   }
 
-  eliminarExcel(id: string) {
-
+  obtenerSemaforoPuc(idPuc: string): ITipoSemaforo {
+    const pucMatriz = obtenerClaseMatrizPuc(idPuc);
+    switch (pucMatriz) {
+      case '1':
+      case '2':
+      case '4':
+        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
+          return 'rojo';
+        }
+        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
+          return 'verde';
+        }
+        return 'amarillo';
+      case '3':
+      case '5':
+      case '6':
+        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
+          return 'rojo';
+        }
+        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
+          return 'verde';
+        }
+        return 'amarillo';
+      default:
+        return 'amarillo';
+    }
   }
 
-  getVal(idExcel: string, idPropiedad:string): string{
-    return '42'
+  getValorExcel1(id: string | number) {
+    return this.temp1.getValorPorCodigo(id)
   }
 
-  getAnios() {
-    return ['2020', '2021', '2022']
+  getValorExcel2(id: string | number) {
+    return this.temp2.getValorPorCodigo(id)
   }
 
-  getHijos(prop: string) {
-    return ['11','12','13']
+  getVariacionNetaPuc(id: string | number) {
+    return this.temp2.getValorPorCodigo(id) - this.temp1.getValorPorCodigo(id);
   }
 
+  getVariacionPorcentualPuc(id: string | number) {
+    const valorDatos1 = this.temp1.getValorPorCodigo(id);
+    const valorDatos2 = this.temp2.getValorPorCodigo(id);
+    return ((valorDatos2 - valorDatos1) * 100) / valorDatos1;
+  }
 }

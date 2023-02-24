@@ -8,13 +8,14 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from '../app.reducer'
 import * as UI from '../shared/ui.actions'
 import * as Auth from './auth.actions'
-import { map, Observable, of, switchMap } from "rxjs";
+import { map, Observable, of, ReplaySubject, Subject, switchMap } from "rxjs";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { User } from "firebase/auth";
 
 @Injectable()
 export class AuthService{
     private user: Observable<any> | null = null;
+    loggedIn$ = new ReplaySubject<boolean>(1);
     
     constructor(
         private router: Router, 
@@ -29,11 +30,13 @@ export class AuthService{
     initAuthListener(){
         this.afAuth.authState.subscribe(user => {
             if(user){
+                this.loggedIn$.next(true);
                 this.store.dispatch(new Auth.SetAuthenticated());
                 //this.router.navigate(['/training']);
                 this.userInfo();
-               // console.log(user);
+                // console.log(user);
             } else {
+                this.loggedIn$.next(false);
                 this.trainingService.cancelSubscriptions();
                 this.store.dispatch(new Auth.SetUnauthenticated());
                 this.router.navigate(['/auth/login']);
@@ -60,6 +63,7 @@ export class AuthService{
        .then(result => {
             //this.uiService.loadingStateChanged.next(false);
             this.store.dispatch(new UI.StopLoading());
+            this.loggedIn$.next(true);
        })
        .catch(error => {
             //this.uiService.loadingStateChanged.next(false);
@@ -76,6 +80,7 @@ export class AuthService{
             authData.password)
             .then(result => {
                 this.store.dispatch(new UI.StopLoading());
+                this.loggedIn$.next(true);
                 //this.uiService.loadingStateChanged.next(false);
            })
            .catch(error => {
@@ -87,5 +92,6 @@ export class AuthService{
 
     logout(){
         this.afAuth.signOut();
+        this.loggedIn$.next(false);
     }
 }
