@@ -1,8 +1,7 @@
 <main>
-  <h1 class="text-center font-medium m-0 mt-4">Rentabilidad</h1>
+  <h1 class="text-center font-medium m-0 mt-4">{{categoria?.nombre}}</h1>
   <p class="text-center m-0 my-2">
-    Rentabilidad es la capacidad de su empresa de obtener ganancias a partir de
-    una cierta inversión.
+    {{categoria?.descripcion}}
   </p>
   <div class="">
     <!-- https://v6.swiperjs.com/swiper-api -->
@@ -14,12 +13,13 @@
       (slideChange)="onSwipe($event)"
     >
       <!-- [pagination]="{ clickable: true }" -->
-      <ng-template *ngFor="let indicador of obtenerIndicadoresAMostrar()" swiperSlide>
+      <ng-template *ngFor="let indicador of listaIndicadores" swiperSlide>
         <app-card-indicador
           class="flex justify-center w-auto max-w-[80vw]"
           [activo]="indicador.prop === idSeleccionado"
           (seleccionar)="onSeleccionarCard(indicador.prop)"
-          [nombre]="indicador.prop"
+          [nombre]="indicador.nombre"
+          [descripcion]="indicador.descripcion"
           [datoAnio1]="obtenerValorAnio1(indicador.prop)"
           [datoAnio2]="obtenerValorAnio2(indicador.prop)"
           [datoComparacion]="indicador.dif"

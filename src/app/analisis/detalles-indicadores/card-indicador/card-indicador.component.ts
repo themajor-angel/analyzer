@@ -12,6 +12,7 @@ export class CardIndicadorComponent implements OnInit {
   @Input('datoAnio2') datoAnio2 = "_año2";
   @Input('datoComparacion') datoComparacion = "_comparacion";
   @Input('mensajeComparacion') mensajeComparacion = "_mensajeComparacion";
+  @Input('descripcion') descripcion = "_descripcion";
   @Output('seleccionar') seleccionarEventEmitter = new EventEmitter<void>();
 
   constructor() {}

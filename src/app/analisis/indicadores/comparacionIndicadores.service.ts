@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
+import { IndicadoresHttpService } from 'src/app/shared/services/indicadores-http.service';
+import { IIndicadorConValor, IValorIndicador } from 'src/app/shared/services/types/indicadores.types';
 import { obtenerClaseMatrizPuc } from 'src/app/utils';
 import { Item, Regla, ExcelInfo } from '../item.model';
 import { ITipoSemaforo } from '../mostrar-analisis/tabla-balance/types';
@@ -32,7 +35,7 @@ export class ComparacionIndicadoresService {
   $rotActivos;
   $rotInventario;
 
-  indicadores = [
+  indicadores: IValorIndicador[] = [
     {
       prop: 'margenNeto',
       status: 'Su margen no ha cambiado',
@@ -103,10 +106,12 @@ export class ComparacionIndicadoresService {
       status: 'Su margen ha mejorado',
       dif: 0,
     },
-  ]  
+  ]
   reglas: Regla[] = []
 
-  constructor() {}
+  constructor(
+    private _indicadoresHttpService: IndicadoresHttpService,
+  ) {}
 
   setVal1(data: Item[], fecha ) {
     this.data1 = data;
@@ -191,4 +196,32 @@ export class ComparacionIndicadoresService {
     const valorDatos2 = this.temp2.getValorPorCodigo(id);
     return ((valorDatos2 - valorDatos1) * 100) / valorDatos1;
   }
+
+  getIndicadorExcel1(id: string) {
+    return this.temp1[id];
+  }
+
+  getIndicadorExcel2(id: string) {
+    return this.temp2[id];
+  }
+
+  getIndicadoresPorCategoria$(categoria: string) {
+    return this._indicadoresHttpService
+      .consultarIndicadoresPorCategoria(categoria)
+      .pipe(
+        map((indicadores) =>
+          indicadores.map<IIndicadorConValor>((ind) => {
+            const valorIndicador = this.indicadores.find(
+              (x) => x.prop === ind.id
+            );
+            if (!valorIndicador) return null;
+            return {
+              ...ind,
+              ...valorIndicador
+            };
+          }).filter(x => !!x)
+        )
+      );
+  }
+
 }
