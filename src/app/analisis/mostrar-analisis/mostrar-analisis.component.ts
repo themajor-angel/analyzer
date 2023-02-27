@@ -1,122 +1,12 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, map, Observable, of, shareReplay, switchMap } from 'rxjs';
+import { catchError, map, Observable, of, shareReplay, switchMap, } from 'rxjs';
 import { DiccionarioService } from 'src/app/shared/services/diccionario.service';
-import { IDatoPuc } from 'src/app/shared/services/types/diccionario.types';
+import { IDatoPuc, IValorPuc, IWrapperPuc, } from 'src/app/shared/services/types/diccionario.types';
 import { AnalisisService } from '../analisis.service';
-import { AnalisisService2 } from '../analisis2.service';
 import { ComparacionIndicadoresService } from '../indicadores/comparacionIndicadores.service';
-import {
-  TablaBalanceYears,
-  TablaBalanceActivos,
-  IFilaBalanceActivos,
-} from './tabla-balance/types';
-
-const balances = {
-  balanceGeneral: [
-    {
-      id: '1',
-      nombre: 'Activos',
-      variacionNeta: '42',
-      variacionPorcentual: '104%',
-      porAnio: {
-        year2020: /*this.comparacionIndicadoresService.getVal('2020', '1')*/ 2000,
-        year2021: '200.000',
-      },
-      styles: {
-        nombre: 'bg-gradient-radial from-cyan-400 to-sky-400',
-        variacionPorcentual: 'text-white bg-teal-300',
-      },
-      semaforoValor: 'verde',
-      semaforoTexto: 'Aumentó con respecto al año pasado',
-    },
-    {
-      id: '2',
-      nombre: 'Pasivos',
-      variacionNeta: '64',
-      variacionPorcentual: '64%',
-      porAnio: {
-        year2020: '10.200',
-        year2021: '400.400',
-      },
-      styles: {
-        nombre: 'bg-gradient-radial from-[#FCBDCA] to-[#FAA6BA]',
-        variacionPorcentual: 'text-white bg-orange-300',
-      },
-      semaforoValor: 'amarillo',
-      semaforoTexto: 'Aumentó con respecto al año pasado',
-    },
-    {
-      id: '3',
-      nombre: 'Patrimonio',
-      variacionNeta: '64',
-      variacionPorcentual: '64%',
-      porAnio: {
-        year2020: '10.200',
-        year2021: '400.400',
-      },
-      styles: {
-        nombre: 'bg-gradient-radial from-[#5FEBBE] to-[#57D7C9]',
-        variacionPorcentual: 'text-white bg-rose-300',
-      },
-      semaforoValor: 'rojo',
-      semaforoTexto: 'Aumentó con respecto al año pasado',
-    },
-  ],
-  estadoResultados: [
-    {
-      id: '4',
-      nombre: 'Ingresos',
-      variacionNeta: '42',
-      variacionPorcentual: '104%',
-      porAnio: {
-        year2020: '100.000',
-        year2021: '200.000',
-      },
-      styles: {
-        nombre: 'bg-gradient-radial from-cyan-400 to-sky-400',
-      },
-      semaforoValor: 'verde',
-      semaforoTexto: 'Aumentó con respecto al año pasado',
-    },
-    {
-      id: '5',
-      nombre: 'Gastos',
-      variacionNeta: '64',
-      variacionPorcentual: '64%',
-      porAnio: {
-        year2020: '10.200',
-        year2021: '400.400',
-      },
-      styles: {
-        nombre: 'bg-gradient-radial from-[#FCBDCA] to-[#FAA6BA]',
-      },
-      semaforoValor: 'amarillo',
-      semaforoTexto: 'Aumentó con respecto al año pasado',
-    },
-    {
-      id: '6',
-      nombre: 'Costos',
-      variacionNeta: '64',
-      variacionPorcentual: '64%',
-      porAnio: {
-        year2020: '10.200',
-        year2021: '400.400',
-      },
-      styles: {
-        nombre: 'bg-gradient-radial from-[#5FEBBE] to-[#57D7C9]',
-      },
-      semaforoValor: 'rojo',
-      semaforoTexto: 'Aumentó con respecto al año pasado',
-    },
-  ],
-};
-
-const codigosAMostrar: { [id: string]: string[] } = {
-  balanceGeneral: ['1', '2', '3'],
-  estadoResultados: ['4', '5', '6'],
-};
+import { TablaBalanceYears, TablaBalanceActivos, IFilaBalanceActivos, } from './tabla-balance/types';
 
 @Component({
   selector: 'app-mostrar-analisis',
@@ -131,6 +21,7 @@ export class MostrarAnalisisComponent implements OnInit {
     { id: 'year2021', nombre: 'Año 2021' },
   ];
   dataActivos$: Observable<TablaBalanceActivos>;
+  dataActivos: TablaBalanceActivos;
   idPuc$: Observable<string>;
   idPuc: string = null;
 
@@ -187,35 +78,58 @@ export class MostrarAnalisisComponent implements OnInit {
   }
 
   formatearDinero(cantidad: string | number) {
-    return this.currencyPipe.transform(cantidad, 'USD', 'symbol', '1.2-2');
+    return this.currencyPipe.transform(cantidad.toString(), 'USD', 'symbol', '1.2-2');
   }
 
-  mapDataPucAFilaTabla(datoPuc: IDatoPuc): IFilaBalanceActivos {
+  mapCodigoPucAWrapperPuc(datoPuc: IDatoPuc) {
     const id = datoPuc?.Codigo?.toString() || '';
-    const prop = `cod${id}`;
-    const excel1 = this.comparacionIndicadoresService.temp1;
-    const excel2 = this.comparacionIndicadoresService.temp2;
-    const valorDatos1 =
-      (excel1.codigosExtra[prop] ?? (excel1[prop] as number)) || 0;
-    const valorDatos2 =
-      (excel2.codigosExtra[prop] ?? (excel2[prop] as number)) || 0;
+    const valorDatos1 = this.comparacionIndicadoresService.getValorExcel1(id);
+    const valorDatos2 = this.comparacionIndicadoresService.getValorExcel2(id);
+    const colorSemaforo =
+      this.comparacionIndicadoresService.obtenerSemaforoPuc(id);
+    let variacionNeta =
+      this.comparacionIndicadoresService.getVariacionNetaPuc(id);
+    let variacionPorcentual =
+      this.comparacionIndicadoresService.getVariacionPorcentualPuc(id);
+    return {
+      codigoPuc: datoPuc,
+      valorPuc: {
+        valorDatos1,
+        valorDatos2,
+        colorSemaforo,
+        variacionNeta,
+        variacionPorcentual,
+      } as IValorPuc,
+    };
+  }
+
+  mapWrapperPucAFilaTabla({
+    codigoPuc,
+    valorPuc,
+  }: IWrapperPuc): IFilaBalanceActivos {
+    const { Codigo, Nombre } = codigoPuc || {};
+    let {
+      valorDatos1,
+      valorDatos2,
+      variacionNeta,
+      variacionPorcentual,
+      colorSemaforo,
+    } = valorPuc || {};
     const resultCodigo: IFilaBalanceActivos = {
-      id,
-      nombre: datoPuc?.Nombre || '',
+      id: Codigo.toString(),
+      nombre: `${Nombre} (Cod ${Codigo})` || '',
       porAnio: {
-        year2020: this.formatearDinero( valorDatos1.toString()),
-        year2021: this.formatearDinero( valorDatos2.toString()),
+        year2020: this.formatearDinero(valorDatos2),
+        year2021: this.formatearDinero(valorDatos1),
       },
-      variacionNeta: this.formatearDinero (
-        valorDatos2 - valorDatos1
-      ).toString(),
-      variacionPorcentual: `${
-        (((valorDatos2 - valorDatos1) * 100) / valorDatos1).toFixed(2)
-      } %`.toString(),
+      variacionNeta: this.formatearDinero(variacionNeta),
+      variacionPorcentual: isNaN(variacionPorcentual)
+        ? '-'
+        : `${variacionPorcentual.toFixed(2)} %`,
       semaforoTexto: 'Texto semaforo',
-      semaforoValor: 'verde',
+      semaforoValor: colorSemaforo,
       styles: {
-        nombre: this.obtenerEstiloPorId(id),
+        nombre: this.obtenerEstiloPorId(Codigo.toString()),
       },
     };
     return resultCodigo;
@@ -224,41 +138,14 @@ export class MostrarAnalisisComponent implements OnInit {
   setupDataTabla(): void {
     this.dataActivos$ = this.idPuc$.pipe(
       switchMap((idPuc) =>
-        this.diccionarioService.consultarListaClasesHijasPuc(idPuc)
+        this.diccionarioService
+          .consultarListaClasesHijasPuc(idPuc)
+          .pipe(catchError((err) => of([] as IDatoPuc[])))
       ),
-      map((clases) =>
-        [...clases].sort((a, b) =>
-          a.Codigo.toString().localeCompare(b.Codigo.toString())
-        )
-      ),
-      // map((idPuc) => codigosAMostrar[idPuc]),
-      // switchMap((codigos) =>
-      //   forkJoin(
-      //     codigos.map((id) => this.diccionarioService.consultarClasePuc(id))
-      //   )
-      // ),
-      map((codigos) => {
-        const dataPucTabla = codigos.map((datoPuc) =>
-          this.mapDataPucAFilaTabla(datoPuc)
-        );
-        return dataPucTabla;
-        // const filaTabla = dataPucTabla.reduce((a, b) => {
-        //   const dataPorAnio = {}
-        //   Object.entries(b).forEach(([key, value]) => {
-        //     if (dataPorAnio) {
-
-        //     }
-        //   })
-        //   return {
-        //     id: 'Total',
-        //     nombre: 'Total',
-        //     porAnio: dataPorAnio,
-        //     semaforoTexto: '',
-        //     semaforoValor: 'verde',
-        //     variacionNeta:
-        //   };
-        // });
-      })
+      map((codigos) => codigos.map((cod) => this.mapCodigoPucAWrapperPuc(cod))),
+      map((datosPuc) => [...datosPuc].sort((a, b) => a.codigoPuc.Codigo.toString().localeCompare(b.codigoPuc.Codigo.toString()))),
+      map((datosPuc) => datosPuc.map((datoPuc) => this.mapWrapperPucAFilaTabla(datoPuc))),
+      shareReplay(1)
     );
   }
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { LocationStrategy } from '@angular/common';
 import { isNgTemplate } from '@angular/compiler';
 import { Injectable, Output } from '@angular/core';
@@ -6,7 +7,16 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as fromRoot from '../../app.reducer';
+=======
+import { Injectable } from '@angular/core';
+import { map } from 'rxjs';
+import { IndicadoresHttpService } from 'src/app/shared/services/indicadores-http.service';
+import { ReglasIndicadoresService } from 'src/app/shared/services/reglas-indicadores.service';
+import { IIndicadorConValor, IValorIndicador } from 'src/app/shared/services/types/indicadores.types';
+import { obtenerClaseMatrizPuc } from 'src/app/utils';
+>>>>>>> 136b1f13a98ceb7293678d6ad5b87cace5a5a012
 import { Item, Regla, ExcelInfo } from '../item.model';
+import { ITipoSemaforo } from '../mostrar-analisis/tabla-balance/types';
 
 
 @Injectable(
@@ -46,7 +56,7 @@ export class ComparacionIndicadoresService {
   $rotActivos;
   $rotInventario;
 
-  indicadores = [
+  indicadores: IValorIndicador[] = [
     {
       prop: 'margenNeto',
       status: 'Su margen no ha cambiado',
@@ -117,10 +127,13 @@ export class ComparacionIndicadoresService {
       status: 'Su margen ha mejorado',
       dif: 0,
     },
-  ]  
+  ]
   reglas: Regla[] = []
 
-  constructor() {}
+  constructor(
+    private _indicadoresHttpService: IndicadoresHttpService,
+    private _reglasIndicadoresService: ReglasIndicadoresService,
+  ) {}
 
   //agregar datos de nombre y nit de la empresa
   setVal1(data: Item[], fecha, nombre, nit ) {
@@ -155,7 +168,7 @@ export class ComparacionIndicadoresService {
     this.comparar();
     console.log(this.temp1, this.temp2)
   }
-  
+
   comparar() {
     this.indicadores.forEach(dato => {
       dato.dif = this.temp1[dato.prop] - this.temp2[dato.prop];
@@ -173,20 +186,86 @@ export class ComparacionIndicadoresService {
     console.log(this.indicadores)
   }
 
-  eliminarExcel(id: string) {
-
+  obtenerSemaforoPuc(idPuc: string): ITipoSemaforo {
+    const pucMatriz = obtenerClaseMatrizPuc(idPuc);
+    switch (pucMatriz) {
+      case '1':
+      case '2':
+      case '4':
+        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
+          return 'rojo';
+        }
+        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
+          return 'verde';
+        }
+        return 'amarillo';
+      case '3':
+      case '5':
+      case '6':
+      case '7':
+        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
+          return 'rojo';
+        }
+        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
+          return 'verde';
+        }
+        return 'amarillo';
+      default:
+        return 'amarillo';
+    }
   }
 
-  getVal(idExcel: string, idPropiedad:string): string{
-    return '42'
+  getValorExcel1(id: string | number) {
+    return this.temp1.getValorPorCodigo(id)
   }
 
-  getAnios() {
-    return ['2020', '2021', '2022']
+  getValorExcel2(id: string | number) {
+    return this.temp2.getValorPorCodigo(id)
   }
 
-  getHijos(prop: string) {
-    return ['11','12','13']
+  getVariacionNetaPuc(id: string | number) {
+    return this.temp1.getValorPorCodigo(id) - this.temp2.getValorPorCodigo(id);
+  }
+
+  getVariacionPorcentualPuc(id: string | number) {
+    const valorDatos1 = this.temp1.getValorPorCodigo(id);
+    const valorDatos2 = this.temp2.getValorPorCodigo(id);
+    return ((valorDatos1 - valorDatos2) * 100) / valorDatos2;
+  }
+
+  getIndicadorExcel1(id: string) {
+    return this.temp1[id];
+  }
+
+  getIndicadorExcel2(id: string) {
+    return this.temp2[id];
+  }
+
+  getIndicadoresPorCategoria$(categoria: string) {
+    return this._indicadoresHttpService
+      .consultarIndicadoresPorCategoria(categoria)
+      .pipe(
+        map((indicadores) =>
+          indicadores.map<IIndicadorConValor>((ind) => {
+            const valorIndicador = this.indicadores.find(
+              (x) => x.prop === ind.id
+            );
+            if (!valorIndicador) return null;
+            return {
+              ...ind,
+              ...valorIndicador
+            };
+          }).filter(x => !!x)
+        )
+      );
+  }
+
+  getSemaforoIndicador(indicador: string) {
+    return this._reglasIndicadoresService.calcularSemaforoIndicador(
+      indicador,
+      this.getIndicadorExcel1(indicador),
+      this.getIndicadorExcel2(indicador),
+    );
   }
 
 }

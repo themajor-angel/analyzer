@@ -149,6 +149,13 @@ export class ExcelInfo {
         //this.pasCor = 20
       }
     }
+    this.codigosExtra[`cod1`] = this.cod1;
+    this.codigosExtra[`cod2`] = this.cod2;
+    this.codigosExtra[`cod3`] = this.cod3;
+    this.codigosExtra[`cod4`] = this.cod4;
+    this.codigosExtra[`cod5`] = this.cod5;
+    this.codigosExtra[`cod6`] = this.cod6;
+    this.codigosExtra[`cod7`] = this.cod7;
     this.calcularIdicadores();
   }
 
@@ -182,5 +189,10 @@ export class ExcelInfo {
     this.rotPagar = (this.cod6 + this.cod7) / this.cod1305;
     this.rotActivos = this.cod41 / this.cod1;
     this.rotInventario = this.cod41 / this.cod14;
+  }
+
+  getValorPorCodigo(id: string | number) {
+    const prop = `cod${id}`;
+    return (this.codigosExtra[prop] ?? (this[prop] as number)) ?? 0
   }
 }
