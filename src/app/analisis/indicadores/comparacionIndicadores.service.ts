@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { IndicadoresHttpService } from 'src/app/shared/services/indicadores-http.service';
+import { ReglasIndicadoresService } from 'src/app/shared/services/reglas-indicadores.service';
 import { IIndicadorConValor, IValorIndicador } from 'src/app/shared/services/types/indicadores.types';
 import { obtenerClaseMatrizPuc } from 'src/app/utils';
 import { Item, Regla, ExcelInfo } from '../item.model';
@@ -111,6 +112,7 @@ export class ComparacionIndicadoresService {
 
   constructor(
     private _indicadoresHttpService: IndicadoresHttpService,
+    private _reglasIndicadoresService: ReglasIndicadoresService,
   ) {}
 
   setVal1(data: Item[], fecha ) {
@@ -157,20 +159,21 @@ export class ComparacionIndicadoresService {
       case '1':
       case '2':
       case '4':
-        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
+        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
           return 'rojo';
         }
-        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
+        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
           return 'verde';
         }
         return 'amarillo';
       case '3':
       case '5':
       case '6':
-        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
+      case '7':
+        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
           return 'rojo';
         }
-        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
+        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
           return 'verde';
         }
         return 'amarillo';
@@ -188,13 +191,13 @@ export class ComparacionIndicadoresService {
   }
 
   getVariacionNetaPuc(id: string | number) {
-    return this.temp2.getValorPorCodigo(id) - this.temp1.getValorPorCodigo(id);
+    return this.temp1.getValorPorCodigo(id) - this.temp2.getValorPorCodigo(id);
   }
 
   getVariacionPorcentualPuc(id: string | number) {
     const valorDatos1 = this.temp1.getValorPorCodigo(id);
     const valorDatos2 = this.temp2.getValorPorCodigo(id);
-    return ((valorDatos2 - valorDatos1) * 100) / valorDatos1;
+    return ((valorDatos1 - valorDatos2) * 100) / valorDatos2;
   }
 
   getIndicadorExcel1(id: string) {
@@ -222,6 +225,14 @@ export class ComparacionIndicadoresService {
           }).filter(x => !!x)
         )
       );
+  }
+
+  getSemaforoIndicador(indicador: string) {
+    return this._reglasIndicadoresService.calcularSemaforoIndicador(
+      indicador,
+      this.getIndicadorExcel1(indicador),
+      this.getIndicadorExcel2(indicador),
+    );
   }
 
 }

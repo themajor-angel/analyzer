@@ -99,4 +99,8 @@ export class DetallesIndicadoresComponent implements OnInit, OnDestroy {
   obtenerValorAnio2(prop: string) {
     return Number(this._comparacionIndicadoresService.temp2[prop]).toFixed(2);
   }
+
+  obtenerSemaforo(indicador: string) {
+    return this._comparacionIndicadoresService.getSemaforoIndicador(indicador)
+  }
 }

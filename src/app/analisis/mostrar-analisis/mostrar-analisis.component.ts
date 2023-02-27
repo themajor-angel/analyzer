@@ -119,8 +119,8 @@ export class MostrarAnalisisComponent implements OnInit {
       id: Codigo.toString(),
       nombre: `${Nombre} (Cod ${Codigo})` || '',
       porAnio: {
-        year2020: this.formatearDinero(valorDatos1),
-        year2021: this.formatearDinero(valorDatos2),
+        year2020: this.formatearDinero(valorDatos2),
+        year2021: this.formatearDinero(valorDatos1),
       },
       variacionNeta: this.formatearDinero(variacionNeta),
       variacionPorcentual: isNaN(variacionPorcentual)
