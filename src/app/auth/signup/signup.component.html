@@ -106,8 +106,8 @@
       </mat-form-field>
       
         
-        <mat-checkbox ngModel name="agree" labelPosition="before" color="primary" required>Agree to terms</mat-checkbox>
-        <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Submit</button>
+        <mat-checkbox ngModel name="agree" labelPosition="before" color="primary" required>De acuerdo con terminos y condiciones</mat-checkbox>
+        <button *ngIf="!(isLoading$ | async)" type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Registrarse</button>
         <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
     </form>
 </section>

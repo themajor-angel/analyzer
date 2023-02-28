@@ -1,7 +1,9 @@
-<p>Nombre</p>
-<p>Apellido</p>
-<p>Tipo de Cargo</p>
-<p>Nombre de la Empresa</p>
-<p>NIT de la Empresa</p>
-<p>Ciudad</p>
-<p>Pais</p>
+<div *ngFor="let item of products">
+  <p>Nombre: {{ item.nombre }} {{usuario.apellido}}</p>
+  <p>Correo: {{ item.email }}</p>
+  <p>Nombre de la Empresa: {{ item.nombreEmpresa }}</p>
+  <p>NIT de la Empresa: {{ item.nitEmpresa }}</p>
+  <p>Cargo: {{ item.cargo }}</p>
+  <p>Pais: {{ item.pais }}</p>
+  <p>Ciudad: {{ item.ciudad }}</p>
+</div>

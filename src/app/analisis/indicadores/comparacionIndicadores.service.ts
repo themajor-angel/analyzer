@@ -1,20 +1,9 @@
-<<<<<<< HEAD
-import { LocationStrategy } from '@angular/common';
-import { isNgTemplate } from '@angular/compiler';
 import { Injectable, Output } from '@angular/core';
-import { ɵɵtsModuleIndicatorApiExtractorWorkaround } from '@angular/material';
-import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { BehaviorSubject, Observable } from 'rxjs';
-import * as fromRoot from '../../app.reducer';
-=======
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { IndicadoresHttpService } from 'src/app/shared/services/indicadores-http.service';
 import { ReglasIndicadoresService } from 'src/app/shared/services/reglas-indicadores.service';
 import { IIndicadorConValor, IValorIndicador } from 'src/app/shared/services/types/indicadores.types';
 import { obtenerClaseMatrizPuc } from 'src/app/utils';
->>>>>>> 136b1f13a98ceb7293678d6ad5b87cace5a5a012
 import { Item, Regla, ExcelInfo } from '../item.model';
 import { ITipoSemaforo } from '../mostrar-analisis/tabla-balance/types';
 
@@ -37,6 +26,9 @@ export class ComparacionIndicadoresService {
 
   nit1: string;
   nit2: string;
+
+  fechaBool: boolean;
+  nitBool: boolean;
 
   @Output() titulo$;
   tituloPrueba = new BehaviorSubject<string>('Analyzer') ;
@@ -166,6 +158,7 @@ export class ComparacionIndicadoresService {
       console.log("Error en los archivos subidos")
     }
     this.comparar();
+    this.getValidacion();
     console.log(this.temp1, this.temp2)
   }
 
@@ -266,6 +259,42 @@ export class ComparacionIndicadoresService {
       this.getIndicadorExcel1(indicador),
       this.getIndicadorExcel2(indicador),
     );
+  }
+
+  getValidacion(){
+    if(this.temp1.fecha[1] <=  this.temp2.fecha[1]  && this.temp1.fecha[3] <=  this.temp2.fecha[3]){
+      console.log("fecha no OK");
+      this.fechaBool = false;
+    }
+
+    if(this.temp1.nit != this.temp2.nit){
+      this.nitBool = false;
+      console.log("nit no OK");
+    } else {
+      this.nitBool = true;
+      console.log("nit OK");
+    }
+    //comparar años, si los años son diferentes se debe comparar meses, tienen que corresponder 
+    if( this.temp1.fecha[1] !=  this.temp2.fecha[1]  && this.temp1.fecha[3] !=  this.temp2.fecha[3]){
+      if( this.temp1.fecha[0] ==  this.temp2.fecha[0]  && this.temp1.fecha[2] ==  this.temp2.fecha[2]){
+        console.log("fecha OK");
+        this.fechaBool = true;
+      } else {
+        console.log("fecha no OK");
+        this.fechaBool = false;
+      }
+      
+    }
+    //comparar meses, si los meses son diferentes se debe comparar años, tienen que corresponder 
+    if( this.temp1.fecha[0] !=  this.temp2.fecha[0]  && this.temp1.fecha[2] !=  this.temp2.fecha[2]){
+      if( this.temp1.fecha[1] ==  this.temp2.fecha[1]  && this.temp1.fecha[3] ==  this.temp2.fecha[3]){
+        console.log("fecha OK");
+        this.fechaBool = true;
+      } else {
+        console.log("fecha no OK");
+        this.fechaBool = false;
+      }
+    }
   }
 
 }

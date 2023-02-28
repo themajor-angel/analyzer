@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -16,7 +16,6 @@ export class HeaderComponent implements OnInit {
   isAuth$: Observable<boolean>;
   authSubscription: Subscription;
 
-  //@Input() titulo = 'Analyzer';
   titulo  = 'Analyzer';
   constructor(
     private store: Store<fromRoot.State>, 
@@ -37,9 +36,5 @@ export class HeaderComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
-  }
-
-  ngOnChanges(){
-    //this.titulo = this.comparacionIndicadores.titulo$;
   }
 }
