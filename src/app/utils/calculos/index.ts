@@ -1,0 +1,1 @@
+export * from './calcular-variacion-porcentual'

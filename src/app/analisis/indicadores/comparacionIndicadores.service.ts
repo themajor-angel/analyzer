@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { IndicadoresHttpService } from 'src/app/shared/services/indicadores-http.service';
+import { ReglasDiccionarioService } from 'src/app/shared/services/reglas-diccionario.service';
 import { ReglasIndicadoresService } from 'src/app/shared/services/reglas-indicadores.service';
 import { IIndicadorConValor, IValorIndicador } from 'src/app/shared/services/types/indicadores.types';
-import { obtenerClaseMatrizPuc } from 'src/app/utils';
+import { calcularVariacionPorcentual, obtenerClaseMatrizPuc } from 'src/app/utils';
 import { Item, Regla, ExcelInfo } from '../item.model';
 import { ITipoSemaforo } from '../mostrar-analisis/tabla-balance/types';
 
@@ -113,6 +114,7 @@ export class ComparacionIndicadoresService {
   constructor(
     private _indicadoresHttpService: IndicadoresHttpService,
     private _reglasIndicadoresService: ReglasIndicadoresService,
+    private _reglasDiccionarioService: ReglasDiccionarioService,
   ) {}
 
   setVal1(data: Item[], fecha ) {
@@ -154,32 +156,7 @@ export class ComparacionIndicadoresService {
   }
 
   obtenerSemaforoPuc(idPuc: string): ITipoSemaforo {
-    const pucMatriz = obtenerClaseMatrizPuc(idPuc);
-    switch (pucMatriz) {
-      case '1':
-      case '2':
-      case '4':
-        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
-          return 'rojo';
-        }
-        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
-          return 'verde';
-        }
-        return 'amarillo';
-      case '3':
-      case '5':
-      case '6':
-      case '7':
-        if (this.temp1.getValorPorCodigo(idPuc) > this.temp2.getValorPorCodigo(idPuc)) {
-          return 'rojo';
-        }
-        if (this.temp1.getValorPorCodigo(idPuc) < this.temp2.getValorPorCodigo(idPuc)) {
-          return 'verde';
-        }
-        return 'amarillo';
-      default:
-        return 'amarillo';
-    }
+    return this._reglasDiccionarioService.calcularSemaforoDiccionario(this.temp1, this.temp2, idPuc).status;
   }
 
   getValorExcel1(id: string | number) {
@@ -197,7 +174,7 @@ export class ComparacionIndicadoresService {
   getVariacionPorcentualPuc(id: string | number) {
     const valorDatos1 = this.temp1.getValorPorCodigo(id);
     const valorDatos2 = this.temp2.getValorPorCodigo(id);
-    return ((valorDatos1 - valorDatos2) * 100) / valorDatos2;
+    return calcularVariacionPorcentual(valorDatos1, valorDatos2);
   }
 
   getIndicadorExcel1(id: string) {

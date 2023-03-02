@@ -7,6 +7,9 @@ import { IDatoPuc, IValorPuc, IWrapperPuc, } from 'src/app/shared/services/types
 import { AnalisisService } from '../analisis.service';
 import { ComparacionIndicadoresService } from '../indicadores/comparacionIndicadores.service';
 import { TablaBalanceYears, TablaBalanceActivos, IFilaBalanceActivos, } from './tabla-balance/types';
+import { registerLocaleData } from '@angular/common';
+import localeCO from '@angular/common/locales/es-CO'
+registerLocaleData(localeCO);
 
 @Component({
   selector: 'app-mostrar-analisis',
@@ -17,11 +20,12 @@ export class MostrarAnalisisComponent implements OnInit {
   @Input() analisis = {} as any;
   @Input() estadoResultado = {} as any;
   dataYears: TablaBalanceYears = [
-    { id: 'year2020', nombre: 'Año 2020' },
-    { id: 'year2021', nombre: 'Año 2021' },
+    { id: 'year2021', nombre: 'Año 2021 (en miles)' },
+    { id: 'year2020', nombre: 'Año 2020 (en miles)' },
   ];
   dataActivos$: Observable<TablaBalanceActivos>;
-  dataActivos: TablaBalanceActivos;
+  dataClaseActual$: Observable<IWrapperPuc>;
+  dataClaseActual: IWrapperPuc;
   idPuc$: Observable<string>;
   idPuc: string = null;
 
@@ -37,6 +41,7 @@ export class MostrarAnalisisComponent implements OnInit {
   ngOnInit(): void {
     this.setupIdPuc();
     this.setupDataTabla();
+    this.setupDataClaseActual();
     /*this.analisis = this.analisis_service.getAnalisis();
     this.estadoResultado = this.analisis_service.getEstadoResultado();
     if (!this.analisis || !this.estadoResultado) {
@@ -50,6 +55,32 @@ export class MostrarAnalisisComponent implements OnInit {
       shareReplay(1)
     );
     this.idPuc$.subscribe((idPuc) => (this.idPuc = idPuc));
+  }
+
+  setupDataTabla(): void {
+    this.dataActivos$ = this.idPuc$.pipe(
+      switchMap((idPuc) =>
+        this.diccionarioService
+          .consultarListaClasesHijasPuc(idPuc)
+          .pipe(catchError((err) => of([] as IDatoPuc[])))
+      ),
+      map((codigos) => codigos.map((cod) => this.mapCodigoPucAWrapperPuc(cod))),
+      map((datosPuc) => [...datosPuc].sort((a, b) => a.codigoPuc.Codigo.toString().localeCompare(b.codigoPuc.Codigo.toString()))),
+      map((datosPuc) => datosPuc.map((datoPuc) => this.mapWrapperPucAFilaTabla(datoPuc))),
+      shareReplay(1)
+    );
+  }
+
+  setupDataClaseActual(): void {
+    this.dataClaseActual$ = this.idPuc$.pipe(
+      switchMap((idPuc) =>
+        this.diccionarioService
+          .consultarClasePuc(idPuc)
+          .pipe(catchError((err) => of(null)))
+      ),
+      map(dataPuc => this.mapCodigoPucAWrapperPuc(dataPuc)),
+      shareReplay(1),
+    );
   }
 
   obtenerEstiloPorId(idCodigo: string) {
@@ -78,7 +109,7 @@ export class MostrarAnalisisComponent implements OnInit {
   }
 
   formatearDinero(cantidad: string | number) {
-    return this.currencyPipe.transform(cantidad.toString(), 'USD', 'symbol', '1.2-2');
+    return this.currencyPipe.transform((Number(cantidad) / 1000).toString(), '$', 'symbol', '1.2-2', 'es-CO');
   }
 
   mapCodigoPucAWrapperPuc(datoPuc: IDatoPuc) {
@@ -135,21 +166,11 @@ export class MostrarAnalisisComponent implements OnInit {
     return resultCodigo;
   }
 
-  setupDataTabla(): void {
-    this.dataActivos$ = this.idPuc$.pipe(
-      switchMap((idPuc) =>
-        this.diccionarioService
-          .consultarListaClasesHijasPuc(idPuc)
-          .pipe(catchError((err) => of([] as IDatoPuc[])))
-      ),
-      map((codigos) => codigos.map((cod) => this.mapCodigoPucAWrapperPuc(cod))),
-      map((datosPuc) => [...datosPuc].sort((a, b) => a.codigoPuc.Codigo.toString().localeCompare(b.codigoPuc.Codigo.toString()))),
-      map((datosPuc) => datosPuc.map((datoPuc) => this.mapWrapperPucAFilaTabla(datoPuc))),
-      shareReplay(1)
-    );
-  }
-
   get linkBotonAtras() {
+    const idPadre = this?.dataClaseActual?.codigoPuc?.Padre;
+    if (idPadre) {
+      return `/analisis/mostraranalisis/${idPadre}`;
+    }
     const id = this.idPuc;
     if (id !== null && id !== undefined) {
       if (isNaN(Number(id))) {

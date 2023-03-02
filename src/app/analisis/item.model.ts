@@ -55,6 +55,9 @@ export class ExcelInfo {
   rotActivos;
   rotInventario;
 
+  debeCambiarSigno(idPuc: string | number) {
+    return ['2', '3'].includes(idPuc.toString().slice(0, 1));
+  }
 
   setFecha(fecha: []){
     this.fecha = fecha
@@ -70,55 +73,57 @@ export class ExcelInfo {
     this.codigosExtra = {}
     for (let i = 0; i < data.length; i++) {
       const codigo = data[i].codigo;
-      this.codigosExtra[`cod${codigo}`] = data[i].saldo;
+      const factorSigno = this.debeCambiarSigno(codigo) ? -1 : 1
+      const saldoCodigo = data[i].saldo * factorSigno;
+      this.codigosExtra[`cod${codigo}`] = saldoCodigo;
       if (data[i].codigo.length == 2) {
         if (data[i].codigo.startsWith('1')) {
-          this.cod1 += data[i].saldo;
+          this.cod1 += saldoCodigo;
         }
       }
       if (data[i].codigo.length == 2) {
         if (data[i].codigo.startsWith('2')) {
-          this.cod2 += data[i].saldo;
+          this.cod2 += saldoCodigo;
         }
       }
       if (data[i].codigo.length == 2) {
         if (data[i].codigo.startsWith('3')) {
-          this.cod3 += data[i].saldo;
+          this.cod3 += saldoCodigo;
         }
       }
       if (data[i].codigo.length == 2) {
         if (data[i].codigo.startsWith('4')) {
-          this.cod4 += data[i].saldo;
+          this.cod4 += saldoCodigo;
         }
       }
       if (data[i].codigo.length == 2) {
         if (data[i].codigo.startsWith('5')) {
-          this.cod5 += data[i].saldo;
+          this.cod5 += saldoCodigo;
         }
       }
       if (data[i].codigo.length == 2) {
         if (data[i].codigo.startsWith('6')) {
-          this.cod6 += data[i].saldo;
+          this.cod6 += saldoCodigo;
         }
       }
       if (data[i].codigo.length == 7) {
         if (data[i].codigo.startsWith('2')) {
-          this.cod7 += data[i].saldo;
+          this.cod7 += saldoCodigo;
         }
       }
       
       
       if (data[i].codigo == '11') {
-        this.cod11 = data[i].saldo;
+        this.cod11 = saldoCodigo;
       }
       if (data[i].codigo == '12') {
-        this.cod12 = data[i].saldo;
+        this.cod12 = saldoCodigo;
       }
       if (data[i].codigo == '14') {
-        this.cod14 = data[i].saldo;
+        this.cod14 = saldoCodigo;
       }
       if (data[i].codigo == '41') {
-        this.cod41 = data[i].saldo;
+        this.cod41 = saldoCodigo;
       }
       if (
         data[i].codigo == '11' ||
@@ -126,7 +131,7 @@ export class ExcelInfo {
         data[i].codigo == '13' ||
         data[i].codigo == '14'
       ) {
-        this.actCor.push(data[i].saldo);
+        this.actCor.push(saldoCodigo);
         //this.actCor = 20
       }
       if (
@@ -136,7 +141,7 @@ export class ExcelInfo {
         data[i].codigo == '24' ||
         data[i].codigo == '25'
       ) {
-        this.pasCor.push(data[i].saldo);
+        this.pasCor.push(saldoCodigo);
         //this.pasCor = 20
       }
     }
