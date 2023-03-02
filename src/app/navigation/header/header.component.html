@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="toolbar">
     <div fxHide.gt-xs>
       <button mat-icon-button (click)="onToggleSidenav()">
         <mat-icon>menu</mat-icon>
@@ -11,7 +11,7 @@
         <li *ngIf="!(isAuth$ | async)"><a routerLink="/auth/login">Ingresar</a></li>
         <li *ngIf="isAuth$ | async"><a routerLink="/analisis/cargadearchivos">Análisis</a></li>
         <li *ngIf="isAuth$ | async"><a routerLink="/analisis/menu">Menú</a></li>
-        <li *ngIf="isAuth$ | async"><a routerLink="/perfil/editarperfil">Editar Perfil</a></li>
+        <li *ngIf="isAuth$ | async"><a routerLink="/perfil/verperfil">Perfil</a></li>
         <li *ngIf="isAuth$ | async"><a style="cursor: pointer" (click)="onLogout()">Cerrar Sesión</a></li>
       </ul>
     </div>

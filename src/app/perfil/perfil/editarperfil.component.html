@@ -1,5 +1,9 @@
 <div *ngFor="let item of products">
-  <section class="signup-form">
+  <section
+    class="signup-form"
+    fxLayout="column"
+    fxLayoutAlign="space-around center"
+  >
     <form
       fxLayout="column"
       fxLayoutAlign="center center"
@@ -97,7 +101,6 @@
         type="submit"
         mat-raised-button
         color="primary"
-        [disabled]="f.invalid"
       >
         Guardar
       </button>

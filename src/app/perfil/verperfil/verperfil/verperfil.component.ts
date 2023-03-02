@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/shared/usuario.model';
 import { PerfilService } from '../../perfil.service';
 
@@ -15,7 +16,8 @@ export class VerPerfilComponent implements OnInit {
   products: any;
   constructor(
     private _perfilService: PerfilService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -27,5 +29,9 @@ export class VerPerfilComponent implements OnInit {
   async getProductStock() {
     let supplier = await this._perfilService.getSupplier('Arts and Crafts Supplier'); 
     this.products = await this._perfilService.getProductsFromSupplier();
+  }
+
+  submit(){
+    this.router.navigate(['/perfil/editarperfil'])
   }
 }

@@ -1,4 +1,8 @@
-<section>
+<section
+class="signup-form"
+fxLayout="column"
+fxLayoutAlign="space-around center"
+>
     <form
       fxLayout="column"
       fxLayoutAlign="center center"
@@ -9,21 +13,21 @@
         <input
           type="email"
           matInput
-          placeholder="Your email"
+          placeholder="Correo"
           formControlName="email">
-        <mat-hint>Please enter a valid email.</mat-hint>
-        <mat-error>Invalid or missing email.</mat-error>
+        <mat-hint>Por favor ingrese un correo válido.</mat-hint>
+        <mat-error>Correo inválido.</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input
           type="password"
           matInput
-          placeholder="Your password"
+          placeholder="Contraseña"
           formControlName="password">
-        <mat-hint>Please enter your password.</mat-hint>
-        <mat-error>Missing password.</mat-error>
+        <mat-hint>Por favor ingrese su contraseña.</mat-hint>
+        <mat-error>Ingrese contraseña.</mat-error>
       </mat-form-field>
-      <button *ngIf="!(isLoading$ | async)"  type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
+      <button *ngIf="!(isLoading$ | async)"  type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Ingresar</button>
       <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
     </form>
   </section>
