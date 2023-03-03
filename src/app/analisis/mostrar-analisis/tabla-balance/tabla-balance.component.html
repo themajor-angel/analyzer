@@ -6,6 +6,8 @@
         <div
           [class]="'text-white text-center px-2 md:px-8 lg:px-12 py-3 my-1 rounded-md drop-shadow-lg cursor-pointer ' + element.styles?.nombre"
           [routerLink]="'/analisis/mostraranalisis/' + element.id"
+          [matTooltip]="element.descripcion"
+          matTooltipPosition="after"
         >
           {{element.nombre}}
         </div>

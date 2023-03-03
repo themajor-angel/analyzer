@@ -10,10 +10,18 @@
       {{nombre}}
     </h3>
   </div>
-  <p class="m-0 font-bold"><b>Descripción:</b></p>
-  <p class="m-0 mb-12">
-    {{descripcion}}
-  </p>
+  <div class="descripcion-accordion-wrapper">
+    <mat-accordion class="m-0 p-0">
+      <mat-expansion-panel [expanded]="activo" class="bg-transparent shadow-none m-0 p-0">
+        <div class="descripcion-wrapper">
+          <p class="m-0 font-bold"><b>Descripción:</b></p>
+          <p class="m-0 mb-12">
+            {{descripcion}}
+          </p>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
   <div class="flex flex-row justify-around gap-4 mb-4">
     <div class="bg-white flex-auto text-center rounded-md pt-4">
       <p class="font-bold m-0 my-2">Año 2021</p>

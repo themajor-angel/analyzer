@@ -3,6 +3,7 @@
     <button
       [routerLink]="indicador.ruta"
       [class]="indicador.bgColor + ' w-full h-24 rounded-md text-white text-xl font-bold'"
+      [matTooltip]="descripcionesCategorias[indicador.ruta]"
     >
       {{ indicador.nombre }}
     </button>

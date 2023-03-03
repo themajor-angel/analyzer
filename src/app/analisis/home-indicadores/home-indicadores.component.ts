@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TextosIndicadoresService } from 'src/app/shared/services/textos-indicadores.service';
 
 @Component({
   selector: 'app-home-indicadores',
@@ -28,7 +29,17 @@ export class HomeIndicadoresComponent implements OnInit {
     bgColor: 'bg-gradient-radial from-[#F18AD9] to-[#D19AE1]'
   },]
 
-  constructor() {}
+  descripcionesCategorias: Record<string, string> = {}
 
-  ngOnInit(): void {}
+  constructor(private _textosIndicadoresService: TextosIndicadoresService) {}
+
+  ngOnInit(): void {
+    this.subscribeDescripcionesCategorias();
+  }
+
+  subscribeDescripcionesCategorias() {
+    this._textosIndicadoresService.getCategoriasIndicadores$().subscribe(categorias => {
+      this.descripcionesCategorias = categorias.reduce((a,b) => ({...a, [b.id]: b.descripcion}), {})
+    })
+  }
 }

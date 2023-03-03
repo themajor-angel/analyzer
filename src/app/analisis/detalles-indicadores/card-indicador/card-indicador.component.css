@@ -1,0 +1,4 @@
+.descripcion-accordion-wrapper ::ng-deep .mat-expansion-panel-body {
+  margin: 0;
+  padding: 0;
+}

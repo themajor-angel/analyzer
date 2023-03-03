@@ -20,6 +20,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTooltipModule } from "@angular/material/tooltip";
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
     imports: [
@@ -43,7 +45,9 @@ import { MatStepperModule } from '@angular/material/stepper';
         MatPaginatorModule,
         MatSnackBarModule,
         MatRadioModule,
-        MatStepperModule
+        MatStepperModule,
+        MatTooltipModule,
+        MatExpansionModule,
     ],
     exports: [
         MatButtonModule,
@@ -66,7 +70,9 @@ import { MatStepperModule } from '@angular/material/stepper';
         MatPaginatorModule,
         MatSnackBarModule,
         MatRadioModule,
-        MatStepperModule
+        MatStepperModule,
+        MatTooltipModule,
+        MatExpansionModule,
     ]
 })
 

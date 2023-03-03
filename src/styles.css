@@ -17,3 +17,8 @@ body {
 
 /* Necesario para poder usar slidesPerView: auto en swiper.js */
 .swiper-slide { width: auto; }
+
+.cdk-overlay-pane.mat-tooltip-panel .mat-tooltip {
+    font-size: 16px;
+    line-height: 1em;
+}

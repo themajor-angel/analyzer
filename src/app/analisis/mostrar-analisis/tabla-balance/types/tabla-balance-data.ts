@@ -10,6 +10,7 @@ export type TablaBalanceActivos = IFilaBalanceActivos[];
 export interface IFilaBalanceActivos {
   id: string;
   nombre: string;
+  descripcion?: string;
   variacionNeta: string;
   variacionPorcentual: string;
   porAnio: { [id: string]: string };

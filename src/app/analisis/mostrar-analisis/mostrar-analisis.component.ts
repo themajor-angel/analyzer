@@ -138,7 +138,7 @@ export class MostrarAnalisisComponent implements OnInit {
     codigoPuc,
     valorPuc,
   }: IWrapperPuc): IFilaBalanceActivos {
-    const { Codigo, Nombre } = codigoPuc || {};
+    const { Codigo, Nombre, Descripcion } = codigoPuc || {};
     let {
       valorDatos1,
       valorDatos2,
@@ -149,6 +149,7 @@ export class MostrarAnalisisComponent implements OnInit {
     const resultCodigo: IFilaBalanceActivos = {
       id: Codigo.toString(),
       nombre: `${Nombre} (Cod ${Codigo})` || '',
+      descripcion: Descripcion,
       porAnio: {
         year2020: this.formatearDinero(valorDatos2),
         year2021: this.formatearDinero(valorDatos1),
