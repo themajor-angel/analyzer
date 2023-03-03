@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 
 import * as fromRoot from '../../app.reducer';
 import { AuthService } from '../../auth/auth.service';
+import { ComparacionIndicadoresService } from 'src/app/analisis/indicadores/comparacionIndicadores.service';
 
 @Component({
   selector: 'app-header',
@@ -15,10 +16,18 @@ export class HeaderComponent implements OnInit {
   isAuth$: Observable<boolean>;
   authSubscription: Subscription;
 
-  constructor(private store: Store<fromRoot.State>, private authService: AuthService) { }
+  titulo  = 'Analyzer';
+  constructor(
+    private store: Store<fromRoot.State>, 
+    private authService: AuthService,
+    private comparacionIndicadores: ComparacionIndicadoresService) { }
 
   ngOnInit() {
     this.isAuth$ = this.store.select(fromRoot.getIsAuth);
+    
+    this.comparacionIndicadores.tituloPrueba.subscribe(titulito => {
+      this.titulo = titulito;
+    })
   }
 
   onToggleSidenav() {

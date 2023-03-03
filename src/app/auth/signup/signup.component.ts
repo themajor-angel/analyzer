@@ -4,6 +4,7 @@ import { Observable, Subscription } from 'rxjs';
 import { UIservice } from 'src/app/shared/ui.service';
 import { AuthService } from '../auth.service';
 import * as fromRoot from '../../app.reducer';
+import { PerfilService } from 'src/app/perfil/perfil.service';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -18,9 +19,11 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
+    private perfilService: PerfilService,
     private uiService: UIservice,
     private store: Store<fromRoot.State>) { }
 
+    cargos = ["Contable", "Empresario"];
   ngOnDestroy(): void {
     if(this.loadingSubs){
       this.loadingSubs.unsubscribe();
@@ -40,6 +43,18 @@ export class SignupComponent implements OnInit, OnDestroy {
     this.authService.registerUser({
       email: form.value.email,
       password: form.value.password
+    })
+
+    this.perfilService.guardarUsuario({
+      id: null, 
+      email: null,
+      nombre: form.value.nombre,
+      apellido: form.value.apellido,
+      cargo: form.value.cargo,
+      nombreEmpresa: form.value.nombreEmpresa,
+      nitEmpresa: form.value.nitEmpresa,
+      ciudad: form.value.ciudad,
+      pais: form.value.pais
     })
   }
 

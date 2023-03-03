@@ -14,7 +14,10 @@ import { PerfilService } from '../perfil.service';
 })
 export class EditarPerfilComponent implements OnInit {
   isLoading$: Observable<boolean>;
-
+  usuarioID;
+  data;
+  products: any;
+  
   constructor(
     private perfilService: PerfilService,
     private uiService: UIservice,
@@ -24,10 +27,18 @@ export class EditarPerfilComponent implements OnInit {
 
   ngOnInit(): void {
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    this.usuarioID = this.perfilService.getUsuario();
+     this.getProductStock();
+    console.log("usuario id????", this.usuarioID)
+    this.data = "hola"
+  }
+  async getProductStock() {
+    let supplier = await this.perfilService.getSupplier('Arts and Crafts Supplier'); 
+    this.products = await this.perfilService.getProductsFromSupplier();
   }
 
   onSubmit(form: NgForm){
-    this.perfilService.guardarUsuario({
+    this.perfilService.actualizarUsuario({
       id: null, 
       email: null,
       nombre: form.value.nombre,
@@ -38,6 +49,7 @@ export class EditarPerfilComponent implements OnInit {
       ciudad: form.value.ciudad,
       pais: form.value.pais
     })
+    
   }
 
 }

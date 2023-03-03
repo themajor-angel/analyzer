@@ -1,0 +1,41 @@
+form {
+    width: 100%;
+
+}
+
+mat-form-field {
+    width: 80%;
+    /*background-color: #3CBEFD;*/
+    border-style: hidden;
+    border-radius: 2%;
+    color: white !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    /*change color of label*/
+    color: white !important;
+}
+
+::ng-deep .mat-form-field-label {
+    /*change color of label*/
+    color: white !important;
+}
+
+::ng-deep.mat-form-field-underline {
+    /*change color of underline*/
+    background-color: white !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+    /*change color of underline when focused*/
+    background-color: white !important;
+}
+
+.signup-form {
+    background: rgba(71, 88, 91, 0.606);
+    /*background: radial-gradient(circle, rgba(35, 223, 246, 1) 0%, rgba(60, 190, 253, 1) 100%);*/
+    border-radius: 2%;
+    width: 40%;
+    margin: 2% auto;
+    padding: 2% 0;
+}

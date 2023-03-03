@@ -18,6 +18,8 @@ export class ReadexcelDirective {
   @Output() eventEmitter = new EventEmitter();
   fecha: string;
   fechaArr = [];
+  nombre: string;
+  nit: string;
 
   constructor(private analisis_service: AnalisisService,
     private comparacionIndicadoresService:ComparacionIndicadoresService) {}
@@ -61,6 +63,8 @@ export class ReadexcelDirective {
 
   analisisBalanceGeneral(data) {
     this.fecha = data[3]['__EMPTY'];
+    this.nombre = data[1]['__EMPTY'];
+    this.nit = data[2]['__EMPTY'];
 
     for (let i = 0; i < data.length; i++) {
       if (data[i]['__EMPTY_2'] >= 1 && data[i]['__EMPTY_7'] != 0) {
@@ -82,7 +86,7 @@ export class ReadexcelDirective {
           this.datosNum.push(row);
         }
       }
-      
+      console.log(this.nombre, this.nit)
     }
 
     //this.analisis_service.generarAnalisisGeneral(this.datosNum);
@@ -95,7 +99,8 @@ export class ReadexcelDirective {
     
     this.analisis_service.setFecha(this.fecha);
     this.fechaArr = this.analisis_service.getFecha();
-    this.comparacionIndicadoresService.setVal1(this.datosNum, this.fechaArr);
+    //agregar datos de nombre y nit de la empresa
+    this.comparacionIndicadoresService.setVal1(this.datosNum, this.fechaArr, this.nombre, this.nit);
     
   }
 }

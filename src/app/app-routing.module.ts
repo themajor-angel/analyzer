@@ -12,7 +12,8 @@ const routes: Routes = [
     path: 'perfil',
     loadChildren: () =>
       import('./perfil/perfil.module').then((m) => m.PerfilModule),
-    canLoad: [AuthGuard],
+      //canLoad: [AuthGuard],
+    //está funcionando la autenticación?
   },
   {
     path: 'analisis',

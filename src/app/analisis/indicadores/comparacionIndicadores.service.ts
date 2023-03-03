@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { Injectable, Output } from '@angular/core';
+import { BehaviorSubject, map } from 'rxjs';
 import { IndicadoresHttpService } from 'src/app/shared/services/indicadores-http.service';
 import { ReglasDiccionarioService } from 'src/app/shared/services/reglas-diccionario.service';
 import { ReglasIndicadoresService } from 'src/app/shared/services/reglas-indicadores.service';
@@ -21,6 +21,18 @@ export class ComparacionIndicadoresService {
 
   fecha1: [];
   fecha2: [];
+
+  nombre1 = 'Analyzer';
+  nombre2: string;
+
+  nit1: string;
+  nit2: string;
+
+  fechaBool: boolean;
+  nitBool: boolean;
+
+  @Output() titulo$;
+  tituloPrueba = new BehaviorSubject<string>('Analyzer') ;
 
   $margenNeto;
   $margenBruto;
@@ -117,14 +129,19 @@ export class ComparacionIndicadoresService {
     private _reglasDiccionarioService: ReglasDiccionarioService,
   ) {}
 
-  setVal1(data: Item[], fecha ) {
+  //agregar datos de nombre y nit de la empresa
+  setVal1(data: Item[], fecha, nombre, nit ) {
     this.data1 = data;
     this.fecha1 = fecha;
+    this.nombre1 = nombre;
+    this.nit1 = nit;
   }
 
-  setVal2(data: Item[], fecha) {
+  setVal2(data: Item[], fecha, nombre, nit) {
     this.data2 = data;
     this.fecha2 = fecha;
+    this.nombre2 = nombre;
+    this.nit2 = nit;
     this.iniciar()
   }
 
@@ -133,14 +150,23 @@ export class ComparacionIndicadoresService {
     this.temp2.setVal(this.data2)
     this.temp1.setFecha(this.fecha1)
     this.temp2.setFecha(this.fecha2)
+    if(this.nombre1 == this.nombre2 && this.nit1 == this.nit2){
+      this.temp1.setDatos(this.fecha1, this.nombre1, this.nit1);
+      this.temp2.setDatos(this.fecha2, this.nombre1, this.nit1);
+      this.titulo$ = this.nombre1;
+      this.tituloPrueba.next(this.nombre1);
+    } else{
+      //poner error 
+      console.log("Error en los archivos subidos")
+    }
     this.comparar();
+    this.getValidacion();
     console.log(this.temp1, this.temp2)
   }
 
   comparar() {
     this.indicadores.forEach(dato => {
       dato.dif = this.temp1[dato.prop] - this.temp2[dato.prop];
-      console.log("dato.prop", [dato.prop], this.temp1[dato.prop], this.temp2[dato.prop])
       if (this.temp1[dato.prop] > this.temp2[dato.prop]) {
         dato.status = 'verde';
       }
@@ -210,6 +236,42 @@ export class ComparacionIndicadoresService {
       this.getIndicadorExcel1(indicador),
       this.getIndicadorExcel2(indicador),
     );
+  }
+
+  getValidacion(){
+    if(this.temp1.fecha[1] <=  this.temp2.fecha[1]  && this.temp1.fecha[3] <=  this.temp2.fecha[3]){
+      console.log("fecha no OK");
+      this.fechaBool = false;
+    }
+
+    if(this.temp1.nit != this.temp2.nit){
+      this.nitBool = false;
+      console.log("nit no OK");
+    } else {
+      this.nitBool = true;
+      console.log("nit OK");
+    }
+    //comparar años, si los años son diferentes se debe comparar meses, tienen que corresponder 
+    if( this.temp1.fecha[1] !=  this.temp2.fecha[1]  && this.temp1.fecha[3] !=  this.temp2.fecha[3]){
+      if( this.temp1.fecha[0] ==  this.temp2.fecha[0]  && this.temp1.fecha[2] ==  this.temp2.fecha[2]){
+        console.log("fecha OK");
+        this.fechaBool = true;
+      } else {
+        console.log("fecha no OK");
+        this.fechaBool = false;
+      }
+      
+    }
+    //comparar meses, si los meses son diferentes se debe comparar años, tienen que corresponder 
+    if( this.temp1.fecha[0] !=  this.temp2.fecha[0]  && this.temp1.fecha[2] !=  this.temp2.fecha[2]){
+      if( this.temp1.fecha[1] ==  this.temp2.fecha[1]  && this.temp1.fecha[3] ==  this.temp2.fecha[3]){
+        console.log("fecha OK");
+        this.fechaBool = true;
+      } else {
+        console.log("fecha no OK");
+        this.fechaBool = false;
+      }
+    }
   }
 
 }

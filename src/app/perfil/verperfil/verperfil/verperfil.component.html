@@ -1,7 +1,36 @@
-<p>Nombre</p>
-<p>Apellido</p>
-<p>Tipo de Cargo</p>
-<p>Nombre de la Empresa</p>
-<p>NIT de la Empresa</p>
-<p>Ciudad</p>
-<p>Pais</p>
+<div *ngIf="products" fxFlex = "row">
+  <div *ngFor="let item of products" fxFlex = "column" >
+    <img src="../../../../assets/mdi_user-circle.png" width="20%">
+    <div fxFlexAlign="center center">
+      <h2 fxFlexAlign="center center">{{ item.nombre }} {{item.apellido}}</h2>
+    </div>
+    <div>
+      <h4>{{ item.cargo }}</h4>
+    </div>
+    <div>
+      <p>Correo: {{ item.email }}</p>
+    </div>
+    <div>
+      <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      (click)="submit()"
+    >
+      Editar Perfil
+    </button>
+    </div>
+  </div>
+  <div *ngFor="let item of products" fxFlex = "column"  >
+    
+    <p>Nombre de la Empresa</p>
+    <h3>{{ item.nombreEmpresa }}</h3>
+    <p>NIT de la Empresa</p>
+    <h3>{{ item.nitEmpresa }}</h3>
+    <p>Ciudad</p>
+    <h3>{{ item.pais }}</h3>
+    <p>País</p>
+    <h3>{{ item.ciudad }}</h3>
+  </div>
+</div>
+

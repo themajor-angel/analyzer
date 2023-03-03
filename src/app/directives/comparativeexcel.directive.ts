@@ -16,6 +16,9 @@ export class ComparativeexcelDirective {
   idInput: string;
   fecha: string;
   fechaArr = [];
+  nombre: string;
+  nit: string;
+
   @Output() eventEmitter = new EventEmitter();
 
   constructor(private analisis_service: AnalisisService2,
@@ -60,6 +63,8 @@ export class ComparativeexcelDirective {
 
   analisisBalanceGeneral(data) {
     this.fecha = data[3]['__EMPTY'];
+    this.nombre = data[1]['__EMPTY'];
+    this.nit = data[2]['__EMPTY'];
 
     for (let i = 0; i < data.length; i++) {
       if (data[i]['__EMPTY_2'] >= 1 && data[i]['__EMPTY_7'] != 0) {
@@ -93,7 +98,7 @@ export class ComparativeexcelDirective {
     this.analisis_service.crearAnalisis();
     this.analisis_service.setFecha(this.fecha);
     this.fechaArr = this.analisis_service.getFecha();
-    this.comparacionIndicadoresService.setVal2(this.datosNum, this.fechaArr);
+    this.comparacionIndicadoresService.setVal2(this.datosNum, this.fechaArr, this.nombre, this.nit);
   }
 
 }
