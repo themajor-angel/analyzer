@@ -32,9 +32,7 @@ export class AuthService{
             if(user){
                 this.loggedIn$.next(true);
                 this.store.dispatch(new Auth.SetAuthenticated());
-                //this.router.navigate(['/training']);
                 this.userInfo();
-                // console.log(user);
             } else {
                 this.loggedIn$.next(false);
                 this.trainingService.cancelSubscriptions();

@@ -35,7 +35,6 @@ export class PerfilService {
         this.datosUsuario = user;
         usuario.id = this.datosUsuario.uid;
         usuario.email = this.datosUsuario.email;
-        console.log('datos ', usuario);
         this.db.collection('usuarios').doc(this.datosUsuario.uid).set(usuario);
         this.router.navigate(['/perfil/verperfil']);
         return user;

@@ -11,8 +11,7 @@
       #f="ngForm"
       (ngSubmit)="onSubmit(f)"
     >
-      <mat-form-field appearance="fill">
-        <mat-label>Nombre</mat-label>
+      <mat-form-field >
         <input
           [(ngModel)]="item.nombre"
           #nombre="ngModel"
@@ -24,8 +23,7 @@
           required
         />
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Apellido</mat-label>
+      <mat-form-field >
         <input
           [(ngModel)]="item.apellido"
           #apellido="ngModel"
@@ -37,13 +35,14 @@
           required
         />
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field >
         <mat-label>Tipo de cargo</mat-label>
-        <mat-select placeholder="Choose Exercise" ngModel name="cargo" required>
-          <mat-option *ngFor="let cargo of cargos" [value]="cargo">
-            {{ cargo }}
-          </mat-option>
-        </mat-select>
+        <mat-select placeholder="Category" [(ngModel)]="item.cargo" name="cargo" >
+        <mat-option *ngFor="let cargo of cargos" [value]="cargo">
+          {{cargo}}
+        </mat-option>
+      </mat-select>
+        
       </mat-form-field>
       <mat-form-field>
         <input
@@ -69,8 +68,7 @@
           required
         />
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Ciudad de la empresa</mat-label>
+      <mat-form-field>
         <input
           [(ngModel)]="item.ciudad"
           #ciudad="ngModel"
@@ -83,7 +81,6 @@
         />
       </mat-form-field>
       <mat-form-field>
-        <mat-label>País de la empresa</mat-label>
         <input
           [(ngModel)]="item.pais"
           #pais="ngModel"

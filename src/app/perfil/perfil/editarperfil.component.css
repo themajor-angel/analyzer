@@ -5,20 +5,8 @@ form {
 
 mat-form-field {
     width: 80%;
-    /*background-color: #3CBEFD;*/
     border-style: hidden;
     border-radius: 2%;
-    color: white !important;
-}
-
-::ng-deep .mat-focused .mat-form-field-label {
-    /*change color of label*/
-    color: white !important;
-}
-
-::ng-deep .mat-form-field-label {
-    /*change color of label*/
-    color: white !important;
 }
 
 ::ng-deep.mat-form-field-underline {
@@ -32,8 +20,8 @@ mat-form-field {
 }
 
 .signup-form {
-    background: rgba(71, 88, 91, 0.606);
-    /*background: radial-gradient(circle, rgba(35, 223, 246, 1) 0%, rgba(60, 190, 253, 1) 100%);*/
+    box-shadow: 2px 2px 8px 1px #aaa;
+    background: rgb(227 227 227);
     border-radius: 2%;
     width: 40%;
     margin: 2% auto;

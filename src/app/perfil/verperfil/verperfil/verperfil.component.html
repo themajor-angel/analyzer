@@ -1,5 +1,5 @@
 <div *ngIf="products" fxFlex = "row">
-  <div *ngFor="let item of products" fxFlex = "column" >
+  <div class="perfil" *ngFor="let item of products" fxFlex = "column" >
     <img src="../../../../assets/mdi_user-circle.png" width="20%">
     <div fxFlexAlign="center center">
       <h2 fxFlexAlign="center center">{{ item.nombre }} {{item.apellido}}</h2>
@@ -8,7 +8,7 @@
       <h4>{{ item.cargo }}</h4>
     </div>
     <div>
-      <p>Correo: {{ item.email }}</p>
+      <p>{{ item.email }}</p>
     </div>
     <div>
       <button
@@ -28,9 +28,9 @@
     <p>NIT de la Empresa</p>
     <h3>{{ item.nitEmpresa }}</h3>
     <p>Ciudad</p>
-    <h3>{{ item.pais }}</h3>
-    <p>País</p>
     <h3>{{ item.ciudad }}</h3>
+    <p>País</p>
+    <h3>{{ item.pais }}</h3>
   </div>
 </div>
 

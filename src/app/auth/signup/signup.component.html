@@ -10,8 +10,7 @@
     #f="ngForm"
     (ngSubmit)="onSubmit(f)"
   >
-    <mat-form-field appearance="fill">
-      <mat-label>Nombre</mat-label>
+    <mat-form-field>
       <input
         type="text"
         matInput
@@ -21,8 +20,7 @@
         required
       />
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Apellido</mat-label>
+    <mat-form-field>
       <input
         type="text"
         matInput
@@ -32,8 +30,7 @@
         required
       />
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
+    <mat-form-field >
       <input
         type="email"
         matInput
@@ -65,7 +62,7 @@
       <mat-hint align="end"> {{ pwInput.value?.length }} / 6</mat-hint>
       <mat-error>Tiene que tener al menos 6 carácteres</mat-error>
     </mat-form-field>
-    <mat-form-field appearance="fill">
+    <mat-form-field >
       <mat-label>Tipo de cargo</mat-label>
       <mat-select placeholder="Choose Exercise" ngModel name="cargo" required>
         <mat-option *ngFor="let cargo of cargos" [value]="cargo">
@@ -85,7 +82,6 @@
       />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>NIT de la empresa</mat-label>
       <input
         type="text"
         matInput
@@ -96,7 +92,6 @@
       />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>País de la empresa</mat-label>
       <input
         type="text"
         matInput
@@ -106,8 +101,7 @@
         required
       />
     </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Ciudad de la empresa</mat-label>
+    <mat-form-field >
       <input
         type="text"
         matInput

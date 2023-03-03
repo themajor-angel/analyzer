@@ -28,6 +28,8 @@ export class CargaArchivosComponent implements OnInit {
     secondCtrl: ['', Validators.required],
   });
   isLinear = false;
+  fileIsUploaded1 = false;
+  fileIsUploaded2 = false;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -57,5 +59,10 @@ export class CargaArchivosComponent implements OnInit {
 
   submit(){
     this.router.navigate(['/analisis/mostraranalisis/balanceGeneral'])
+  }
+
+  fileUploaded(file1: boolean, file2: boolean){
+    this.fileIsUploaded1 = file1;
+    this.fileIsUploaded2 = file2;
   }
 }

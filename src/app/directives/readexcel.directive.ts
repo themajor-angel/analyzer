@@ -86,7 +86,6 @@ export class ReadexcelDirective {
           this.datosNum.push(row);
         }
       }
-      console.log(this.nombre, this.nit)
     }
 
     //this.analisis_service.generarAnalisisGeneral(this.datosNum);

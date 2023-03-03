@@ -5,7 +5,7 @@
 </div>
 
 <div class="pasoapaso">
-  <mat-stepper [linear]="true" #stepper>
+  <mat-stepper [linear]="true" #stepper color="success">
     <mat-step
       [stepControl]="firstFormGroup"
       completed="{{ completo1 }}"
@@ -26,13 +26,15 @@
           appReadexcel
           #readexcel="readexcel"
           (eventEmitter)="DataFromEventEmitter($event)"
+          (change)="fileUploaded(true, false)"
+          required
         />
         <button
           mat-raised-button
           color="primary"
           matStepperNext
           (click)="onSubmit(f)"
-          [disabled]="f.invalid"
+          [disabled]="!fileIsUploaded1"
         >
           Siguiente
         </button>
@@ -50,6 +52,8 @@
         fxLayoutGap="10px"
         #form2="ngForm"
         (ngSubmit)="onSubmitComparacion(form2)"
+        (change)="fileUploaded(true, true)"
+          required
       >
         <label for="input-file-id" class="md-button md-raised md-primary"
           >Seleccione el archivo del periodo más antiguo</label
@@ -66,14 +70,14 @@
           color="primary"
           matStepperNext
           (click)="onSubmitComparacion(form2)"
-          [disabled]="f.invalid"
+          [disabled]="!fileIsUploaded2"
         >
           Siguiente
         </button>
         <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
       </form>
     </mat-step>
-    <mat-step>
+    <mat-step >
       <ng-template matStepLabel>Analizar archivos</ng-template>
       <div>
         <button
