@@ -1,6 +1,6 @@
 import { formatCurrency } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { UIservice } from 'src/app/shared/ui.service';
