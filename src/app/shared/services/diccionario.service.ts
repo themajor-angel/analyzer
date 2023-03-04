@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { map, ReplaySubject, Subject, switchMap, tap } from 'rxjs';
+import { combineLatest, map, ReplaySubject, Subject, switchMap, tap } from 'rxjs';
 import { IDatoPuc } from './types/diccionario.types';
 
 @Injectable({
@@ -15,12 +15,22 @@ export class DiccionarioService {
   }
 
   consultarClasePuc(id: string | number) {
-    return this._firestore
-      .collection<IDatoPuc>('diccionario', (ref) =>
-        ref.where('Codigo', '==', Number(id)).limit(1)
+    return combineLatest([
+      this._firestore
+        .collection<IDatoPuc>('diccionario', (ref) =>
+          ref.where('Codigo', '==', Number(id)).limit(1)
+        )
+        .get(),
+      this._firestore
+        .collection<IDatoPuc>('diccionario', (ref) =>
+          ref.where('Codigo', '==', id.toString()).limit(1)
+        )
+        .get(),
+    ]).pipe(
+      map(
+        ([query1, query2]) => query2.docs[0]?.data() || query1.docs[0]?.data()
       )
-      .get()
-      .pipe(map((query) => query.docs[0]?.data()));
+    );
   }
 
   consultarListaClasesHijasPuc(id: string | number) {

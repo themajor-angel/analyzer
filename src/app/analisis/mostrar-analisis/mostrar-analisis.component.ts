@@ -19,10 +19,6 @@ registerLocaleData(localeCO);
 export class MostrarAnalisisComponent implements OnInit {
   @Input() analisis = {} as any;
   @Input() estadoResultado = {} as any;
-  dataYears: TablaBalanceYears = [
-    { id: 'year2021', nombre: 'Año 2021 (en miles)' },
-    { id: 'year2020', nombre: 'Año 2020 (en miles)' },
-  ];
   dataActivos$: Observable<TablaBalanceActivos>;
   dataClaseActual$: Observable<IWrapperPuc>;
   dataClaseActual: IWrapperPuc;
@@ -146,13 +142,14 @@ export class MostrarAnalisisComponent implements OnInit {
       variacionPorcentual,
       colorSemaforo,
     } = valorPuc || {};
+    const dataAnios = this.dataYears1;
     const resultCodigo: IFilaBalanceActivos = {
       id: Codigo.toString(),
       nombre: `${Nombre} (Cod ${Codigo})` || '',
       descripcion: Descripcion,
       porAnio: {
-        year2020: this.formatearDinero(valorDatos2),
-        year2021: this.formatearDinero(valorDatos1),
+        [dataAnios[0].id]: this.formatearDinero(valorDatos1),
+        [dataAnios[1].id]: this.formatearDinero(valorDatos2),
       },
       variacionNeta: this.formatearDinero(variacionNeta),
       variacionPorcentual: isNaN(variacionPorcentual)
@@ -194,5 +191,40 @@ export class MostrarAnalisisComponent implements OnInit {
         return `/analisis/mostraranalisis/${id.slice(0, 10)}`;
       } else return '.';
     } else return '.';
+  }
+
+  get dataYears1(): TablaBalanceYears {
+    const fechasNuevo = this.comparacionIndicadoresService.getFechasNuevo();
+    const fechasAnterior = this.comparacionIndicadoresService.getFechasAnterior();
+    if (!fechasNuevo?.length || !fechasAnterior?.length) { return []; }
+    const anioNuevo = Number(fechasNuevo[3]);
+    const anioAnterior = Number(fechasAnterior[3]);
+    return [{
+      id: `year${anioNuevo}`,
+      nombre: `Año ${anioNuevo} (en miles)`,
+      valor: anioNuevo
+    }, {
+      id: `year${anioAnterior}`,
+      nombre: `Año ${anioAnterior} (en miles)`,
+      valor: anioAnterior
+    },]
+  }
+
+  get titulos() {
+    const titulosBalance = {
+      titulo: 'Cuánto tiene y cuánto debe su empresa',
+      subtitulo: `Balance general a ${this.dataYears1?.[0]?.valor}`
+    };
+    const titulosEstadoResultados = {
+      titulo: 'Así va el desempeño de su empresa',
+      subtitulo: `Estado de resultados a ${this.dataYears1?.[0]?.valor}`
+    };
+    const idPuc = this.idPuc
+    if (!idPuc) return null;
+    if (idPuc === 'balanceGeneral') { return titulosBalance; }
+    if (['1','2','3'].includes(idPuc.toString().slice(0,1))) { return titulosBalance; }
+    if (idPuc === 'estadoResultados') { return titulosEstadoResultados; }
+    if (['4','5','6'].includes(idPuc.toString().slice(0,1))) { return titulosEstadoResultados; }
+    return null;
   }
 }

@@ -3,6 +3,7 @@ export type ITipoSemaforo = 'verde' | 'amarillo' | 'rojo';
 export type TablaBalanceYears = {
   id: string;
   nombre: string;
+  valor: number;
 }[];
 
 export type TablaBalanceActivos = IFilaBalanceActivos[];

@@ -274,4 +274,12 @@ export class ComparacionIndicadoresService {
     }
   }
 
+  getFechasNuevo() {
+    return this.temp1.fecha;
+  }
+
+  getFechasAnterior() {
+    return this.temp2.fecha;
+  }
+
 }
