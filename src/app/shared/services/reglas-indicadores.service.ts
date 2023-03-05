@@ -29,6 +29,26 @@ export class ReglasIndicadoresService {
     };
   }
 
+  private crearReglaMinimoRecomendado(valorMinimo: number, mayorEsMejor: boolean = true): IReglaIndicador {
+    return (nuevo: number, anterior: number) => {
+      const mayorQueMinimo = nuevo > valorMinimo;
+      const mejorQueAnterior = (nuevo > anterior) === mayorEsMejor;
+      if (!mayorQueMinimo && mejorQueAnterior) return { mensaje: `A pesar de que mejoró, este indicador debe ser mayor a ${valorMinimo}.` };
+      else if (!mayorQueMinimo && !mejorQueAnterior) return { mensaje: `Este indicador ha empeorado. Además, debería ser mayor a ${valorMinimo}.` };
+      return {};
+    };
+  }
+
+  private crearReglaMaximoRecomendado(valorMaximo: number, mayorEsMejor: boolean = true): IReglaIndicador {
+    return (nuevo: number, anterior: number) => {
+      const menorQueMaximo = nuevo < valorMaximo;
+      const mejorQueAnterior = (nuevo > anterior) === mayorEsMejor;
+      if (!menorQueMaximo && mejorQueAnterior) return { mensaje: `A pesar de que mejoró, este indicador debe ser menor a ${valorMaximo}.` };
+      else if (!menorQueMaximo && !mejorQueAnterior) return { mensaje: `Este indicador ha empeorado. Además, debería ser menor a ${valorMaximo}.` };
+      return {};
+    };
+  }
+
   private registrarRegla(indicador: string, regla: IReglaIndicador) {
     if (!this.reglasSemaforo[indicador]) {
       this.reglasSemaforo[indicador] = [];
@@ -38,14 +58,19 @@ export class ReglasIndicadoresService {
 
   private registrarListaReglas() {
     this.registrarRegla('endeudamientoTotal', this.crearReglaVerdeSiBaja());
+    this.registrarRegla('endeudamientoTotal', this.crearReglaMaximoRecomendado(1, false));
     this.registrarRegla('liquidezCorriente', this.crearReglaVerdeSiSube());
+    this.registrarRegla('liquidezCorriente', this.crearReglaMinimoRecomendado(1));
     this.registrarRegla('liquidezInmediata', this.crearReglaVerdeSiSube());
+    this.registrarRegla('liquidezInmediata', this.crearReglaMinimoRecomendado(1));
     this.registrarRegla('liquidezTotal', this.crearReglaVerdeSiSube());
+    this.registrarRegla('liquidezTotal', this.crearReglaMinimoRecomendado(1));
     this.registrarRegla('margenBruto', this.crearReglaVerdeSiSube());
     this.registrarRegla('margenNeto', this.crearReglaVerdeSiSube());
     this.registrarRegla('rActivos', this.crearReglaVerdeSiSube());
     this.registrarRegla('rPatrimonio', this.crearReglaVerdeSiSube());
     this.registrarRegla('ratio', this.crearReglaVerdeSiSube());
+    this.registrarRegla('ratio', this.crearReglaMinimoRecomendado(1.5));
     this.registrarRegla('rotActivos', this.crearReglaVerdeSiSube());
     this.registrarRegla('rotCobrar', this.crearReglaVerdeSiBaja());
     this.registrarRegla('rotInventario', this.crearReglaVerdeSiSube());
