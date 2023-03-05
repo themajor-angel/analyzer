@@ -15,6 +15,8 @@ export class CardIndicadorComponent implements OnInit {
   @Input('colorComparacion') colorComparacion: ITipoSemaforo = "rojo";
   @Input('mensajeComparacion') mensajeComparacion = "_mensajeComparacion";
   @Input('descripcion') descripcion = "_descripcion";
+  @Input('fechaNueva') fechaNueva = "";
+  @Input('fechaAnterior') fechaAnterior = "";
   @Output('seleccionar') seleccionarEventEmitter = new EventEmitter<void>();
 
   constructor() {}

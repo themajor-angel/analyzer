@@ -39,7 +39,7 @@ export class ReglasIndicadoresService {
   private registrarListaReglas() {
     this.registrarRegla('endeudamientoTotal', this.crearReglaVerdeSiBaja());
     this.registrarRegla('liquidezCorriente', this.crearReglaVerdeSiSube());
-    this.registrarRegla('liquidezInmmediata', this.crearReglaVerdeSiSube());
+    this.registrarRegla('liquidezInmediata', this.crearReglaVerdeSiSube());
     this.registrarRegla('liquidezTotal', this.crearReglaVerdeSiSube());
     this.registrarRegla('margenBruto', this.crearReglaVerdeSiSube());
     this.registrarRegla('margenNeto', this.crearReglaVerdeSiSube());

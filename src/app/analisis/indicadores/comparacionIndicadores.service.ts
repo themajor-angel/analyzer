@@ -39,7 +39,7 @@ export class ComparacionIndicadoresService {
   $rActivos;
   $rPatrimonio;
   $liquidezCorriente;
-  $liquidezInmmediata;
+  $liquidezInmediata;
   $liquidezTotal;
   $ratio;
   $endeudamientoTotal;
@@ -76,7 +76,7 @@ export class ComparacionIndicadoresService {
       dif: 0,
     },
     {
-      prop: 'liquidezInmmediata',
+      prop: 'liquidezInmediata',
       status: 'Su margen ha mejorado',
       dif: 0,
     },

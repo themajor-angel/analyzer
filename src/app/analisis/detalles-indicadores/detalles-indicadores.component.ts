@@ -103,4 +103,14 @@ export class DetallesIndicadoresComponent implements OnInit, OnDestroy {
   obtenerSemaforo(indicador: string) {
     return this._comparacionIndicadoresService.getSemaforoIndicador(indicador)
   }
+
+  get fechasAMostrar() {
+    const fechasNuevo = this._comparacionIndicadoresService.getFechasNuevo();
+    const fechasAnterior = this._comparacionIndicadoresService.getFechasAnterior();
+    if (!fechasNuevo?.length || !fechasAnterior?.length) { return null; }
+    return {
+      nuevo: `Año ${fechasNuevo[3]}`,
+      anterior: `Año ${fechasAnterior[3]}`,
+    };
+  }
 }

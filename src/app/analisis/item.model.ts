@@ -179,7 +179,7 @@ export class ExcelInfo {
 
     this.liquidezCorriente = (this.sumAct / this.sumPas) * 100;
    
-    this.liquidezInmediata = ((this.cod11 * this.cod12) / this.sumPas) * 100;
+    this.liquidezInmediata = ((this.codigosExtra.cod11 * this.codigosExtra.cod12) / this.sumPas) * 100;
 
     this.liquidezTotal = (this.cod1 / this.sumPas) * 100;
 
@@ -190,11 +190,11 @@ export class ExcelInfo {
     this.endeudamientoTotal = this.cod2 / this.cod1;
 
     //eficiencia
-    this.rotInventarios = (this.cod6 + this.cod7) / this.cod14;
-    this.rotCobrar = (this.cod41 - this.cod1305) / this.cod1305;
-    this.rotPagar = (this.cod6 + this.cod7) / this.cod1305;
-    this.rotActivos = this.cod41 / this.cod1;
-    this.rotInventario = this.cod41 / this.cod14;
+    this.rotInventarios = (this.cod6 + this.cod7) / this.codigosExtra.cod14;
+    this.rotCobrar = (this.codigosExtra.cod41 - this.codigosExtra.cod1305) / this.codigosExtra.cod1305;
+    this.rotPagar = (this.cod6 + this.cod7) / this.codigosExtra.cod1305;
+    this.rotActivos = this.codigosExtra.cod41 / this.cod1;
+    this.rotInventario = this.codigosExtra.cod41 / this.codigosExtra.cod14;
   }
 
   getValorPorCodigo(id: string | number) {
