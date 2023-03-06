@@ -179,7 +179,7 @@ export class ExcelInfo {
 
     this.liquidezCorriente = (this.sumAct / this.sumPas) * 100;
    
-    this.liquidezInmediata = ((this.codigosExtra.cod11 * this.codigosExtra.cod12) / this.sumPas) * 100;
+    this.liquidezInmediata = ((this.codigosExtra.cod11 + this.codigosExtra.cod12) / this.sumPas) * 100;
 
     this.liquidezTotal = (this.cod1 / this.sumPas) * 100;
 
