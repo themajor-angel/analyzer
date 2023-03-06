@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AuthService } from '../auth.service';
 import { UIservice } from '../../shared/ui.service';
 import * as fromRoot from '../../app.reducer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -36,5 +38,6 @@ export class LoginComponent implements OnInit {
       email: this.loginForm.value.email,
       password: this.loginForm.value.password
     });
+    this.router.navigate(['/analisis/cargadearchivos'])
   }
 }

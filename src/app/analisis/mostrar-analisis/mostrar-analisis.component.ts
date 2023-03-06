@@ -212,7 +212,7 @@ export class MostrarAnalisisComponent implements OnInit {
 
   get titulos() {
     const titulosBalance = {
-      titulo: 'Cuánto tiene y cuánto debe su empresa',
+      titulo: '¿Cuánto tiene y cuánto debe su empresa?',
       subtitulo: `Balance general a ${this.dataYears1?.[0]?.valor}`
     };
     const titulosEstadoResultados = {
