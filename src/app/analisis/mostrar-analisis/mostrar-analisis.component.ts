@@ -61,7 +61,8 @@ export class MostrarAnalisisComponent implements OnInit {
           .pipe(catchError((err) => of([] as IDatoPuc[])))
       ),
       map((codigos) => codigos.map((cod) => this.mapCodigoPucAWrapperPuc(cod))),
-      map((datosPuc) => [...datosPuc].sort((a, b) => a.codigoPuc.Codigo.toString().localeCompare(b.codigoPuc.Codigo.toString()))),
+      map((datosPuc) => [...datosPuc].sort((a, b) => b.valorPuc.valorDatos1 - a.valorPuc.valorDatos1)),
+      map((datosPuc) => datosPuc.filter(datoPuc => datoPuc.valorPuc.valorDatos1 || datoPuc.valorPuc.valorDatos2)),
       map((datosPuc) => datosPuc.map((datoPuc) => this.mapWrapperPucAFilaTabla(datoPuc))),
       shareReplay(1)
     );
@@ -200,13 +201,13 @@ export class MostrarAnalisisComponent implements OnInit {
     const anioNuevo = Number(fechasNuevo[3]);
     const anioAnterior = Number(fechasAnterior[3]);
     return [{
-      id: `year${anioNuevo}`,
-      nombre: `Año ${anioNuevo} (en miles)`,
-      valor: anioNuevo
-    }, {
       id: `year${anioAnterior}`,
       nombre: `Año ${anioAnterior} (en miles)`,
       valor: anioAnterior
+    }, {
+      id: `year${anioNuevo}`,
+      nombre: `Año ${anioNuevo} (en miles)`,
+      valor: anioNuevo
     },]
   }
 

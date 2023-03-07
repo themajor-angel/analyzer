@@ -20,16 +20,16 @@ export class ReglasDiccionarioService {
     };
   }
 
-  private crearReglaVerdeSiSubeMenosQueActivos(): IReglaDiccionario {
+  private crearReglaVerdeSiSubeMenosQueCodigo(idPucComparacion: string): IReglaDiccionario {
     return (excelNuevo: ExcelInfo, excelAnterior: ExcelInfo, idPuc: string) => {
       const valorNuevo = excelNuevo.getValorPorCodigo(idPuc);
       const valorAnterior = excelAnterior.getValorPorCodigo(idPuc);
       const diferenciaPorcentual = calcularVariacionPorcentual(valorNuevo, valorAnterior);
-      const valorNuevoActivos = excelNuevo.getValorPorCodigo('1');
-      const valorAnteriorActivos = excelAnterior.getValorPorCodigo('1');
-      const diferenciaPorcentualActivos = calcularVariacionPorcentual(valorNuevoActivos, valorAnteriorActivos);
-      if (diferenciaPorcentual < diferenciaPorcentualActivos) return { status: 'verde' };
-      if (diferenciaPorcentual > diferenciaPorcentualActivos) return { status: 'rojo' };
+      const valorNuevoComparacion = excelNuevo.getValorPorCodigo(idPucComparacion);
+      const valorAnteriorComparacion = excelAnterior.getValorPorCodigo(idPucComparacion);
+      const diferenciaPorcentualComparacion = calcularVariacionPorcentual(valorNuevoComparacion, valorAnteriorComparacion);
+      if (diferenciaPorcentual < diferenciaPorcentualComparacion) return { status: 'verde' };
+      if (diferenciaPorcentual > diferenciaPorcentualComparacion) return { status: 'rojo' };
       return { status: 'amarillo' };
     };
   }
@@ -45,7 +45,8 @@ export class ReglasDiccionarioService {
   }
 
   private reglaVerdeSiSube = this.crearReglaVerdeSiSube();
-  private reglaVerdeSiSubeMenosQueActivos = this.crearReglaVerdeSiSubeMenosQueActivos();
+  private reglaVerdeSiSubeMenosQueActivos = this.crearReglaVerdeSiSubeMenosQueCodigo('1');
+  private reglaVerdeSiSubeMenosQueIngresos = this.crearReglaVerdeSiSubeMenosQueCodigo('4');
   private reglaVerdeSiBaja = this.crearReglaVerdeSiBaja();
 
   calcularSemaforoDiccionario(
@@ -62,14 +63,15 @@ export class ReglasDiccionarioService {
         resultado = this.reglaVerdeSiSube(excelNuevo, excelAnterior, idPuc);
         break;
       case '2':
-      case '5':
-      case '6':
-      case '7':
         if (idPuc === '2') {
           resultado = this.reglaVerdeSiSubeMenosQueActivos(excelNuevo, excelAnterior, idPuc);
         } else {
           resultado = this.reglaVerdeSiBaja(excelNuevo, excelAnterior, idPuc);
         }
+      case '5':
+      case '6':
+      case '7':
+        resultado = this.reglaVerdeSiSubeMenosQueIngresos(excelNuevo, excelAnterior, idPuc);
         break;
       default:
         break;
