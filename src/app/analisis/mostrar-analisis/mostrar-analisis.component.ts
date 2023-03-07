@@ -143,14 +143,15 @@ export class MostrarAnalisisComponent implements OnInit {
       variacionPorcentual,
       colorSemaforo,
     } = valorPuc || {};
-    const dataAnios = this.dataYears1;
+    const anioNuevo = this.comparacionIndicadoresService.getFechasNuevo()[3];
+    const anioAnterior = this.comparacionIndicadoresService.getFechasAnterior()[3];
     const resultCodigo: IFilaBalanceActivos = {
       id: Codigo.toString(),
       nombre: `${Nombre} (Cod ${Codigo})` || '',
       descripcion: Descripcion,
       porAnio: {
-        [dataAnios[0].id]: this.formatearDinero(valorDatos1),
-        [dataAnios[1].id]: this.formatearDinero(valorDatos2),
+        [`year${anioNuevo}`]: this.formatearDinero(valorDatos1),
+        [`year${anioAnterior}`]: this.formatearDinero(valorDatos2),
       },
       variacionNeta: this.formatearDinero(variacionNeta),
       variacionPorcentual: isNaN(variacionPorcentual)
