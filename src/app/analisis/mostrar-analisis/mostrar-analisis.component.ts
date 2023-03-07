@@ -218,7 +218,7 @@ export class MostrarAnalisisComponent implements OnInit {
       subtitulo: `Balance general a ${this.dataYears1?.[0]?.valor}`
     };
     const titulosEstadoResultados = {
-      titulo: 'Así va el desempeño de su empresa',
+      titulo: '¡Así va el desempeño de su empresa!',
       subtitulo: `Estado de resultados a ${this.dataYears1?.[0]?.valor}`
     };
     const idPuc = this.idPuc
