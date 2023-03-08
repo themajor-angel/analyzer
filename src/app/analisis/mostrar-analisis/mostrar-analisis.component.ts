@@ -195,6 +195,10 @@ export class MostrarAnalisisComponent implements OnInit {
     } else return '.';
   }
 
+  get anioNuevo(): number {
+    return this.comparacionIndicadoresService.getFechasNuevo()?.[3];
+  }
+
   get dataYears1(): TablaBalanceYears {
     const fechasNuevo = this.comparacionIndicadoresService.getFechasNuevo();
     const fechasAnterior = this.comparacionIndicadoresService.getFechasAnterior();
@@ -215,11 +219,11 @@ export class MostrarAnalisisComponent implements OnInit {
   get titulos() {
     const titulosBalance = {
       titulo: '¿Cuánto tiene y cuánto debe su empresa?',
-      subtitulo: `Balance general a ${this.dataYears1?.[0]?.valor}`
+      subtitulo: `Balance general a ${this.anioNuevo}`
     };
     const titulosEstadoResultados = {
       titulo: '¡Así va el desempeño de su empresa!',
-      subtitulo: `Estado de resultados a ${this.dataYears1?.[0]?.valor}`
+      subtitulo: `Estado de resultados a ${this.anioNuevo}`
     };
     const idPuc = this.idPuc
     if (!idPuc) return null;

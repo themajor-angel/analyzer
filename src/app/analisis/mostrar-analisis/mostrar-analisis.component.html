@@ -1,7 +1,7 @@
 <section>
   <h1 class="text-center font-medium text-4xl m-0 p-0">{{titulos?.titulo}}</h1>
   <h2 *ngIf="(dataClaseActual$ | async) as claseActual" class="text-center font-light text-2xl m-0 p-0">({{claseActual?.codigoPuc?.Nombre}})</h2>
-  <h2 *ngIf="dataYears1?.[0]" class="text-center font-light text-4xl m-0 p-0">{{titulos?.subtitulo}}</h2>
+  <h2 *ngIf="anioNuevo" class="text-center font-light text-4xl m-0 p-0">{{titulos?.subtitulo}}</h2>
   <app-tabla-balance
     [dataYears]="dataYears1"
     [dataActivos]="dataActivos$ | async"
