@@ -161,7 +161,6 @@ export class ComparacionIndicadoresService {
     }
     this.comparar();
     this.getValidacion();
-    console.log(this.temp1, this.temp2)
   }
 
   comparar() {
@@ -177,8 +176,6 @@ export class ComparacionIndicadoresService {
         dato.status = 'rojo';
       }
     })
-
-    console.log(this.indicadores)
   }
 
   obtenerSemaforoPuc(idPuc: string): ITipoSemaforo {

@@ -145,6 +145,7 @@ export class ExcelInfo {
       if (data[i].codigo == '41') {
         this.cod41 = saldoCodigo;
       }
+      
       if (
         data[i].codigo == '11' ||
         data[i].codigo == '12' ||
@@ -152,7 +153,6 @@ export class ExcelInfo {
         data[i].codigo == '14'
       ) {
         this.actCor.push(saldoCodigo);
-        //this.actCor = 20
       }
       if (
         data[i].codigo == '21' ||
@@ -162,7 +162,6 @@ export class ExcelInfo {
         data[i].codigo == '25'
       ) {
         this.pasCor.push(saldoCodigo);
-        //this.pasCor = 20
       }
     }
     this.codigosExtra[`cod1`] = this.cod1;
@@ -180,18 +179,18 @@ export class ExcelInfo {
     //margenUtilidad
     this.margenNeto = (this.cod41 - this.cod6 - this.cod5) / this.cod41;
     this.margenBruto = (this.cod41 - this.cod6) / this.cod41;
-    this.rActivos = ((this.cod4 - (this.cod5 + this.cod6)) / this.cod1) * 100;
-    this.rPatrimonio = ((this.cod4 - (this.cod5 + this.cod6)) / this.cod3) * 100;
+    this.rActivos = ((this.cod4 - (this.cod5 + this.cod6)) / this.cod1);
+    this.rPatrimonio = ((this.cod4 - (this.cod5 + this.cod6)) / this.cod3);
 
     //Liquidez
+    
     this.sumAct = this.actCor.reduce((a, b) => a + b, 0);
     this.sumPas = this.pasCor.reduce((a, b) => a + b, 0);
-
-    this.liquidezCorriente = (this.sumAct / this.sumPas) * 100;
+    this.liquidezCorriente = (this.sumAct / this.sumPas);
    
-    this.liquidezInmediata = ((this.codigosExtra.cod11 + this.codigosExtra.cod12) / this.sumPas) * 100;
+    this.liquidezInmediata = ((this.codigosExtra.cod11 + this.codigosExtra.cod12) / this.sumPas);
 
-    this.liquidezTotal = (this.cod1 / this.sumPas) * 100;
+    this.liquidezTotal = (this.cod1 / this.sumPas);
 
     //solvencia
     this.ratio = this.cod1 / this.cod2;
