@@ -28,8 +28,28 @@ export class ReglasDiccionarioService {
       const valorNuevoComparacion = excelNuevo.getValorPorCodigo(idPucComparacion);
       const valorAnteriorComparacion = excelAnterior.getValorPorCodigo(idPucComparacion);
       const diferenciaPorcentualComparacion = calcularVariacionPorcentual(valorNuevoComparacion, valorAnteriorComparacion);
+      if (valorNuevo < 0 && valorAnterior > 0) return { status: 'verde' };
+      if (valorNuevo > 0 && valorAnterior < 0) return { status: 'rojo' };
+      if (isNaN(diferenciaPorcentual) || isNaN(diferenciaPorcentualComparacion)) return { status: 'amarillo' };
       if (diferenciaPorcentual < diferenciaPorcentualComparacion) return { status: 'verde' };
       if (diferenciaPorcentual > diferenciaPorcentualComparacion) return { status: 'rojo' };
+      return { status: 'amarillo' };
+    };
+  }
+
+  private crearReglaVerdeSiSubeMasQueCodigo(idPucComparacion: string): IReglaDiccionario {
+    return (excelNuevo: ExcelInfo, excelAnterior: ExcelInfo, idPuc: string) => {
+      const valorNuevo = excelNuevo.getValorPorCodigo(idPuc);
+      const valorAnterior = excelAnterior.getValorPorCodigo(idPuc);
+      const diferenciaPorcentual = calcularVariacionPorcentual(valorNuevo, valorAnterior);
+      const valorNuevoComparacion = excelNuevo.getValorPorCodigo(idPucComparacion);
+      const valorAnteriorComparacion = excelAnterior.getValorPorCodigo(idPucComparacion);
+      const diferenciaPorcentualComparacion = calcularVariacionPorcentual(valorNuevoComparacion, valorAnteriorComparacion);
+      if (valorNuevo > 0 && valorAnterior < 0) return { status: 'verde' };
+      if (valorNuevo < 0 && valorAnterior > 0) return { status: 'rojo' };
+      if (isNaN(diferenciaPorcentual) || isNaN(diferenciaPorcentualComparacion)) return { status: 'amarillo' };
+      if (diferenciaPorcentual > diferenciaPorcentualComparacion) return { status: 'verde' };
+      if (diferenciaPorcentual < diferenciaPorcentualComparacion) return { status: 'rojo' };
       return { status: 'amarillo' };
     };
   }
@@ -47,6 +67,7 @@ export class ReglasDiccionarioService {
   private reglaVerdeSiSube = this.crearReglaVerdeSiSube();
   private reglaVerdeSiSubeMenosQueActivos = this.crearReglaVerdeSiSubeMenosQueCodigo('1');
   private reglaVerdeSiSubeMenosQueIngresos = this.crearReglaVerdeSiSubeMenosQueCodigo('4');
+  private reglaVerdeSiSubeMasQueIngresos = this.crearReglaVerdeSiSubeMasQueCodigo('4');
   private reglaVerdeSiBaja = this.crearReglaVerdeSiBaja();
 
   calcularSemaforoDiccionario(
@@ -74,6 +95,9 @@ export class ReglasDiccionarioService {
         resultado = this.reglaVerdeSiSubeMenosQueIngresos(excelNuevo, excelAnterior, idPuc);
         break;
       default:
+        if (idPuc === 'estadoResultados') {
+          resultado = this.reglaVerdeSiSubeMasQueIngresos(excelNuevo, excelAnterior, idPuc);
+        }
         break;
     }
     return resultado;

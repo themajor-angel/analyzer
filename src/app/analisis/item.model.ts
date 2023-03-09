@@ -162,6 +162,7 @@ export class ExcelInfo {
     this.codigosExtra[`cod5`] = this.cod5;
     this.codigosExtra[`cod6`] = this.cod6;
     this.codigosExtra[`cod7`] = this.cod7;
+    this.codigosExtra[`codestadoResultados`] = this.cod4 - this.cod5 - this.cod6 - this.cod7;
     this.calcularIdicadores();
   }
 
