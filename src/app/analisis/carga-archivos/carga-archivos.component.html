@@ -16,7 +16,7 @@
         fxLayoutAlign="center center"
         fxLayoutGap="10px"
         #f="ngForm"
-        (ngSubmit)="onSubmit(f)"
+        (ngSubmit)="onSubmit(f, stepper)"
       >
         <label for="input-file-id" class="md-button md-raised md-primary"
           >Seleccione el archivo del periodo más reciente</label
@@ -33,7 +33,7 @@
           mat-raised-button
           color="primary"
           matStepperNext
-          (click)="onSubmit(f)"
+          (click)="onSubmit(f, stepper)"
           [disabled]="!fileIsUploaded1"
         >
           Siguiente
@@ -51,7 +51,7 @@
         fxLayoutAlign="center center"
         fxLayoutGap="10px"
         #form2="ngForm"
-        (ngSubmit)="onSubmitComparacion(form2)"
+        (ngSubmit)="onSubmitComparacion(form2, stepper)"
         (change)="fileUploaded(true, true)"
           required
       >
@@ -69,7 +69,7 @@
           mat-raised-button
           color="primary"
           matStepperNext
-          (click)="onSubmitComparacion(form2)"
+          (click)="onSubmitComparacion(form2, stepper)"
           [disabled]="!fileIsUploaded2"
         >
           Siguiente

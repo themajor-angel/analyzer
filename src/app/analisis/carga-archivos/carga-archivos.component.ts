@@ -43,14 +43,16 @@ export class CargaArchivosComponent implements OnInit {
     
   }
 
-  onSubmit(form: NgForm){
+  onSubmit(form: NgForm, stepper){
     this.analisis = this.analisis_service.getAnalisis();
     this.completo1 = true;
+    stepper.next();
   }
 
-  onSubmitComparacion(form: NgForm){
+  onSubmitComparacion(form: NgForm, stepper){
     this.comparasion = this.comparacion_service.getAnalisis();
     this.completo2 = true;
+    stepper.next();
   }
 
   DataFromEventEmitter(data) {
@@ -58,7 +60,7 @@ export class CargaArchivosComponent implements OnInit {
   }
 
   submit(){
-    this.router.navigate(['/analisis/mostraranalisis/balanceGeneral'])
+    this.router.navigate(['/analisis/menu'])
   }
 
   fileUploaded(file1: boolean, file2: boolean){
