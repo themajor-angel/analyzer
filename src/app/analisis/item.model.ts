@@ -21,6 +21,7 @@ export interface ComparacionItems {
 }
 
 export class ExcelInfo {
+  
   fecha = [];
   nombre: string;
   nit: string;
@@ -31,32 +32,32 @@ export class ExcelInfo {
   cod5 = 0;
   cod6 = 0;
   cod7 = 0;
-  cod11;
-  cod12;
-  cod14;
-  cod1305;
-  cod41;
+  cod11= 0;
+  cod12= 0;
+  cod14= 0;
+  cod1305= 0;
+  cod41= 0;
   codigosExtra: Record<string, number> = {};
   actCor = [];
   pasCor = [];
-  sumAct;
-  sumPas;
+  sumAct= 0;
+  sumPas= 0;
 
-  margenNeto;
-  margenBruto;
-  rActivos;
-  rPatrimonio;
-  liquidezCorriente;
-  liquidezInmediata;
-  liquidezTotal;
-  ratio;
-  endeudamientoTotal;
-  rotInventarios;
-  rotCobrar;
-  rotPagar;
-  rotActivos;
-  rotInventario;
-
+  margenNeto= 0;
+  margenBruto= 0;
+  rActivos= 0;
+  rPatrimonio= 0;
+  liquidezCorriente= 0;
+  liquidezInmediata= 0;
+  liquidezTotal= 0;
+  ratio= 0;
+  endeudamientoTotal= 0;
+  rotInventarios= 0;
+  rotCobrar= 0;
+  rotPagar= 0;
+  rotActivos= 0;
+  rotInventario= 0;
+  
   debeCambiarSigno(idPuc: string | number) {
     return ['2', '3'].includes(idPuc.toString().slice(0, 1));
   }
@@ -80,6 +81,15 @@ export class ExcelInfo {
     this.cod5 = 0;
     this.cod6 = 0;
     this.cod7 = 0;
+    this.cod11= 0;
+    this.cod12= 0;
+    this.cod14= 0;
+    this.cod1305= 0;
+    this.cod41= 0;
+    this.actCor = [];
+    this.pasCor = [];
+    this.sumAct= 0;
+    this.sumPas= 0;
     this.codigosExtra = {}
     for (let i = 0; i < data.length; i++) {
       const codigo = data[i].codigo;
@@ -174,9 +184,9 @@ export class ExcelInfo {
     this.rPatrimonio = ((this.cod4 - (this.cod5 + this.cod6)) / this.cod3) * 100;
 
     //Liquidez
-    //no está bien seteada la suma
     this.sumAct = this.actCor.reduce((a, b) => a + b, 0);
     this.sumPas = this.pasCor.reduce((a, b) => a + b, 0);
+    console.log("pasivos corriente", this.sumPas, "activos corrientes", this.sumAct )
 
     this.liquidezCorriente = (this.sumAct / this.sumPas) * 100;
    

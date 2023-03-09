@@ -13,8 +13,8 @@ import { ITipoSemaforo } from '../mostrar-analisis/tabla-balance/types';
   {providedIn: 'root'}
 )
 export class ComparacionIndicadoresService {
-  temp1 = new ExcelInfo()
-  temp2 = new ExcelInfo()
+  temp1 = new ExcelInfo();
+  temp2 = new ExcelInfo();
 
   data1: Item[] = [];
   data2: Item[] = [];
@@ -34,20 +34,20 @@ export class ComparacionIndicadoresService {
   @Output() titulo$;
   tituloPrueba = new BehaviorSubject<string>('Analyzer') ;
 
-  $margenNeto;
-  $margenBruto;
-  $rActivos;
-  $rPatrimonio;
-  $liquidezCorriente;
-  $liquidezInmediata;
-  $liquidezTotal;
-  $ratio;
-  $endeudamientoTotal;
-  $rotInventarios;
-  $rotCobrar;
-  $rotPagar;
-  $rotActivos;
-  $rotInventario;
+  $margenNeto = 0;
+  $margenBruto = 0;
+  $rActivos = 0;
+  $rPatrimonio = 0;
+  $liquidezCorriente = 0;
+  $liquidezInmediata = 0;
+  $liquidezTotal = 0;
+  $ratio = 0;
+  $endeudamientoTotal = 0;
+  $rotInventarios = 0;
+  $rotCobrar = 0;
+  $rotPagar = 0;
+  $rotActivos = 0;
+  $rotInventario = 0;
 
   indicadores: IValorIndicador[] = [
     {
