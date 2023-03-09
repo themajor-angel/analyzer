@@ -186,7 +186,6 @@ export class ExcelInfo {
     //Liquidez
     this.sumAct = this.actCor.reduce((a, b) => a + b, 0);
     this.sumPas = this.pasCor.reduce((a, b) => a + b, 0);
-    console.log("pasivos corriente", this.sumPas, "activos corrientes", this.sumAct )
 
     this.liquidezCorriente = (this.sumAct / this.sumPas) * 100;
    
