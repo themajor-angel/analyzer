@@ -197,6 +197,7 @@ export class MostrarAnalisisComponent implements OnInit {
     const anioNuevo = this.comparacionIndicadoresService.getFechasNuevo()[3];
     const anioAnterior = this.comparacionIndicadoresService.getFechasAnterior()[3];
     const nombreFila = Codigo.toString() === 'estadoResultados' ? Nombre : `${Nombre} (Cod ${Codigo.toString()})`
+    const textoSemaforo = Codigo.toString() === 'estadoResultados' ? 'Este valor es un porcentaje de aumento absoluto' : null;
     const resultCodigo: IFilaBalanceActivos = {
       id: Codigo.toString(),
       nombre: nombreFila,
@@ -209,7 +210,7 @@ export class MostrarAnalisisComponent implements OnInit {
       variacionPorcentual: isNaN(variacionPorcentual)
         ? '-'
         : `${variacionPorcentual.toFixed(2)} %`,
-      semaforoTexto: 'Texto semaforo',
+      semaforoTexto: textoSemaforo,
       semaforoValor: colorSemaforo,
       styles: {
         nombre: this.obtenerEstiloPorId(Codigo.toString(), valorDatos1),
