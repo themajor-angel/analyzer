@@ -9,7 +9,7 @@ import { ComparacionIndicadoresService } from '../indicadores/comparacionIndicad
 import { TablaBalanceYears, TablaBalanceActivos, IFilaBalanceActivos, } from './tabla-balance/types';
 import { registerLocaleData } from '@angular/common';
 import localeCO from '@angular/common/locales/es-CO'
-import { calcularVariacionPorcentual } from 'src/app/utils';
+import { calcularVariacionPorcentual, esVariacionAbsoluta } from 'src/app/utils';
 registerLocaleData(localeCO);
 
 @Component({
@@ -197,7 +197,8 @@ export class MostrarAnalisisComponent implements OnInit {
     const anioNuevo = this.comparacionIndicadoresService.getFechasNuevo()[3];
     const anioAnterior = this.comparacionIndicadoresService.getFechasAnterior()[3];
     const nombreFila = Codigo.toString() === 'estadoResultados' ? Nombre : `${Nombre} (Cod ${Codigo.toString()})`
-    const textoSemaforo = Codigo.toString() === 'estadoResultados' ? 'Este valor es un porcentaje de aumento absoluto' : null;
+    const variacionEsAbsoluta = esVariacionAbsoluta(valorDatos1, valorDatos2);
+    const textoSemaforo = variacionEsAbsoluta ? 'Este valor es un porcentaje de aumento absoluto' : null;
     const resultCodigo: IFilaBalanceActivos = {
       id: Codigo.toString(),
       nombre: nombreFila,

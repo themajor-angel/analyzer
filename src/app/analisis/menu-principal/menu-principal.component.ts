@@ -8,6 +8,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { TemplateTextoDirective } from 'src/app/shared/directives/template-texto.directive';
+import { ComparacionIndicadoresService } from '../indicadores/comparacionIndicadores.service';
 
 @Component({
   selector: 'app-menu-principal',
@@ -33,7 +34,10 @@ export class MenuPrincipalComponent implements OnInit, AfterViewInit {
 
   textosBotones: TemplateRef<any>[] = [];
 
-  constructor(private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private cdRef: ChangeDetectorRef,
+    private comparacionIndicadoresService: ComparacionIndicadoresService,
+  ) {}
 
   ngOnInit(): void {}
 
@@ -43,5 +47,10 @@ export class MenuPrincipalComponent implements OnInit, AfterViewInit {
     );
     // * cdRef se usa solo para evitar que salga el error ExpressionChangedAfterItHasBeenCheckedError en la consola
     this.cdRef.detectChanges();
+  }
+
+  get fechaHeader() {
+    const fechaNueva = this.comparacionIndicadoresService.getFechasNuevo();
+    return `${fechaNueva?.[2] || ''} ${fechaNueva?.[3] || ''}`
   }
 }
