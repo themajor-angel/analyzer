@@ -5,17 +5,20 @@ import { SharedModule } from "../shared/shared.module";
 import { AuthRoutingModule } from "./auth-routing.module";
 import { LoginComponent } from "./login/login.component";
 import { SignupComponent } from "./signup/signup.component";
+import { VerificarEmailComponent } from './verificar-email/verificar-email.component';
 
 @NgModule({
     declarations: [
         SignupComponent,
         LoginComponent,
+        VerificarEmailComponent,
     ],
     imports: [
         ReactiveFormsModule,
         AngularFireAuthModule,
         SharedModule,
-        AuthRoutingModule
+        AuthRoutingModule,
+        
     ]
 })
 

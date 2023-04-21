@@ -1,0 +1,59 @@
+<br>
+<br>
+<br>
+<section
+class="signup-form"
+fxLayout="column"
+fxLayoutAlign="space-around center"
+>
+    <div align="center" class="container-fluid" *ngIf="correo | async as email; else cargando">  
+    <label class="text-center"><h5> Se ha enviado un email de verificacion a su correo. </h5></label>
+    <br><label><h5> EMAIL: {{ email?.email }} </h5></label>
+    <br><label><h5> Verifíquelo para completar el registro.</h5></label>
+    </div>
+    <br><br>
+    <br><br>
+    <hr>
+    <div class="row">
+      <button type="submit" class="btn btn-success" (click)="Reenviar()">Reenviar correo de verificacion</button>
+    </div> 
+    <br>
+    <br>
+    <ng-template #cargando>Cargando ...</ng-template>
+      <!--<button  type="submit" mat-raised-button color="primary" (click)="loginConGoogle()">Google</button>-->
+      
+      <!--<h1>Angular reCAPTCHA v2</h1>
+      <div class="row mt-3">
+      <div class="col-sm-12 mb-2">
+        <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+        <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
+          <div *ngIf="recaptcha.errors?.['required']">This field is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 mb-2">
+        <button type="button" class="btn btn-sm btn-primary" (click)="send(form)">Send</button>
+      </div>
+    </div>-->
+
+   <!-- <div class="container-fluid py-3">
+  <h1>Angular reCAPTCHA v2</h1>
+
+  <form #form="ngForm">
+    <div class="row mt-3">
+      <div class="col-sm-12 mb-2">
+        <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+        <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
+          <div *ngIf="recaptcha.errors?.['required']">This field is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 mb-2">
+        <button type="button" class="btn btn-sm btn-primary" (click)="send(form)">Send</button>
+      </div>
+    </div>
+  </form>
+</div>-->
+  </section>

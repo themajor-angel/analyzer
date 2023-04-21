@@ -1,0 +1,98 @@
+<br>
+<br>
+<br>
+<div >
+  <section
+    class="signup-form"
+    fxLayout="column"
+    fxLayoutAlign="space-around center"
+  >
+   <h4><mat-label> Nueva Empresa </mat-label></h4>
+  
+    <form
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      #f="ngForm"
+      (ngSubmit)="onSubmit(f)"
+    >
+      <mat-form-field >
+        <input
+          #nombreEmpresa="ngModel"
+          type="text"
+          matInput
+          placeholder="Nombre de empresa"
+          ngModel
+          name="nombreEmpresa"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          
+          #ciudad="ngModel"
+          type="text"
+          matInput
+          placeholder="Ciudad de la Empresa"
+          ngModel
+          name="ciudad"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          
+          #pais="ngModel"
+          type="text"
+          matInput
+          placeholder="País de la Empresa"
+          ngModel
+          name="pais"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+         
+          #nit="ngModel"
+          type="text"
+          matInput
+          placeholder="Nit de la Empresa"
+          ngModel
+          name="nit"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          
+          #software="ngModel"
+          type="text"
+          matInput
+          placeholder="Software de la Empresa"
+          ngModel
+          name="software"
+          required
+        />
+      </mat-form-field>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        mat-raised-button
+        color="primary"
+      >
+        Agregar
+      </button>
+      <!--<button
+        type="submit"
+        class="btn btn-default"
+        mat-raised-button
+        color="primary"
+        (click)="agregarRegresar(f)"
+      >
+        Agregar y regresar
+      </button>-->
+      
+    </form>
+  </section>
+</div>

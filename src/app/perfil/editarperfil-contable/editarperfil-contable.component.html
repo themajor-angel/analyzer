@@ -1,0 +1,135 @@
+<br>
+<br>
+<br>
+<div *ngFor="let item of usuario">
+  <section
+    class="signup-form"
+    fxLayout="column"
+    fxLayoutAlign="space-around center"
+  >
+   <h4><mat-label> Modificar datos de usuario</mat-label></h4>
+  
+    <form
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      #f="ngForm"
+      (ngSubmit)="onSubmit(f)"
+    >
+      <mat-form-field >
+        <input
+          [(ngModel)]="item.nombre"
+          #nombre="ngModel"
+          type="text"
+          matInput
+          placeholder="Nombre"
+          ngModel
+          name="nombre"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field >
+        <input
+          [(ngModel)]="item.apellido"
+          #apellido="ngModel"
+          type="text"
+          matInput
+          placeholder="Apellido"
+          ngModel
+          name="apellido"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field >
+        <!--<mat-label>Tipo de cargo</mat-label>
+        <mat-select placeholder="Category" [(ngModel)]="item.cargo" name="cargo" >
+        <mat-option *ngFor="let cargo of cargos" [value]="cargo">
+          {{cargo}}
+        </mat-option>
+      </mat-select>-->
+      <input
+          [(ngModel)]="item.cargo"
+          #cargo="ngModel"
+          type="text"
+          matInput
+          placeholder="Tipo de cargo (Contable)"
+          ngModel
+          name="cargo"
+          required
+          hidden
+        />
+        
+      </mat-form-field>
+      <mat-form-field >
+        <input
+          [(ngModel)]="item.telefono"
+          #telefono="ngModel"
+          type="text"
+          matInput
+          placeholder="Teléfono"
+          ngModel
+          name="telefono"
+          required
+        />
+      </mat-form-field>
+      <!--<mat-form-field >
+        <input
+          [(ngModel)]="item.nombreEmpresa"
+          #nombreEmpresa="ngModel"
+          type="text"
+          matInput
+          placeholder="Nombre de la Empresa"
+          ngModel
+          name="nombreEmpresa"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          [(ngModel)]="item.nitEmpresa"
+          #nitEmpresa="ngModel"
+          type="text"
+          matInput
+          placeholder="NIT de la Empresa"
+          ngModel
+          name="nitEmpresa"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          [(ngModel)]="item.ciudad"
+          #ciudad="ngModel"
+          type="text"
+          matInput
+          placeholder="Ciudad de la Empresa"
+          ngModel
+          name="ciudad"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          [(ngModel)]="item.pais"
+          #pais="ngModel"
+          type="text"
+          matInput
+          placeholder="País de la Empresa"
+          ngModel
+          name="pais"
+          required
+        />
+      </mat-form-field>-->
+      
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        class="btn btn-primary"
+      >
+        Guardar
+      </button>
+   
+    </form>
+  </section>
+</div>

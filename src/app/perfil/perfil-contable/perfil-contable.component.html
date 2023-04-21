@@ -1,0 +1,133 @@
+<br>
+<br>
+<br>
+<div fxFlex = "row">
+  <div class="perfil" *ngFor="let item of usuar" fxFlex = "column" >
+    <img src="../../../../assets/mdi_user-circle.png" width="20%">
+    <div fxFlexAlign="center center">
+      <h2 fxFlexAlign="center center">{{ item.nombre }} {{item.apellido}}</h2>
+    </div>
+    <div>
+      <h4>{{ item.cargo }}</h4>
+    </div>
+    <div>
+      <p>{{ item.email }}</p>
+    </div>
+    <!--<div>
+      <p>Ciudad: {{ item.ciudad }}</p>
+    </div>
+    <div>
+     <p> País: {{ item.pais }}</p>
+    </div>-->
+    <div>
+      <h4><button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      (click)="submit()"
+    >
+      Editar Perfil
+    </button></h4>
+    
+    </div>
+    <div>
+      <h4><button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      (click)="agregarUsuario()"
+    >
+      Nuevo Usuario
+    </button></h4>
+  </div>
+    <div>
+      <h4><button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      (click)="agregarEmpresa()"
+    >
+      Nueva empresa
+    </button></h4>
+  </div>
+  </div>
+  <!--<div class="perfil2"  fxFlex = "column"  >
+    <ul *ngFor="let ite of empres">
+       <li> {{ ite.nombreEmpresa }}</li>
+    </ul> 
+  </div>-->
+  <div class="perfil2"  fxFlex = "column" >
+    <label for="input-file-id" class="md-button md-raised md-primary"
+          ><h2>Listado de las empresas</h2>
+      </label>
+      
+    <table class="table table-striped table-bordered table-sm table-secondary">
+     <thead>
+        <tr>
+            <th scope="col" >
+               <h3>Nombre</h3>
+            </th>
+            <th scope="col">
+               <h3>País</h3>
+            </th>
+            <th scope="col">
+               <h3>Ciudad</h3>
+            </th>
+            <th scope="col">
+               <h3>Nit</h3>
+            </th>
+            <th scope="col">
+               <h3>Software</h3>
+            </th>
+            <th scope="col">
+               <h3>ACCIONES</h3>
+            </th>
+        </tr>
+    </thead>
+    <tbody align="center">
+        <tr *ngFor="let ite of empres" >
+          <td scope="col">
+            <mat-radio-button name="seleccion">
+            </mat-radio-button>
+                {{ ite.nombreEmpresa }}
+            </td>
+            <td scope="col">
+               {{ ite.pais }} 
+            </td>
+            <td scope="col">
+               {{ ite.ciudad }} 
+            </td>
+            <td scope="col">
+               {{ ite.nit }} 
+            </td>
+            <td scope="col">
+                {{ ite.software }}
+            </td>
+            <td scope="col">
+                <button
+                type="submit"
+                mat-raised-button
+                color="primary"
+                (click)="modificar(ite)"
+                >Modificar</button>
+                <button
+                type="submit"
+                mat-raised-button
+                color="info"
+                (click)="verAsociados(ite)"
+                >Asociados</button>
+                <button
+                type="submit"
+                mat-raised-button
+                color="default"
+                (click)="eliminarEmpresa(ite)"
+                >Eliminar</button>
+                
+            </td>
+          
+        </tr>
+    </tbody>
+</table>
+</div>
+
+</div>

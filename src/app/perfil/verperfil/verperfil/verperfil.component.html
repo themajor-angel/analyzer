@@ -1,4 +1,20 @@
-<div *ngIf="products" fxFlex = "row">
+<br>
+<br>
+<br>
+<div class="row">
+  <div class="column">
+  <div *ngIf="cargo == 1">
+    <app-contable></app-contable>
+    <app-datos-contable></app-datos-contable>
+  </div>
+  <div *ngIf="cargo == 2">
+    <app-empresario></app-empresario>
+    <!--<app-datos-empresario></app-datos-empresario>-->
+  </div>
+  </div>
+
+</div>
+<!--<div *ngIf="products" fxFlex = "row">
   <div class="perfil" *ngFor="let item of products" fxFlex = "column" >
     <img src="../../../../assets/mdi_user-circle.png" width="20%">
     <div fxFlexAlign="center center">
@@ -22,15 +38,14 @@
     </div>
   </div>
   <div class="perfil" *ngFor="let item of products" fxFlex = "column"  >
-    
-    <p>Nombre de la Empresa</p>
+    <p>Nombre de Empresa</p>
     <h3>{{ item.nombreEmpresa }}</h3>
-    <p>NIT de la Empresa</p>
+    <p>Nit de Empresa</p>
     <h3>{{ item.nitEmpresa }}</h3>
     <p>Ciudad</p>
     <h3>{{ item.ciudad }}</h3>
     <p>País</p>
     <h3>{{ item.pais }}</h3>
   </div>
-</div>
+</div>-->
 

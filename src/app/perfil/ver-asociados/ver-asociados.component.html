@@ -1,0 +1,106 @@
+<div class="container-fluid" >
+   <div class="row">
+  <div class="col-md-12">  
+  <label ><h5>Usuarios asociados a esta empresa</h5>
+      </label>
+      
+    <table class="table table-striped table-bordered table-sm table-success">
+     <thead>
+        <tr align="center">
+            <th scope="col" >
+               Nombre y Apellidos
+            </th>
+            <th scope="col">
+               ACCIONES
+            </th>
+        </tr>
+    </thead>
+    <tbody align="center">
+        <tr *ngFor="let ite of usuarAsociados" align="center">
+          <td scope="col">
+                {{ ite.nombre }}  {{ ite.apellido }}
+            </td>
+            <td scope="col">
+                <button
+                class="btn btn-warning rounded-pill"
+                mat-raised-button
+                color="primary"
+                (click)="modificarUser(ite)"
+                >Modificar</button>
+                <button
+                class="btn btn-success rounded-pill"
+                mat-raised-button
+                color="default"
+                (click)="borrarEnlace(ite)"
+                >Borrar</button>
+                <button
+                class="btn btn-danger rounded-pill"
+                mat-raised-button
+                color="default"
+                (click)="eliminarEnlace(ite)"
+                >Eliminar</button>
+                
+            </td>
+          
+        </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+<!--<div class="perfil2"  fxFlex = "column">
+  <section
+    class="perfil2"
+    fxLayout="column"
+    fxLayoutAlign="space-around center"
+  >
+    <form
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      #f="ngForm"
+      
+    >
+      <label for="input-file-id" class="md-button md-raised md-primary"
+          ><h2>Listado de empresarios asociados a la empresa: </h2>
+      </label>
+      
+    <table class="table table-striped table-bordered table-sm table-secondary">
+     <thead>
+        <tr>
+            <th scope="col" >
+               <h3>Nombre</h3>
+            </th>
+            <th scope="col">
+               <h3>ACCIONES</h3>
+            </th>
+        </tr>
+    </thead>
+    <tbody align="center">
+        <tr *ngFor="let ite of nombreUsuar" >
+          <td scope="col">
+                {{ ite.nombre | uppercase }}  {{ ite.apellido | uppercase }}
+            </td>
+            <td scope="col">
+                <button
+                
+                mat-raised-button
+                color="primary"
+                (click)="modificarUser(ite)"
+                >Modificar</button>
+                <button
+                
+                mat-raised-button
+                color="default"
+                (click)="eliminarUser(ite)"
+                >Eliminar</button>
+                
+            </td>
+          
+        </tr>
+    </tbody>
+  </table>
+     
+    </form>
+  </section>
+</div>-->

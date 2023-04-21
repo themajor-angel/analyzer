@@ -1,3 +1,23 @@
+
+<br>
+<br>
+<br>
+<div fxLayout="column" fxLayoutAlign="center center" class="encabezado">
+      <label for="input-file-id" class="md-button md-raised md-primary"
+          >Seleccione una de sus empresas:
+      </label>
+      <div class="contenedor">
+  <div class="contenedor_formulario">
+        <mat-select placeholder="Empresa" name="empresa" (change)="onChance($event)">
+        <mat-option *ngFor="let item of EsEmpresa" [value]="item">
+          {{ item.nombreEmpresa }}
+        </mat-option>
+      </mat-select>
+      </div>
+</div>
+      
+</div>
+
 <div fxLayout="column" fxLayoutAlign="center center" class="encabezado">
   <h1>
     Seleccione dos reportes de periodos correspondientes para comparar
@@ -11,24 +31,35 @@
       completed="{{ completo1 }}"
       label="Cargar archivo más reciente"
     >
+    <!--(ngSubmit)="subirArchivo()"
+       (change)="cambioArchivo($event);
+    (click)="subirArchivo()"-->
       <form
         fxLayout="column"
         fxLayoutAlign="center center"
         fxLayoutGap="10px"
         #f="ngForm"
+        [formGroup]="archivoForm"
         (ngSubmit)="onSubmit(f, stepper)"
+        
       >
         <label for="input-file-id" class="md-button md-raised md-primary"
           >Seleccione el archivo del periodo más reciente</label
         >
         <input
+          
           type="file"
+          class="file-input"
           appReadexcel
           #readexcel="readexcel"
           (eventEmitter)="DataFromEventEmitter($event)"
-          (change)="fileUploaded(true, false)"
           required
+          formControlName="archivo" (change)="fileUploaded(true, false)"
         />
+        <hr>
+       <!--<progress *ngIf="porcentaje > 0 && porcentaje < 100" class="progress is-large is-success" value="{{porcentaje}}" max="100">{{porcentaje}}%</progress>
+       <button [ngClass]="{'button': true, 'is-success': true, 'is-large': true, 'is-loading': porcentaje > 0 && porcentaje < 100}" [disabled]="!archivoForm.valid && (porcentaje > 0 && porcentaje < 100)">Subir archivo</button>-->
+      <!--<progress class="progress is-large is-success" value="0" max="100">0%</progress>-->
         <button
           mat-raised-button
           color="primary"
@@ -36,8 +67,9 @@
           (click)="onSubmit(f, stepper)"
           [disabled]="!fileIsUploaded1"
         >
-          Siguiente
+          Subir-Siguiente
         </button>
+        
         <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
       </form>
     </mat-step>
@@ -61,10 +93,13 @@
         <input
           id="excel-1"
           type="file"
+          class="file-input"
           appComparativeexcel
           #comparativeexcel="comparativeexcel"
           (eventEmitter)="DataFromEventEmitter($event)"
         />
+        <hr>
+      <!--<progress class="progress is-large is-success" value="0" max="100">0%</progress>-->
         <button
           mat-raised-button
           color="primary"
@@ -72,7 +107,7 @@
           (click)="onSubmitComparacion(form2, stepper)"
           [disabled]="!fileIsUploaded2"
         >
-          Siguiente
+          Subir-Analizar
         </button>
         <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
       </form>
@@ -93,5 +128,6 @@
       </div>
     </mat-step>
   </mat-stepper>
+
 </div>
 

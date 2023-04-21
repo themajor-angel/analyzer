@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { TemplateTextoDirective } from 'src/app/shared/directives/template-texto.directive';
 import { ComparacionIndicadoresService } from '../indicadores/comparacionIndicadores.service';
+import { PerfilService } from 'src/app/perfil/perfil.service';
+import { GuardaArchivosService } from '../guarda-archivos.service';
 
 @Component({
   selector: 'app-menu-principal',
@@ -37,9 +39,13 @@ export class MenuPrincipalComponent implements OnInit, AfterViewInit {
   constructor(
     private cdRef: ChangeDetectorRef,
     private comparacionIndicadoresService: ComparacionIndicadoresService,
+    private perfilservice: PerfilService,
+    private gservicio: GuardaArchivosService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.gservicio.IDusuario = this.perfilservice.getUsuario();
+  }
 
   ngAfterViewInit(): void {
     this.textosBotones.push(

@@ -1,3 +1,6 @@
+<br>
+<br>
+<br>
 <section
 class="signup-form"
 fxLayout="column"
@@ -7,6 +10,7 @@ fxLayoutAlign="space-around center"
       fxLayout="column"
       fxLayoutAlign="center center"
       fxLayoutGap="10px"
+      #form="ngForm"
       [formGroup]="loginForm"
       (ngSubmit)="onSubmit()">
       <mat-form-field>
@@ -28,6 +32,45 @@ fxLayoutAlign="space-around center"
         <mat-error>Ingrese contraseña.</mat-error>
       </mat-form-field>
       <button *ngIf="!(isLoading$ | async)"  type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Ingresar</button>
+      <!--<button  type="submit" mat-raised-button color="primary" (click)="loginConGoogle()">Google</button>-->
       <mat-spinner *ngIf="isLoading$ | async"></mat-spinner>
+      
+      <!--<h1>Angular reCAPTCHA v2</h1>
+      <div class="row mt-3">
+      <div class="col-sm-12 mb-2">
+        <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+        <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
+          <div *ngIf="recaptcha.errors?.['required']">This field is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 mb-2">
+        <button type="button" class="btn btn-sm btn-primary" (click)="send(form)">Send</button>
+      </div>
+    </div>-->
+    <div *ngIf="tokenVisible"> reCAPTCHA Token <br />
+        <p style="color: red">{{reCAPTCHAToken}}</p>
+      </div>
     </form>
+
+   <!-- <div class="container-fluid py-3">
+  <h1>Angular reCAPTCHA v2</h1>
+
+  <form #form="ngForm">
+    <div class="row mt-3">
+      <div class="col-sm-12 mb-2">
+        <re-captcha id="recaptcha" name="recaptcha" #recaptcha="ngModel" [(ngModel)]="token" required [class.is-invalid]="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)"></re-captcha>
+        <div *ngIf="recaptcha.invalid && (recaptcha.dirty || recaptcha.touched)" class="invalid-feedback">
+          <div *ngIf="recaptcha.errors?.['required']">This field is required.</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 mb-2">
+        <button type="button" class="btn btn-sm btn-primary" (click)="send(form)">Send</button>
+      </div>
+    </div>
+  </form>
+</div>-->
   </section>

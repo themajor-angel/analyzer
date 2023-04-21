@@ -1,0 +1,30 @@
+<br>
+<br>
+<br>
+<div fxFlex = "row">
+  <div class="perfil" *ngFor="let item of usuario" fxFlex = "column" >
+    <img src="../../../../assets/mdi_user-circle.png" width="10%">
+    <div fxFlexAlign="center center">
+      <h2 fxFlexAlign="center center">{{ item.nombre }} {{item.apellido}}</h2>
+    </div>
+    <div>
+      <h4>{{ item.cargo }}</h4>
+    </div>
+    <div>
+      <p>{{ item.email }}</p>
+    </div>
+    
+    <!--<div>
+      <p>Ciudad: {{ item.ciudad }}</p>
+    </div>
+    <div>
+     <p> País: {{ item.pais }}</p>
+    </div>-->
+    <div class="btn-group" role="group" aria-label="Basic example">
+       <button type="button" class="btn btn-outline-success" (click)="submit(item)">Editar perfil</button>
+       <!--<button type="button" class="btn btn-outline-success" (click)="agregarUsuario()">Agregar usuarios</button>
+       <button type="button" class="btn btn-outline-success" (click)="agregarEmpresa()">Agregar empresas</button>
+       <button type="button" class="btn btn-outline-success" (click)="asociarUsuarioEmpresa()">Asociar usuarios-empresa</button>-->
+    </div>
+    
+  </div>

@@ -4,8 +4,13 @@ export interface Usuario {
     apellido: string;
     email: string;
     nitEmpresa: string;
-    nombreEmpresa: string;
-    cargo: 'contable' | 'empresario' | null;
+    //nombreEmpresa: string;
+    cargo: 'Contable' | 'Empresario' | null;
     ciudad: string;
     pais: string;
+    telefono: string;
+}
+
+export interface Software {
+    nombre: string;
 }

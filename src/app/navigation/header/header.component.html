@@ -1,4 +1,4 @@
-<mat-toolbar class="toolbar">
+<mat-toolbar class="toolbar fijado" >
     <div fxHide.gt-xs>
       <button mat-icon-button (click)="onToggleSidenav()">
         <mat-icon>menu</mat-icon>
@@ -9,7 +9,9 @@
       <ul fxLayout fxLayoutGap="10px" class="navigation-items">
         <li *ngIf="!(isAuth$ | async)"><a routerLink="/auth/signup">Registrarse</a></li>
         <li *ngIf="!(isAuth$ | async)"><a routerLink="/auth/login">Ingresar</a></li>
-        <li *ngIf="isAuth$ | async"><a routerLink="/analisis/cargadearchivos">Análisis</a></li>
+        <li *ngIf="(isAuth$ | async) "> <!--*ngIf="(isAuth$ | async) && cargo  && (cargo | async)"-->
+          <a routerLink="/analisis/cargadearchivos" (click)="acceso()">Análisis</a>
+        </li>
         <li *ngIf="isAuth$ | async"><a routerLink="/analisis/menu">Menú</a></li>
         <li *ngIf="isAuth$ | async"><a routerLink="/perfil/verperfil">Perfil</a></li>
         <li *ngIf="isAuth$ | async"><a style="cursor: pointer" (click)="onLogout()">Cerrar Sesión</a></li>

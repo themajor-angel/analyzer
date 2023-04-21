@@ -28,6 +28,11 @@ import { AnalisisService } from './analisis/analisis.service';
 import { AnalisisService2 } from './analisis/analisis2.service';
 import { MostrarAnalisisComponent } from './analisis/mostrar-analisis/mostrar-analisis.component';
 import { IndicadoresComponent } from './analisis/indicadores/indicadores.component';
+//Formularios
+import { ReactiveFormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+//import { RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY, RecaptchaSettings, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+//import { RECAPTCHA_SETTINGS, RecaptchaFormsModule, RecaptchaModule, RecaptchaSettings } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -46,8 +51,22 @@ import { IndicadoresComponent } from './analisis/indicadores/indicadores.compone
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     StoreModule.forRoot(reducers),
+    ReactiveFormsModule,
+    //RecaptchaV3Module
+    //RecaptchaModule,
+    //RecaptchaFormsModule,
   ],
-  providers: [AuthService, TrainingService, UIservice, PerfilService, AnalisisService, AnalisisService2],
+  providers: [AuthService, TrainingService, UIservice, PerfilService, AnalisisService, AnalisisService2, CookieService,
+    /*{
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {
+        siteKey: environment.recaptcha.siteKey,
+      } as RecaptchaSettings,
+    },*/
+  /*{
+      provide: RECAPTCHA_SETTINGS,
+      useValue: { siteKey: "6LfKNi0cAAAAACeYwFRY9_d_qjGhpiwYUo5gNW5-" } as RecaptchaSettings,
+    }*/],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

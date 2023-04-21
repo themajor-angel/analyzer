@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../src/bootstrap/css/bootstrap.min.css";
 
 /* tailwind */
 @tailwind base;
@@ -41,4 +42,8 @@ body {
 
 .mat-icon-button.mat-primary {
   color:#57D7C9;
+}
+
+.fijado {
+  position: fixed;
 }

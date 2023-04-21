@@ -1,3 +1,18 @@
+export interface Empresa {
+  id: string;
+  ciudad: string;
+  nit: string;
+  nombreEmpresa: string;
+  pais: string;
+  software: string;
+}
+
+export interface UsuarioEmpresa {
+    id: string;
+    id_empresa: string;
+    id_usuario: string;
+}
+
 export interface Item {
   codigo: string;
   nombre: string;

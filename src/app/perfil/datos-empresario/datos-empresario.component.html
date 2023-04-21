@@ -1,0 +1,79 @@
+<br>
+<div>
+    <section class="section">
+        <br>
+        <div class="container-fluid">
+   <div class="col-md-12">
+       
+      <div class="card">
+            <div class="card-body">
+                <label class="label label-default">
+        <h4>Listado de las empresas asociadas</h4>
+      </label>
+     <table class="table table-striped table-bordered table-info" align="center">
+     <thead>
+        <tr align="center">
+            <th scope="col" >
+               <h5>Nombre</h5>
+            </th>
+            <th scope="col">
+               <h5>País</h5>
+            </th>
+            <th scope="col">
+               <h5>Ciudad</h5>
+            </th>
+            <th scope="col">
+               <h5>Nit</h5>
+            </th>
+            <th scope="col">
+               <h5>Software</h5>
+            </th>
+            <th scope="col">
+               <h5>ACCIONES</h5>
+            </th>
+        </tr>
+    </thead>
+    <tbody align="center">
+        <tr *ngFor="let ite of listEmpresas" >
+          <td scope="col">
+            <mat-radio-button name="seleccion" (click)="seleccionado(ite)">
+            </mat-radio-button>
+                {{ ite.nombreEmpresa | uppercase}}
+            </td>
+            <td scope="col">
+               {{ ite.pais }} 
+            </td>
+            <td scope="col">
+               {{ ite.ciudad }} 
+            </td>
+            <td scope="col">
+               {{ ite.nit }} 
+            </td>
+            <td scope="col">
+                {{ ite.software }}
+            </td>
+            <td scope="col">
+                
+                <button
+                type="submit"
+                class="btn btn-info rounded-pill"
+                mat-raised-button
+                color="info"
+                (click)="analizar(ite)"
+                >Analizar</button>
+                
+                
+            </td>
+          
+        </tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+   </div>
+   <!--<div class="col-md-4">
+    <app-ver-asociados></app-ver-asociados>
+   </div>-->
+  </div>
+    </section>
+ </div>
