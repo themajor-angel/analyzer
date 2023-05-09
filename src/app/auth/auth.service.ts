@@ -56,8 +56,10 @@ export class AuthService{
                 this.loggedIn$.next(false);
                 this.trainingService.cancelSubscriptions();
                 this.store.dispatch(new Authe.SetUnauthenticated());
-                this.EnviarVerificacionEmail();
-                this.router.navigate(['/auth/verification']);
+                if(user){
+                    this.EnviarVerificacionEmail();
+                    this.router.navigate(['/auth/verification']);
+                }
             }
         });
     }

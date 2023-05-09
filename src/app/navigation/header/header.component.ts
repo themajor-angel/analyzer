@@ -88,11 +88,13 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout() {
+    this.titulo  = 'Analyzer';
     this.cokie.delete('userIDlog');
     this.cokie.delete('cargoID');
     this._perfilService.SetCargo(null);
     this._perfilService.SetIDUser(null);
     this._perfilService.SetIDEmp(null);
     this.authService.logout();
+    this.router.navigate(['home']);
   }
 }

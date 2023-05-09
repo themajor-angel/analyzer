@@ -483,6 +483,7 @@ export class PerfilService {
 
   ObtenerUsuario(id){
     //console.log(id);
+    this.usuar = [];
     this.db.collection('usuarios', ref => ref.where("email", "==", id)).get()
         .subscribe(ss => {
           if (ss.docs.length === 0) {

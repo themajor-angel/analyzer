@@ -22,13 +22,14 @@ const routes: Routes = [
     // * comentado para poder probar
     canLoad: [AuthGuard],
   },
-  { path: '', redirectTo: '/analisis/cargadearchivos', pathMatch:'full'},
   {
     path: 'training',
     loadChildren: () =>
       import('./training/training.module').then((m) => m.TrainingModule),
     canLoad: [AuthGuard],
   },
+  { path: '', redirectTo : 'home' , pathMatch:'full'},
+  { path: 'home',  component : WelcomeComponent},
 ];
 
 @NgModule({

@@ -1,4 +1,5 @@
 <div class="w-full flex justify-end gap-4 pr-4">
+  <button mat-button *ngIf="isContable" class="bg-sky-400 text-white rounded-md px-4 py-2"  >Enviar al cliente</button>
   <button mat-button class="text-sky-400 rounded-md px-4 py-2" [routerLink]="routerLinkAtras">Atrás</button>
   <button mat-stroked-button class="text-sky-400 border-2 border-sky-400 rounded-md px-4 py-2" routerLink="/analisis/menu">Menú principal</button>
   <button *ngIf="mostrarBotonIndicadores" mat-button class="bg-sky-400 text-white rounded-md px-4 py-2" routerLink="/analisis/indicadores">Indicadores</button>
